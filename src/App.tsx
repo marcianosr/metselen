@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { tables, getRandomTable } from "./data/tables";
-import BrickContainer from "./components/BrickContainer/BrickContainer";
-import AnswerDisplay from "./components/AnswerDisplay/AnswerDisplay";
+import BrickContainer from "./components/BrickContainer";
+import TableAnswerDisplay from "./components/TableAnswerDisplay";
 import { GameState } from "./types/GameState";
 
 const times = 20;
@@ -22,15 +22,10 @@ function App() {
 
 	return (
 		<section className="gameContainer">
-			<section>
-				<span>
-					{gameState.tables.length > 0 && gameState.tables[0].table}
-				</span>
-				<AnswerDisplay
-					gameState={gameState}
-					setGameState={setGameState}
-				/>
-			</section>
+			<TableAnswerDisplay
+				gameState={gameState}
+				setGameState={setGameState}
+			/>
 			<BrickContainer correctAnswers={gameState.correctAnswers} />
 		</section>
 	);
