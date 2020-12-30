@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { tables, getRandomTable } from "./data/tables";
+import BrickContainer from "./components/BrickContainer/BrickContainer";
+import AnswerDisplay from "./components/AnswerDisplay/AnswerDisplay";
+import { GameState } from "./types/GameState";
+
+const times = 20;
+const allTables = [...Array(times)].map((_, i) => ({
+	id: i,
+	...getRandomTable(tables),
+}));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [gameState, setGameState] = React.useState<GameState>({
+		timer: null,
+		tables: allTables,
+		correctAnswers: [],
+	});
+
+	console.log("gameState:", gameState);
+
+	return (
+		<section className="gameContainer">
+			<section>
+				<span>
+					{gameState.tables.length > 0 && gameState.tables[0].table}
+				</span>
+				<AnswerDisplay
+					gameState={gameState}
+					setGameState={setGameState}
+				/>
+			</section>
+			<BrickContainer correctAnswers={gameState.correctAnswers} />
+		</section>
+	);
 }
 
 export default App;
