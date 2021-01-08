@@ -9,20 +9,23 @@ const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
 }) => {
 	const [givenAnswer, setGivenAnswer] = React.useState<string>("");
 
-	const validateAnswer = (answer: string) => {
-		const isCorrectAnswer = gameState.tables[0].result === +answer;
+	const validateAnswer = React.useCallback(
+		(answer: string) => {
+			const isCorrectAnswer = gameState.tables[0].result === +answer;
 
-		setGameState({
-			...gameState,
-			tables: [...gameState.tables.slice(1)],
-			correctAnswers: [
-				...gameState.correctAnswers,
-				...(isCorrectAnswer ? [gameState.tables[0]] : []),
-			],
-		});
+			setGameState({
+				...gameState,
+				tables: [...gameState.tables.slice(1)],
+				correctAnswers: [
+					...gameState.correctAnswers,
+					...(isCorrectAnswer ? [gameState.tables[0]] : []),
+				],
+			});
 
-		clearTextField();
-	};
+			clearTextField();
+		},
+		[gameState, setGameState]
+	);
 
 	const clearTextField = (): void => setGivenAnswer("");
 
@@ -33,7 +36,7 @@ const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
 		window.addEventListener("keydown", handleEnter);
 
 		return () => window.removeEventListener("keydown", handleEnter);
-	}, [givenAnswer, gameState]);
+	}, [givenAnswer, gameState, validateAnswer]);
 
 	return (
 		<>
