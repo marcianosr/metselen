@@ -1,16 +1,36 @@
 .brickContainer {
-	width: 700px;
-	margin: 0 auto;
-	border: 1px solid sienna;
+	--containerWidth: 700px;
+	--brickHeight: 50px;
+	--brickGap: 2px;
+	--brickWidth: 20%;
+	--brickSize: calc(var(--brickWidth) - var(--brickGap));
+	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
 
+	width: var(--containerWidth);
+	margin: 0 auto;
+	border: 5px solid violet;
+	margin-top: auto;
+	height: 100%;
+}
+
+.brickRowContainer {
 	display: flex;
-	flex-direction: row-reverse;
 	align-content: end;
 	flex-wrap: wrap-reverse;
+	flex-direction: row-reverse;
+	height: 100%;
 }
 
 .brick {
-	border: 3px solid black;
 	background-color: white;
-	padding: 1rem;
+	height: var(--brickHeight);
+	background: #45afc1;
+	width: var(--brickSize);
+	margin: calc(var(--brickGap) / 2);
+	border-radius: 4px;
+}
+
+.smallBrick {
+	width: var(--brickSizeSmall);
+	/* width: calc(10% - 2px); */
 }

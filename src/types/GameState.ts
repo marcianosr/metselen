@@ -1,8 +1,4 @@
-import { TableResult } from "../data/tables";
-
-export type Tables = TableResult & {
-	id: number;
-};
+import { Tables } from "./Tables";
 
 export type GameState = {
 	timer: any;
