@@ -18,7 +18,7 @@ function App() {
 		correctAnswers: [],
 	});
 
-	console.log("gameState:", gameState);
+	// console.log("gameState:", gameState);
 
 	return (
 		<section className="gameContainer">
