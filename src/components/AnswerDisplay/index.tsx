@@ -11,7 +11,8 @@ const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
 
 	const validateAnswer = React.useCallback(
 		(answer: string) => {
-			const isCorrectAnswer = gameState.tables[0].result === +answer;
+			// const isCorrectAnswer = gameState.tables[0].result === +answer;
+			const isCorrectAnswer = true; // to cheat
 
 			setGameState({
 				...gameState,

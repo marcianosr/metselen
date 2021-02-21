@@ -18,9 +18,15 @@
 	display: flex;
 	align-content: flex-start;
 	flex-wrap: wrap-reverse;
-	flex-direction: row-reverse;
 	height: 100%;
 	position: relative;
+}
+
+.brickRow {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row-reverse;
+	flex: 1 1 100%;
 }
 
 .brick {
@@ -44,22 +50,22 @@
 }
 
 .shakeBrick {
-	background-color: crimson;
 	animation-name: shakeBrick;
 	animation-duration: 820ms;
 	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
-	animation-fill-mode: both;
+	animation-fill-mode: forwards;
 	animation-delay: 400ms;
 	transform: translate3d(0, 0, 0);
+
+	transition: background 1s;
 }
 
 .softShakeBrick {
-	background-color: crimson;
 	animation-name: softShakeBrick;
 	animation-duration: 520ms;
 	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
-	animation-fill-mode: both;
-	animation-delay: 400ms;
+	animation-fill-mode: forwards;
+	animation-delay: 450ms;
 	transform: translate3d(0, 0, 0);
 }
 
