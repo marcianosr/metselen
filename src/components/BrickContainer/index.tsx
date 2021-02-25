@@ -115,7 +115,7 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 														brick.size === "small",
 													[styles.dropBrick]:
 														brick.willDrop,
-													[styles.shakeBrick]:
+													[styles.hardShakeBrick]:
 														currentBrick?.hardShake
 															?.length &&
 														currentBrick?.hardShake.includes(
