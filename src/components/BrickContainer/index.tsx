@@ -1,8 +1,7 @@
 import React from "react";
-import classnames from "classnames";
 import { neighbours, toBrickIds } from "../../utils";
 import { GameState } from "../../types/GameState";
-
+import Brick from "../Brick";
 import styles from "./styles.module.css";
 
 type BrickContainerProps = Pick<GameState, "correctAnswers">;
@@ -46,6 +45,8 @@ const bricksMapping: BrickType[][] = [
 	],
 ];
 
+const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
+
 const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 	const [showBricksCounter, setShowBricksCounter] = React.useState<number[]>(
 		[]
@@ -67,7 +68,7 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 
 		const resetShakeAnimation = setTimeout(() => {
 			setCurrentBrick({ ...currentBrick, hardShake: [] });
-		}, 1220); // animation delay + duration
+		}, HARD_SHAKE_BRICK_ANIMATION_LENGTH);
 
 		const timer = setTimeout(() => {
 			setBricks(
@@ -105,27 +106,12 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 
 								return (
 									showBrick && (
-										<div
-											key={brick.id}
-											data-idx={brick.id}
-											className={classnames(
-												styles.brick,
-												{
-													[styles.smallBrick]:
-														brick.size === "small",
-													[styles.dropBrick]:
-														brick.willDrop,
-													[styles.hardShakeBrick]:
-														currentBrick?.hardShake
-															?.length &&
-														currentBrick?.hardShake.includes(
-															brick.id
-														),
-												}
-											)}
-										>
-											{brick.id}
-										</div>
+										<Brick
+											id={brick.id}
+											currentBrick={currentBrick}
+											willDrop={brick.willDrop}
+											size={brick.size}
+										/>
 									)
 								);
 							})}
