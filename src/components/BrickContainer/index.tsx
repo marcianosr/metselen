@@ -43,6 +43,19 @@ const bricksMapping: BrickType[][] = [
 			willDrop: true,
 		},
 	],
+	[
+		{
+			id: 11,
+			size: "small",
+			willDrop: true,
+		},
+		{ id: 12, size: "default", willDrop: true },
+		{
+			id: 13,
+			size: "default",
+			willDrop: true,
+		},
+	],
 ];
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
@@ -52,6 +65,7 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 		[]
 	);
 	const [bricks, setBricks] = React.useState(bricksMapping);
+
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
