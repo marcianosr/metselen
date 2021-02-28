@@ -15,6 +15,7 @@ const Brick: React.FC<BrickProps> = ({ id, currentBrick, size, willDrop }) => (
 		key={id}
 		data-idx={id}
 		className={classnames(styles.brick, {
+			[styles.currentBrick]: currentBrick?.id === id,
 			[styles.smallBrick]: size === "small",
 			[styles.dropBrick]: willDrop,
 			[styles.hardShakeBrick]:
