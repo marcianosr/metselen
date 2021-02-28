@@ -1,13 +1,16 @@
 .brickContainer {
 	--containerWidth: 700px;
 	--brickHeight: 50px;
-	--brickGap: 2px;
+	--brickGap: 3px;
 	--brickWidth: 20%;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
 	--brickDropAnimationDuration: 500ms;
 	--hardShakeBrickAnimationDuration: 600ms;
 	--hardShakeBrickAnimationDelay: 450ms;
+
+	--defaultBrickColor: #cd5c7c;
+	--defaultCementColor: #005170;
 
 	width: var(--containerWidth);
 	margin: 0 auto;
@@ -32,16 +35,23 @@
 }
 
 .brick {
-	background-color: #45afc1;
+	background-color: var(--defaultBrickColor);
 	height: var(--brickHeight);
 	width: var(--brickSize);
-	margin: calc(var(--brickGap) / 2);
-	border-radius: 2px;
+	/* margin: calc(var(--brickGap) / 2); */
+	border: calc(var(--brickGap)) solid var(--defaultCementColor);
+	border-right: 0;
+	border-bottom: 0;
+	/* border-radius: 3px; */
 }
 
 .smallBrick {
 	width: var(--brickSizeSmall);
 	/* width: calc(10% - 2px); */
+}
+
+.currentBrick {
+	background: red;
 }
 
 .dropBrick {
