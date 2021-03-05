@@ -10,6 +10,7 @@ export type BrickType = {
 	size: string;
 	willDrop: boolean;
 	hardShake?: number[];
+	color?: PinkSchemeBrickColors;
 };
 
 const bricksMapping: BrickType[][] = [
@@ -42,30 +43,72 @@ const bricksMapping: BrickType[][] = [
 			size: "default",
 			willDrop: true,
 		},
-	],
-	[
 		{
 			id: 11,
 			size: "small",
 			willDrop: true,
 		},
+	],
+	[
 		{ id: 12, size: "default", willDrop: true },
 		{
 			id: 13,
 			size: "default",
 			willDrop: true,
 		},
+		{
+			id: 14,
+			size: "small",
+			willDrop: true,
+		},
+		{ id: 15, size: "default", willDrop: true },
+		{
+			id: 16,
+			size: "small",
+			willDrop: true,
+		},
+		{
+			id: 17,
+			size: "default",
+			willDrop: true,
+		},
 	],
 ];
 
+enum PinkSchemeBrickColors {
+	Normal = "#cd5c7c",
+	Dark = "#9a5879",
+	VeryDark = "#665776",
+	Light = "#d76c80",
+}
+
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
+
+const brickColor: PinkSchemeBrickColors[] = [
+	PinkSchemeBrickColors.Normal,
+	PinkSchemeBrickColors.Dark,
+	PinkSchemeBrickColors.Light,
+	PinkSchemeBrickColors.VeryDark,
+];
+
+const getRandomBrickColor = () =>
+	brickColor[Math.floor(Math.random() * brickColor.length)];
+
+const mapColorsToBricks = (bricks: BrickType[][]) =>
+	bricks.map((brick) =>
+		brick.map((brick) => ({
+			...brick,
+			color: getRandomBrickColor(),
+		}))
+	);
 
 const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 	const [showBricksCounter, setShowBricksCounter] = React.useState<number[]>(
 		[]
 	);
-	const [bricks, setBricks] = React.useState(bricksMapping);
-
+	const [bricks, setBricks] = React.useState<BrickType[][]>( // Not sure why I need to strictly type this
+		mapColorsToBricks(bricksMapping)
+	);
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
@@ -114,9 +157,9 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 					return (
 						<div key={idx} className={styles.brickRow}>
 							{brickRow.map((brick: BrickType) => {
-								const showBrick = showBricksCounter.includes(
-									brick.id
-								);
+								const showBrick = correctAnswers
+									.map((answer) => answer.id)
+									.includes(brick.id);
 
 								return (
 									showBrick && (
@@ -125,6 +168,7 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 											currentBrick={currentBrick}
 											willDrop={brick.willDrop}
 											size={brick.size}
+											color={brick.color}
 										/>
 									)
 								);

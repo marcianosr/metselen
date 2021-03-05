@@ -14,7 +14,8 @@
 
 	width: var(--containerWidth);
 	margin: 0 auto;
-	border: 5px solid violet;
+	/* debug: container to wrap around */
+	/* border: 5px solid violet;  */
 	margin-top: auto;
 	height: 100%;
 }
@@ -34,24 +35,44 @@
 	flex: 1 1 100%;
 }
 
+.brickCement {
+	height: var(--brickHeight);
+	width: var(--brickSize);
+	background-color: #005170;
+	padding-left: calc(var(--brickGap));
+	padding-top: calc(var(--brickGap));
+}
+
+.brickCement:last-child {
+	padding-left: 0;
+	/* Make sure the bricks in the end will fit (without cement) */
+	--brickSize: var(--brickWidth);
+}
+
+.brickCement:last-child.smallBrick {
+	padding-left: 0;
+	/* Make sure the bricks in the end will fit (without cement)  */
+	--brickSizeSmall: calc(var(--brickWidth) / 2);
+}
+
 .brick {
 	background-color: var(--defaultBrickColor);
 	height: var(--brickHeight);
-	width: var(--brickSize);
-	/* margin: calc(var(--brickGap) / 2); */
-	border: calc(var(--brickGap)) solid var(--defaultCementColor);
-	border-right: 0;
-	border-bottom: 0;
-	/* border-radius: 3px; */
+	border-radius: 4px;
 }
 
 .smallBrick {
 	width: var(--brickSizeSmall);
-	/* width: calc(10% - 2px); */
+}
+
+.smallBrick:last-child {
+	/* --brickSizeSmall: calc(
+		var(--brickWidth) / 2
+	); Make sure the bricks in the end will fit (without cement) */
 }
 
 .currentBrick {
-	background: red;
+	/* background: gold; */
 }
 
 .dropBrick {

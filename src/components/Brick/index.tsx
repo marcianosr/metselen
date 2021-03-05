@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType } from "../BrickContainer";
 import styles from "../BrickContainer/styles.module.css";
@@ -8,22 +8,44 @@ type BrickProps = {
 	currentBrick?: BrickType;
 	size: string;
 	willDrop: boolean;
+	color?: string;
 };
 
-const Brick: React.FC<BrickProps> = ({ id, currentBrick, size, willDrop }) => (
+interface CSSProp extends CSSProperties {
+	"--defaultBrickColor": string;
+}
+
+const Brick: React.FC<BrickProps> = ({
+	id,
+	currentBrick,
+	size,
+	willDrop,
+	color,
+}) => (
 	<div
 		key={id}
-		data-idx={id}
-		className={classnames(styles.brick, {
-			[styles.currentBrick]: currentBrick?.id === id,
-			[styles.smallBrick]: size === "small",
+		className={classnames(styles.brickCement, {
 			[styles.dropBrick]: willDrop,
+			[styles.smallBrick]: size === "small",
 			[styles.hardShakeBrick]:
 				currentBrick?.hardShake?.length &&
 				currentBrick?.hardShake.includes(id),
+			// [styles.dropBrick]: !willDrop,
 		})}
 	>
-		{id}
+		<div
+			style={
+				{
+					"--defaultBrickColor": color,
+				} as CSSProp
+			}
+			className={classnames(styles.brick, {
+				// [styles.dropBrick]: willDrop,
+				[styles.currentBrick]: currentBrick?.id === id,
+			})}
+		>
+			{/* {id} */}
+		</div>
 	</div>
 );
 
