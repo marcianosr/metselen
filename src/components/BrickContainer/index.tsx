@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 type BrickContainerProps = Pick<GameState, "correctAnswers">;
 export type BrickType = {
 	id: number;
-	size: string;
+	size: "default" | "small";
 	willDrop: boolean;
 	hardShake?: number[];
 	color?: PinkSchemeBrickColors;
