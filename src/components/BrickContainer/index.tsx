@@ -103,19 +103,16 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 	);
 
 const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
-	const [showBricksCounter, setShowBricksCounter] = React.useState<number[]>(
-		[]
-	);
 	const [bricks, setBricks] = React.useState<BrickType[][]>( // Not sure why I need to strictly type this
 		mapColorsToBricks(bricksMapping)
 	);
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
-		setShowBricksCounter((state) => [...state, correctAnswers.length]);
-
-		const brickRows = bricks.flatMap((brickRow: BrickType[]) => brickRow);
-		const currentBrick = brickRows[showBricksCounter.length - 1];
+		const flattenedBrickRows = bricks.flatMap(
+			(brickRow: BrickType[]) => brickRow
+		);
+		const currentBrick = flattenedBrickRows[correctAnswers.length - 1];
 
 		setCurrentBrick({
 			...currentBrick,
@@ -148,7 +145,7 @@ const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
 		};
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [correctAnswers.length, setShowBricksCounter]);
+	}, [correctAnswers.length]);
 
 	return (
 		<section className={styles.brickContainer}>
