@@ -11,8 +11,6 @@ const GameContainer = () => {
 	const allTablesCompleted = gameState.tables.length === 0;
 
 	useEffect(() => {
-		console.log("gameState", gameState);
-
 		if (allTablesCompleted) {
 			setGameState({
 				...gameState,

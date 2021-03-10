@@ -1,9 +1,12 @@
 import React, { createContext } from "react";
 import { tables, getRandomTable } from "../data/tables";
 import { GameState } from "../types/GameState";
+import { bricksMapping } from "../components/BrickContainer";
+import { flattenBricksArray } from "../utils";
 
-const times = 6; // sould be leading for the generation of bricks
-const allTables = [...Array(times)].map((_, i) => ({
+const amountOfSums = flattenBricksArray(bricksMapping).length;
+
+const allTables = [...Array(amountOfSums)].map((_, i) => ({
 	id: i + 1,
 	...getRandomTable(tables),
 }));

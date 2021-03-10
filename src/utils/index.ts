@@ -3,6 +3,9 @@ import { BrickType } from "../components/BrickContainer";
 export const toBrickIds = (mapping: BrickType[][]) =>
 	mapping.map((bricks) => bricks.map((brick) => brick.id));
 
+export const flattenBricksArray = (mapping: BrickType[][]) =>
+	mapping.flatMap((row: BrickType[]) => row);
+
 export const neighbours = (currentId: number, mapping: number[][]) => {
 	//////////////////////////////////
 	//

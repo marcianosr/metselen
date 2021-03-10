@@ -1,6 +1,6 @@
 import React from "react";
 import { useGameState } from "../../providers/GameStateProvider";
-import { neighbours, toBrickIds } from "../../utils";
+import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import Brick from "../Brick";
 import styles from "./styles.module.css";
 
@@ -12,7 +12,7 @@ export type BrickType = {
 	color?: PinkSchemeBrickColors;
 };
 
-const bricksMapping: BrickType[][] = [
+export const bricksMapping: BrickType[][] = [
 	[
 		{ id: 1, size: "default", willDrop: true },
 		{ id: 2, size: "default", willDrop: true },
@@ -111,10 +111,9 @@ const BrickContainer: React.FC = () => {
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
-		const flattenedBrickRows = bricks.flatMap(
-			(brickRow: BrickType[]) => brickRow
-		);
-		const currentBrick = flattenedBrickRows[correctAnswers.length - 1];
+		const currentBrick = flattenBricksArray(bricks)[
+			correctAnswers.length - 1
+		];
 
 		setCurrentBrick({
 			...currentBrick,
