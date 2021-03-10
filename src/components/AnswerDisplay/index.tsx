@@ -28,7 +28,9 @@ const AnswerDisplay: React.FC = () => {
 
 	React.useEffect(() => {
 		const handleEnter = (e: KeyboardEvent): boolean | void =>
-			e.key === "Enter" && validateAnswer(givenAnswer);
+			!gameState.isGameFinished &&
+			e.key === "Enter" &&
+			validateAnswer(givenAnswer);
 
 		window.addEventListener("keydown", handleEnter);
 

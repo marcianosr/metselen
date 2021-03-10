@@ -21,12 +21,11 @@ const GameContainer = () => {
 
 	return (
 		<section className="gameContainer">
-			{!gameState.isGameFinished ? (
-				<>
-					<TableAnswerDisplay />
-					<BrickContainer />
-				</>
-			) : (
+			<>
+				<TableAnswerDisplay />
+				<BrickContainer />
+			</>
+			{gameState.isGameFinished && (
 				<Modal>
 					<button onClick={() => onResetGame()}>Play again!</button>
 				</Modal>

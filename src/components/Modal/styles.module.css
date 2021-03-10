@@ -1,3 +1,15 @@
 .modal {
 	background-color: red;
+	position: absolute;
+	margin: 0 auto;
+	top: calc(50% - 100px);
+	left: 0;
+	right: 0;
+	width: 400px;
+	height: 200px;
+	display: flex;
+}
+
+.modal button {
+	margin: auto;
 }
