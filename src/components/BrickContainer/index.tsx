@@ -1,10 +1,9 @@
 import React from "react";
+import { useGameState } from "../../providers/GameStateProvider";
 import { neighbours, toBrickIds } from "../../utils";
-import { GameState } from "../../types/GameState";
 import Brick from "../Brick";
 import styles from "./styles.module.css";
 
-type BrickContainerProps = Pick<GameState, "correctAnswers">;
 export type BrickType = {
 	id: number;
 	size: "default" | "small";
@@ -102,7 +101,10 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 		}))
 	);
 
-const BrickContainer: React.FC<BrickContainerProps> = ({ correctAnswers }) => {
+const BrickContainer: React.FC = () => {
+	const { gameState } = useGameState();
+	const { correctAnswers } = gameState;
+
 	const [bricks, setBricks] = React.useState<BrickType[][]>( // Not sure why I need to strictly type this
 		mapColorsToBricks(bricksMapping)
 	);

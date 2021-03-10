@@ -1,12 +1,8 @@
 import React, { ChangeEvent } from "react";
-import { GameStateProps } from "../../types/GameState";
+import { useGameState } from "../../providers/GameStateProvider";
 
-type AnswerDisplayProps = GameStateProps;
-
-const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
-	gameState,
-	setGameState,
-}) => {
+const AnswerDisplay: React.FC = () => {
+	const { gameState, setGameState } = useGameState();
 	const [givenAnswer, setGivenAnswer] = React.useState<string>("");
 
 	const validateAnswer = React.useCallback(

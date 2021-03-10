@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { GameStateProvider } from "./providers/GameStateProvider";
 import "./App.css";
 import { tables, getRandomTable } from "./data/tables";
 import { GameState } from "./types/GameState";
@@ -39,23 +40,22 @@ function App() {
 	}, [allTablesCompleted]);
 
 	return (
-		<section className="gameContainer">
-			{!gameState.isGameFinished ? (
-				<>
-					<TableAnswerDisplay
-						gameState={gameState}
-						setGameState={setGameState}
-					/>
-					<BrickContainer correctAnswers={gameState.correctAnswers} />
-				</>
-			) : (
-				<Modal>
-					<button onClick={() => onResetGame(setGameState)}>
-						Play again
-					</button>
-				</Modal>
-			)}
-		</section>
+		<GameStateProvider>
+			<section className="gameContainer">
+				{!gameState.isGameFinished ? (
+					<>
+						<TableAnswerDisplay />
+						<BrickContainer />
+					</>
+				) : (
+					<Modal>
+						<button onClick={() => onResetGame(setGameState)}>
+							Play again
+						</button>
+					</Modal>
+				)}
+			</section>
+		</GameStateProvider>
 	);
 }
 
