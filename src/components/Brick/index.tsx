@@ -44,7 +44,7 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.currentBrick]: currentBrick?.id === id,
 			})}
 		>
-			{/* {id} */}
+			{id}
 		</div>
 	</div>
 );

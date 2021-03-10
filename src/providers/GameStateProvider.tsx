@@ -10,7 +10,8 @@ const allTables = [...Array(times)].map((_, i) => ({
 
 type GameStateContextState = {
 	gameState: GameState;
-	setGameState: any;
+	setGameState: (gameState: GameState) => void;
+	onResetGame: () => void; // Refactor later.
 };
 
 const INITIAL_GAME_STATE: GameState = {
@@ -23,6 +24,7 @@ const INITIAL_GAME_STATE: GameState = {
 export const GameStateContext = createContext<GameStateContextState>({
 	gameState: INITIAL_GAME_STATE,
 	setGameState: () => {},
+	onResetGame: () => {},
 });
 
 export const GameStateProvider: React.FC = ({ children }) => {
@@ -30,8 +32,12 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		...INITIAL_GAME_STATE,
 	});
 
+	const onResetGame = () => setGameState({ ...INITIAL_GAME_STATE });
+
 	return (
-		<GameStateContext.Provider value={{ gameState, setGameState }}>
+		<GameStateContext.Provider
+			value={{ gameState, setGameState, onResetGame }}
+		>
 			{children}
 		</GameStateContext.Provider>
 	);
