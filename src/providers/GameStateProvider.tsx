@@ -18,7 +18,7 @@ type GameStateContextState = {
 };
 
 const INITIAL_GAME_STATE: GameState = {
-	timer: null,
+	timer: 7,
 	tables: allTables,
 	correctAnswers: [],
 	isGameFinished: false,
@@ -34,6 +34,8 @@ export const GameStateProvider: React.FC = ({ children }) => {
 	const [gameState, setGameState] = React.useState<GameState>({
 		...INITIAL_GAME_STATE,
 	});
+
+	console.log("gameState", gameState);
 
 	const onResetGame = () => setGameState({ ...INITIAL_GAME_STATE });
 

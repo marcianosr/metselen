@@ -1,7 +1,7 @@
 import { Tables } from "./Tables";
 
 export type GameState = {
-	timer: any;
+	timer: number;
 	tables: Tables[];
 	correctAnswers: Tables[];
 	isGameFinished: boolean;
