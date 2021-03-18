@@ -16,6 +16,8 @@ const GameContainer = () => {
 				...gameState,
 				isGameFinished: true,
 			});
+
+			stopTimer();
 		}
 	}, [allTablesCompleted]);
 
