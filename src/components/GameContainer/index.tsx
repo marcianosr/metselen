@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
+import useTimer from "../../hooks/useTimer";
 
 import BrickContainer from "../BrickContainer";
 import TableAnswerDisplay from "../TableAnswerDisplay";
@@ -7,51 +8,39 @@ import Modal from "../Modal";
 
 const GameContainer = () => {
 	const { gameState, setGameState, onResetGame } = useGameState();
-	const timerRef = useRef<number | null>(null);
+	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
+		gameState.timer
+	);
 	const allTablesCompleted = gameState.tables.length === 0;
 
 	useEffect(() => {
-		if (allTablesCompleted) {
+		if (allTablesCompleted || timerFinished) {
 			setGameState({
 				...gameState,
 				isGameFinished: true,
 			});
-
 			stopTimer();
 		}
-	}, [allTablesCompleted]);
-
-	useEffect(() => {
-		timerRef.current = window.setTimeout(() => {
-			setGameState({
-				...gameState,
-				timer: gameState.timer - 1,
-			});
-		}, 1000);
-
-		if (gameState.timer === 0) {
-			stopTimer();
-			setGameState({
-				...gameState,
-				isGameFinished: true,
-			});
-		}
-
-		return () => stopTimer();
-	}, [gameState.timer]);
-
-	const stopTimer = () => window.clearTimeout(timerRef.current || 0);
+	}, [allTablesCompleted, timerFinished]);
 
 	return (
 		<section className="gameContainer">
 			<>
-				<h1>Tijd: {gameState.timer}</h1>
+				<h1>Tijd: {timer}</h1>
 				<TableAnswerDisplay />
 				<BrickContainer />
+				<h1>Punten: {gameState.score}</h1>
 			</>
 			{gameState.isGameFinished && (
 				<Modal>
-					<button onClick={() => onResetGame()}>Play again!</button>
+					<button
+						onClick={() => {
+							onResetGame();
+							resetTimer();
+						}}
+					>
+						Play again!
+					</button>
 				</Modal>
 			)}
 		</section>
