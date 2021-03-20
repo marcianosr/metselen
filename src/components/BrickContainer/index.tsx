@@ -111,7 +111,9 @@ const BrickContainer: React.FC = () => {
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
-		const currentBrick = flattenBricksArray(bricks)[correctAnswers.length - 1];
+		const currentBrick = flattenBricksArray(bricks)[
+			correctAnswers.length - 1
+		];
 
 		setCurrentBrick({
 			...currentBrick,
