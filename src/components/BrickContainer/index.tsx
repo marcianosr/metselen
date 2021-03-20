@@ -108,6 +108,8 @@ const BrickContainer: React.FC = () => {
 	const [bricks, setBricks] = React.useState<BrickType[][]>( // Not sure why I need to strictly type this
 		mapColorsToBricks(bricksMapping)
 	);
+
+	console.log(bricks);
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {
