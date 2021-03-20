@@ -28,8 +28,8 @@ const GameContainer = () => {
 			<>
 				<h1>Tijd: {timer}</h1>
 				<TableAnswerDisplay />
-				<BrickContainer />
-				<h1>Punten: {gameState.score}</h1>
+				{!gameState.isGameFinished && <BrickContainer />}
+				{/* <h1>Punten: {gameState.score}</h1> */}
 			</>
 			{gameState.isGameFinished && (
 				<Modal>
