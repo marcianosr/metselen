@@ -7,7 +7,7 @@ import TableAnswerDisplay from "../TableAnswerDisplay";
 import Modal from "../Modal";
 
 const GameContainer = () => {
-	const { gameState, setGameState, onResetGame } = useGameState();
+	const { gameState, onResetGame, updateGameState } = useGameState();
 	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
 		gameState.timer
 	);
@@ -15,10 +15,7 @@ const GameContainer = () => {
 
 	useEffect(() => {
 		if (allTablesCompleted || timerFinished) {
-			setGameState({
-				...gameState,
-				isGameFinished: true,
-			});
+			updateGameState("isGameFinished", true);
 			stopTimer();
 		}
 	}, [allTablesCompleted, timerFinished]);

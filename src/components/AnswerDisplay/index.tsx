@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
 
 const AnswerDisplay: React.FC = () => {
-	const { gameState, setGameState } = useGameState();
+	const { gameState, updateGameStateMultiple } = useGameState();
 	const [givenAnswer, setGivenAnswer] = React.useState<string>("");
 
 	const validateAnswer = React.useCallback(
@@ -10,8 +10,7 @@ const AnswerDisplay: React.FC = () => {
 			// const isCorrectAnswer = gameState.tables[0].result === +answer;
 			const isCorrectAnswer = true; // to cheat
 
-			setGameState({
-				...gameState,
+			updateGameStateMultiple({
 				tables: [...gameState.tables.slice(1)],
 				correctAnswers: [
 					...gameState.correctAnswers,
@@ -21,7 +20,7 @@ const AnswerDisplay: React.FC = () => {
 
 			clearTextField();
 		},
-		[gameState, setGameState]
+		[gameState, updateGameStateMultiple]
 	);
 
 	const clearTextField = (): void => setGivenAnswer("");
