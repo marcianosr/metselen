@@ -31,6 +31,7 @@ type GameStateContextState = {
 
 const INITIAL_GAME_STATE: GameState = {
 	timer: 7,
+	score: 0,
 	tables: allTables,
 	correctAnswers: [],
 	isGameFinished: false,

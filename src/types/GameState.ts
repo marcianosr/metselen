@@ -2,6 +2,7 @@ import { Tables } from "./Tables";
 
 export type GameState = {
 	timer: number;
+	score: number;
 	tables: Tables[];
 	correctAnswers: Tables[];
 	isGameFinished: boolean;

@@ -1,17 +1,19 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useCallback } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
+
+const increaseScore = (amount: number, score: number) => amount + score;
 
 const AnswerDisplay: React.FC = () => {
 	const { gameState, updateGameStateMultiple } = useGameState();
 	const [givenAnswer, setGivenAnswer] = React.useState<string>("");
 
-	const validateAnswer = React.useCallback(
+	const validateAnswer = useCallback(
 		(answer: string) => {
 			// const isCorrectAnswer = gameState.tables[0].result === +answer;
 			const isCorrectAnswer = true; // to cheat
-
 			updateGameStateMultiple({
 				tables: [...gameState.tables.slice(1)],
+				score: increaseScore(1, gameState.score),
 				correctAnswers: [
 					...gameState.correctAnswers,
 					...(isCorrectAnswer ? [gameState.tables[0]] : []),
@@ -25,7 +27,7 @@ const AnswerDisplay: React.FC = () => {
 
 	const clearTextField = (): void => setGivenAnswer("");
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const handleEnter = (e: KeyboardEvent): boolean | void =>
 			!gameState.isGameFinished &&
 			e.key === "Enter" &&
