@@ -1,4 +1,4 @@
-import { BrickType } from "../components/BrickContainer";
+import { BrickType } from "../types/Bricks";
 
 export const toBrickIds = (mapping: BrickType[][]) =>
 	mapping.map((bricks) => bricks.map((brick) => brick.id));

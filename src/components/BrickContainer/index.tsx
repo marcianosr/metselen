@@ -1,85 +1,15 @@
 import React from "react";
 import { useGameState } from "../../providers/GameStateProvider";
-import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
+import {
+	neighbours,
+	toBrickIds,
+	flattenBricksArray,
+	findIndexRow,
+} from "../../utils";
 import Brick from "../Brick";
+import { BrickType, PinkSchemeBrickColors } from "../../types/Bricks"
 import styles from "./styles.module.css";
 
-export type BrickType = {
-	id: number;
-	size: "default" | "small";
-	willDrop: boolean;
-	hardShake?: number[];
-	color?: PinkSchemeBrickColors;
-};
-
-export const bricksMapping: BrickType[][] = [
-	[
-		{ id: 1, size: "default", willDrop: true },
-		{ id: 2, size: "default", willDrop: true },
-		{ id: 3, size: "default", willDrop: true },
-		{ id: 4, size: "default", willDrop: true },
-		{ id: 5, size: "default", willDrop: true },
-	],
-	[
-		{
-			id: 6,
-			size: "small",
-			willDrop: true,
-		},
-		{ id: 7, size: "default", willDrop: true },
-		{
-			id: 8,
-			size: "default",
-			willDrop: true,
-		},
-		{
-			id: 9,
-			size: "default",
-			willDrop: true,
-		},
-		{
-			id: 10,
-			size: "default",
-			willDrop: true,
-		},
-		{
-			id: 11,
-			size: "small",
-			willDrop: true,
-		},
-	],
-	[
-		{ id: 12, size: "default", willDrop: true },
-		{
-			id: 13,
-			size: "default",
-			willDrop: true,
-		},
-		{
-			id: 14,
-			size: "small",
-			willDrop: true,
-		},
-		{ id: 15, size: "default", willDrop: true },
-		{
-			id: 16,
-			size: "small",
-			willDrop: true,
-		},
-		{
-			id: 17,
-			size: "default",
-			willDrop: true,
-		},
-	],
-];
-
-enum PinkSchemeBrickColors {
-	Normal = "#cd5c7c",
-	Dark = "#9a5879",
-	VeryDark = "#665776",
-	Light = "#d76c80",
-}
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
@@ -101,14 +31,20 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 		}))
 	);
 
+
+
 const BrickContainer: React.FC = () => {
 	const { gameState } = useGameState();
 	const { correctAnswers } = gameState;
 
-	const [bricks, setBricks] = React.useState<BrickType[][]>( // Not sure why I need to strictly type this
-		mapColorsToBricks(bricksMapping)
+	const [bricks, setBricks] = React.useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this
+		mapColorsToBricks(gameState.bricks)
 	);
 
+
+	// Think of a way to set the current brick based on the mapping. 
+	// slice away the bricks when the answer is correct 
+	// This needs to be refactored in the GameProvider 
 	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
 
 	React.useEffect(() => {

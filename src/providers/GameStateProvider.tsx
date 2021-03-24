@@ -1,8 +1,8 @@
 import React, { createContext } from "react";
 import { tables, getRandomTable } from "../data/tables";
 import { GameState } from "../types/GameState";
-import { bricksMapping } from "../components/BrickContainer";
 import { flattenBricksArray } from "../utils";
+import { bricksMapping } from "../data/levelMappings";
 
 const amountOfSums = flattenBricksArray(bricksMapping).length;
 
@@ -30,10 +30,11 @@ type GameStateContextState = {
 };
 
 const INITIAL_GAME_STATE: GameState = {
-	timer: 7,
+	timer: 700,
 	score: 0,
 	tables: allTables,
 	correctAnswers: [],
+	bricks: bricksMapping,
 	isGameFinished: false,
 };
 
@@ -63,6 +64,8 @@ export const GameStateProvider: React.FC = ({ children }) => {
 			...state,
 		});
 	};
+
+	console.log("gameState", gameState)
 
 	const reset = () => setGameState({ ...INITIAL_GAME_STATE });
 

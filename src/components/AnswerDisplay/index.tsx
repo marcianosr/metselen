@@ -36,7 +36,7 @@ const AnswerDisplay: React.FC = () => {
 		window.addEventListener("keydown", handleEnter);
 
 		return () => window.removeEventListener("keydown", handleEnter);
-	}, [givenAnswer, validateAnswer]);
+	}, [givenAnswer, validateAnswer, gameState.isGameFinished]);
 
 	return (
 		<>

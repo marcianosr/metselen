@@ -1,8 +1,10 @@
 import { Tables } from "./Tables";
+import { BrickType } from "./Bricks"
 
 export type GameState = {
 	timer: number;
 	score: number;
+	bricks: BrickType[][];
 	tables: Tables[];
 	correctAnswers: Tables[];
 	isGameFinished: boolean;
