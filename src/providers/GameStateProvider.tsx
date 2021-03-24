@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { tables, getRandomTable } from "../data/tables";
 import { GameState } from "../types/GameState";
-import { flattenBricksArray } from "../utils";
+import { flattenBricksArray, toBrickIds } from "../utils";
 import { bricksMapping } from "../data/levelMappings";
 
 const amountOfSums = flattenBricksArray(bricksMapping).length;
@@ -34,7 +34,8 @@ const INITIAL_GAME_STATE: GameState = {
 	score: 0,
 	tables: allTables,
 	correctAnswers: [],
-	bricks: bricksMapping,
+	bricks: flattenBricksArray(bricksMapping),
+	mapping: bricksMapping,
 	isGameFinished: false,
 };
 

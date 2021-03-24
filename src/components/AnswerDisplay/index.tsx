@@ -14,14 +14,17 @@ const AnswerDisplay: React.FC = () => {
 			updateGameStateMultiple({
 				tables: [...gameState.tables.slice(1)],
 				score: increaseScore(1, gameState.score),
+				bricks: gameState.bricks.slice(1),
 				correctAnswers: [
 					...gameState.correctAnswers,
 					...(isCorrectAnswer ? [gameState.tables[0]] : []),
 				],
-			});
+			});	
+
 
 			clearTextField();
 		},
+		
 		[gameState, updateGameStateMultiple]
 	);
 
