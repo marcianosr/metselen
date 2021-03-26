@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
-import {
-	neighbours,
-	toBrickIds,
-	flattenBricksArray,
-	findIndexRow,
-} from "../../utils";
+import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import Brick from "../Brick";
-import { BrickType, PinkSchemeBrickColors } from "../../types/Bricks"
+import { BrickType, PinkSchemeBrickColors } from "../../types/Bricks";
 import styles from "./styles.module.css";
-
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
@@ -31,23 +25,20 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 		}))
 	);
 
-
-
 const BrickContainer: React.FC = () => {
 	const { gameState } = useGameState();
 	const { correctAnswers } = gameState;
 
-	const [bricks, setBricks] = React.useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this
-		mapColorsToBricks(gameState.bricks)
+	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this
+		mapColorsToBricks(gameState.mapping)
 	);
 
+	// Think of a way to set the current brick based on the mapping.
+	// slice away the bricks when the answer is correct
+	// This needs to be refactored in the GameProvider
+	const [currentBrick, setCurrentBrick] = useState<BrickType>();
 
-	// Think of a way to set the current brick based on the mapping. 
-	// slice away the bricks when the answer is correct 
-	// This needs to be refactored in the GameProvider 
-	const [currentBrick, setCurrentBrick] = React.useState<BrickType>();
-
-	React.useEffect(() => {
+	useEffect(() => {
 		const currentBrick = flattenBricksArray(bricks)[
 			correctAnswers.length - 1
 		];

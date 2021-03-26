@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { tables, getRandomTable } from "../data/tables";
 import { GameState } from "../types/GameState";
-import { flattenBricksArray, toBrickIds } from "../utils";
+import { flattenBricksArray } from "../utils";
 import { bricksMapping } from "../data/levelMappings";
 
 const amountOfSums = flattenBricksArray(bricksMapping).length;
@@ -66,7 +66,7 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		});
 	};
 
-	console.log("gameState", gameState)
+	// console.log("gameState", gameState)
 
 	const reset = () => setGameState({ ...INITIAL_GAME_STATE });
 
