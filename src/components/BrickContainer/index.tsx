@@ -4,6 +4,7 @@ import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import Brick from "../Brick";
 import { BrickType, PinkSchemeBrickColors } from "../../types/Bricks";
 import styles from "./styles.module.css";
+import classNames from "classnames";
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
@@ -32,6 +33,10 @@ const BrickContainer: React.FC = () => {
 	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this
 		mapColorsToBricks(gameState.mapping)
 	);
+
+	const [slicedBricks, setSlicedBricks] = useState<BrickType[][]>(bricks);
+	const [slicedBrickCounter, setSlicedBrickCounter] = useState(1);
+	const [currentRow, setCurrentRow] = useState(0);
 
 	// Think of a way to set the current brick based on the mapping.
 	// slice away the bricks when the answer is correct
@@ -76,12 +81,32 @@ const BrickContainer: React.FC = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [correctAnswers.length]);
 
+	useEffect(() => {
+		if (slicedBrickCounter === bricks[currentRow].length) {
+			setCurrentRow((c) => c + 1);
+			setSlicedBrickCounter(0);
+		}
+
+		if (correctAnswers.length !== 0) {
+			const bricks = [...slicedBricks];
+			bricks[currentRow] = [...slicedBricks[currentRow].slice(1)];
+			setSlicedBricks(bricks);
+			setSlicedBrickCounter((count) => count + 1);
+		}
+	}, [correctAnswers.length]);
+
 	return (
 		<section className={styles.brickContainer}>
 			<div className={styles.brickRowContainer}>
 				{bricks.map((brickRow: BrickType[], idx) => {
 					return (
-						<div key={idx} className={styles.brickRow}>
+						<div
+							key={idx}
+							className={classNames(styles.brickRow, {
+								[styles.showCompletedRow]:
+									slicedBricks[idx].length === 0,
+							})}
+						>
 							{brickRow.map((brick: BrickType) => {
 								const showBrick = correctAnswers
 									.map((answer) => answer.id)
@@ -108,3 +133,11 @@ const BrickContainer: React.FC = () => {
 };
 
 export default BrickContainer;
+
+// classNames([styles.showCompletedRow]: slicedBricks[idx].length === 0)
+
+// <div
+// className={classNames({
+// 	[styles.showCompletedRow]: true,
+// })}
+// ></div>

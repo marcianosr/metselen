@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 import classnames from "classnames";
-import { BrickType } from "../BrickContainer";
+import { BrickType } from "../../types/Bricks";
 import styles from "../BrickContainer/styles.module.css";
 
 type BrickProps = {

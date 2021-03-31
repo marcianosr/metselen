@@ -1,4 +1,3 @@
-
 import { BrickType } from "../types/Bricks";
 
 export const bricksMapping: BrickType[][] = [
@@ -60,5 +59,12 @@ export const bricksMapping: BrickType[][] = [
 			size: "default",
 			willDrop: true,
 		},
+	],
+	[
+		{ id: 18, size: "default", willDrop: true },
+		{ id: 19, size: "default", willDrop: true },
+		{ id: 20, size: "default", willDrop: true },
+		{ id: 21, size: "default", willDrop: true },
+		{ id: 22, size: "default", willDrop: true },
 	],
 ];

@@ -5,6 +5,7 @@
 	--brickWidth: 20%;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
+	--brickRounding: 4px;
 	--brickDropAnimationDuration: 500ms;
 	--hardShakeBrickAnimationDuration: 600ms;
 	--hardShakeBrickAnimationDelay: 450ms;
@@ -35,11 +36,33 @@
 	flex: 1 1 100%;
 }
 
-.brickCement {
+.showCompletedRow {
+	/* border-top: var(--defaultCementColor) var(--brickGap) solid; */
+	background-color: red;
+	width: 100%;
+	height: var(--brickGap);
+}
+
+/* Move to util as this is a composition class */
+.brickCementProperties {
 	height: var(--brickHeight);
 	width: var(--brickSize);
-	background-color: #005170;
+	background-color: var(--defaultCementColor);
+}
+
+.brickRow .brickCement:first-child {
+	border-bottom-right-radius: var(--brickRounding);
+	border-top-right-radius: var(--brickRounding);
+}
+
+.brickCement {
+	composes: brickCementProperties;
 	padding-left: calc(var(--brickGap));
+}
+
+/* should be used as showCompletedrRow */
+.brickCementRow {
+	composes: brickCementProperties;
 	padding-top: calc(var(--brickGap));
 }
 
@@ -58,7 +81,7 @@
 .brick {
 	background-color: var(--defaultBrickColor);
 	height: var(--brickHeight);
-	border-radius: 4px;
+	border-radius: var(--brickRounding);
 }
 
 .smallBrick {
