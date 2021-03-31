@@ -37,10 +37,10 @@
 }
 
 .showCompletedRow {
-	/* border-top: var(--defaultCementColor) var(--brickGap) solid; */
-	background-color: red;
+	border-top: var(--defaultCementColor) var(--brickGap) solid;
+	/* background-color: red; */
 	width: 100%;
-	height: var(--brickGap);
+	/* height: var(--brickGap); */
 }
 
 /* Move to util as this is a composition class */
