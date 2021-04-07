@@ -32,6 +32,7 @@ type GameStateContextState = {
 const INITIAL_GAME_STATE: GameState = {
 	timer: 700,
 	score: 0,
+	rows: 0,
 	tables: allTables,
 	correctAnswers: [],
 	bricks: flattenBricksArray(bricksMapping),

@@ -3,6 +3,7 @@ import { BrickType } from "./Bricks"
 
 export type GameState = {
 	timer: number;
+	rows: number;
 	score: number;
 	bricks: BrickType[];
 	mapping: BrickType[][];

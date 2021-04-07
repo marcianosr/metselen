@@ -26,7 +26,7 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 	);
 
 const BrickContainer: React.FC = () => {
-	const { gameState } = useGameState();
+	const { gameState, updateGameState } = useGameState();
 	const { correctAnswers } = gameState;
 
 	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this. Answer: Because I think TS doesn't infer complexer types.
@@ -83,6 +83,7 @@ const BrickContainer: React.FC = () => {
 		if (slicedBrickCounter === bricks[currentRow].length) {
 			setCurrentRow((c) => c + 1);
 			setSlicedBrickCounter(0);
+			updateGameState("rows", currentRow + 1);
 		}
 
 		if (correctAnswers.length !== 0) {
@@ -134,11 +135,3 @@ const BrickContainer: React.FC = () => {
 };
 
 export default BrickContainer;
-
-// classNames([styles.showCompletedRow]: slicedBricks[idx].length === 0)
-
-// <div
-// className={classNames({
-// 	[styles.showCompletedRow]: true,
-// })}
-// ></div>

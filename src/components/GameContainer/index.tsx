@@ -27,6 +27,7 @@ const GameContainer = () => {
 				<TableAnswerDisplay />
 				{!gameState.isGameFinished && <BrickContainer />}
 				<h1>Punten: {gameState.score}</h1>
+				<h1>Rijen: {gameState.rows}</h1>
 			</>
 			{gameState.isGameFinished && (
 				<Modal>
