@@ -2,21 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
 import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import Brick from "../Brick";
-import { BrickType, PinkSchemeBrickColors } from "../../types/Bricks";
+import {
+	BrickType,
+	pinkSchemeColors,
+} from "../../types/Bricks";
 import styles from "./styles.module.css";
 import classNames from "classnames";
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
-const brickColor: PinkSchemeBrickColors[] = [
-	PinkSchemeBrickColors.Normal,
-	PinkSchemeBrickColors.Dark,
-	PinkSchemeBrickColors.Light,
-	PinkSchemeBrickColors.VeryDark,
-];
-
-const getRandomBrickColor = () =>
-	brickColor[Math.floor(Math.random() * brickColor.length)];
+const getRandomBrickColor = () => {
+	return Object.values(pinkSchemeColors)[
+		Math.floor(Math.random() * Object.values(pinkSchemeColors).length)
+	];
+};
 
 const mapColorsToBricks = (bricks: BrickType[][]) =>
 	bricks.map((brick) =>
@@ -30,10 +29,9 @@ const BrickContainer: React.FC = () => {
 	const { gameState } = useGameState();
 	const { correctAnswers } = gameState;
 
-	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this
+	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this. Answer: Because I think TS doesn't infer complexer types.
 		mapColorsToBricks(gameState.mapping)
 	);
-
 	const [slicedBricks, setSlicedBricks] = useState<BrickType[][]>(bricks);
 	const [slicedBrickCounter, setSlicedBrickCounter] = useState(1);
 	const [currentRow, setCurrentRow] = useState(0);
@@ -93,38 +91,41 @@ const BrickContainer: React.FC = () => {
 			setSlicedBricks(bricks);
 			setSlicedBrickCounter((count) => count + 1);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [correctAnswers.length]);
 
 	return (
-		<section className={styles.brickContainer}>
+		<section className={styles.wallContainer}>
 			<div className={styles.brickRowContainer}>
 				{bricks.map((brickRow: BrickType[], idx) => {
 					return (
-						<div
-							key={idx}
-							className={classNames(styles.brickRow, {
-								[styles.showCompletedRow]:
-									slicedBricks[idx].length === 0,
-							})}
-						>
-							{brickRow.map((brick: BrickType) => {
-								const showBrick = correctAnswers
-									.map((answer) => answer.id)
-									.includes(brick.id);
+						<>
+							<div key={idx} className={styles.brickRow}>
+								{brickRow.map((brick: BrickType) => {
+									const showBrick = correctAnswers
+										.map((answer) => answer.id)
+										.includes(brick.id);
 
-								return (
-									showBrick && (
-										<Brick
-											id={brick.id}
-											currentBrick={currentBrick}
-											willDrop={brick.willDrop}
-											size={brick.size}
-											color={brick.color}
-										/>
-									)
-								);
-							})}
-						</div>
+									return (
+										showBrick && (
+											<Brick
+												id={brick.id}
+												currentBrick={currentBrick}
+												willDrop={brick.willDrop}
+												size={brick.size}
+												color={brick.color}
+											/>
+										)
+									);
+								})}
+							</div>
+							<div
+								className={classNames({
+									[styles.cementRow]:
+										slicedBricks[idx].length === 0,
+								})}
+							></div>
+						</>
 					);
 				})}
 			</div>

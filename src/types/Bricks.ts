@@ -3,9 +3,8 @@ export type BrickType = {
 	size: "default" | "small";
 	willDrop: boolean;
 	hardShake?: number[];
-	color?: PinkSchemeBrickColors;
+	color?: any;
 };
-
 
 export enum PinkSchemeBrickColors {
 	Normal = "#cd5c7c",
@@ -13,3 +12,14 @@ export enum PinkSchemeBrickColors {
 	VeryDark = "#665776",
 	Light = "#d76c80",
 }
+
+// Make generic in future
+type ColorScheme = {
+	normal: string[];
+	dark: string[];
+};
+
+export const pinkSchemeColors: ColorScheme = {
+	normal: ["#e66465", "#cd5c7c"],
+	dark: ["#9a5879", "#d76c80"],
+};

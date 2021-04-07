@@ -1,7 +1,7 @@
-.brickContainer {
+.wallContainer {
 	--containerWidth: 700px;
 	--brickHeight: 50px;
-	--brickGap: 3px;
+	--brickGap: 5px;
 	--brickWidth: 20%;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
@@ -10,8 +10,10 @@
 	--hardShakeBrickAnimationDuration: 600ms;
 	--hardShakeBrickAnimationDelay: 450ms;
 
-	--defaultBrickColor: #cd5c7c;
+	--defaultBrickColor: #e66465;
+	--secondBrickColor: #cd5c7c;
 	--defaultCementColor: #005170;
+	--secondCementColor: #0b6892;
 
 	width: var(--containerWidth);
 	margin: 0 auto;
@@ -19,6 +21,7 @@
 	/* border: 5px solid violet;  */
 	margin-top: auto;
 	height: 100%;
+	padding: 2rem;
 }
 
 .brickRowContainer {
@@ -36,11 +39,17 @@
 	flex: 1 1 100%;
 }
 
-.showCompletedRow {
-	border-top: var(--defaultCementColor) var(--brickGap) solid;
-	/* background-color: red; */
+.cementRow {
+	background: linear-gradient(
+		-90deg,
+		var(--defaultCementColor),
+		var(--secondCementColor)
+	);
+
 	width: 100%;
-	/* height: var(--brickGap); */
+	height: var(--brickGap);
+	margin-left: 0.25rem;
+	margin-right: 0.25rem;
 }
 
 /* Move to util as this is a composition class */
@@ -50,12 +59,17 @@
 	background-color: var(--defaultCementColor);
 }
 
-.brickRow .brickCement:first-child {
+.brickRow .brickCementSide:first-child {
 	border-bottom-right-radius: var(--brickRounding);
 	border-top-right-radius: var(--brickRounding);
 }
 
-.brickCement {
+.brickRow .brickCementSide:last-child {
+	border-bottom-left-radius: var(--brickRounding);
+	border-top-left-radius: var(--brickRounding);
+}
+
+.brickCementSide {
 	composes: brickCementProperties;
 	padding-left: calc(var(--brickGap));
 }
@@ -66,13 +80,13 @@
 	padding-top: calc(var(--brickGap));
 }
 
-.brickCement:last-child {
+.brickCementSide:last-child {
 	padding-left: 0;
 	/* Make sure the bricks in the end will fit (without cement) */
 	--brickSize: var(--brickWidth);
 }
 
-.brickCement:last-child.smallBrick {
+.brickCementSide:last-child.smallBrick {
 	padding-left: 0;
 	/* Make sure the bricks in the end will fit (without cement)  */
 	--brickSizeSmall: calc(var(--brickWidth) / 2);
@@ -82,6 +96,11 @@
 	background-color: var(--defaultBrickColor);
 	height: var(--brickHeight);
 	border-radius: var(--brickRounding);
+	background: linear-gradient(
+		120deg,
+		var(--defaultBrickColor),
+		var(--secondBrickColor)
+	);
 }
 
 .smallBrick {

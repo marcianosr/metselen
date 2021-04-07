@@ -8,7 +8,7 @@ type BrickProps = {
 	currentBrick?: BrickType;
 	size: string;
 	willDrop: boolean;
-	color?: string;
+	color: string[];
 };
 
 interface CSSProp extends CSSProperties {
@@ -24,7 +24,7 @@ const Brick: React.FC<BrickProps> = ({
 }) => (
 	<div
 		key={id}
-		className={classnames(styles.brickCement, {
+		className={classnames(styles.brickCementSide, {
 			[styles.dropBrick]: willDrop,
 			[styles.smallBrick]: size === "small",
 			[styles.hardShakeBrick]:
@@ -36,7 +36,8 @@ const Brick: React.FC<BrickProps> = ({
 		<div
 			style={
 				{
-					"--defaultBrickColor": color,
+					"--defaultBrickColor": color[0],
+					"--secondBrickColor": color[1],
 				} as CSSProp
 			}
 			className={classnames(styles.brick, {
