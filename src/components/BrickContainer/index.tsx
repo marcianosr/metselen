@@ -33,6 +33,7 @@ const BrickContainer: React.FC = () => {
 	const [slicedBricks, setSlicedBricks] = useState<BrickType[][]>(bricks);
 	const [slicedBrickCounter, setSlicedBrickCounter] = useState(1);
 	const [currentRow, setCurrentRow] = useState(0);
+	const [validRow, increaseValidRow] = useState(0);
 	const [currentBrick, setCurrentBrick] = useState<BrickType>();
 
 	useEffect(() => {
@@ -99,10 +100,20 @@ const BrickContainer: React.FC = () => {
 	}, [answers.length]);
 
 	useEffect(() => {
+		const filteredValidBricks = bricks[currentRow].filter(
+			(brick) => brick.cracked === false
+		).length;
+
+		const isValidRow = filteredValidBricks === bricks[currentRow].length;
+
 		if (slicedBrickCounter === bricks[currentRow].length) {
-			setCurrentRow((c) => c + 1);
+			setCurrentRow((row) => row + 1);
 			setSlicedBrickCounter(0);
-			updateGameState("rows", currentRow + 1);
+		}
+
+		if (slicedBrickCounter === bricks[currentRow].length && isValidRow) {
+			increaseValidRow((row) => row + 1);
+			updateGameState("rows", validRow + 1);
 		}
 
 		if (gameState.amountOfBricksOnField !== 0) {
