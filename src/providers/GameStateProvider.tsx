@@ -34,10 +34,12 @@ const INITIAL_GAME_STATE: GameState = {
 	score: 0,
 	rows: 0,
 	tables: allTables,
-	correctAnswers: [],
+	answers: [],
 	bricks: flattenBricksArray(bricksMapping),
 	mapping: bricksMapping,
 	isGameFinished: false,
+	amountOfBricksOnField: 0,
+	currentAnswer: null,
 };
 
 export const GameStateContext = createContext<GameStateContextState>({
@@ -67,7 +69,7 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		});
 	};
 
-	// console.log("gameState", gameState)
+	console.log("gameState", gameState);
 
 	const reset = () => setGameState({ ...INITIAL_GAME_STATE });
 

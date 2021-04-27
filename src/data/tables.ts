@@ -1,6 +1,7 @@
 export type TableResult = {
 	table: string;
 	result: number;
+	correct: "yes" | "no" | "untouched";
 };
 
 // Will be configurable
@@ -11,6 +12,7 @@ const tables: TableResult[][] = TABLE_RANGE.map((range) =>
 	MULTIPLIER_RANGE.map((multiplier) => ({
 		table: `${range} * ${multiplier}`,
 		result: multiplier * range,
+		correct: "untouched",
 	}))
 );
 
