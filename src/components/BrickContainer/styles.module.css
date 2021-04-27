@@ -56,7 +56,7 @@
 	animation-name: animateCement;
 	animation-duration: var(--cementLayerAnimationDuration);
 	animation-delay: var(--cementLayerAnimationDelay);
-	animation-fill-mode: forwards
+	animation-fill-mode: forwards;
 }
 
 /* Move to util as this is a composition class */
@@ -122,6 +122,10 @@
 
 .currentBrick {
 	/* background: gold; */
+}
+
+.crackedBrick {
+	background: chartreuse;
 }
 
 .dropBrick {

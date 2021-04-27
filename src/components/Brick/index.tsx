@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType } from "../../types/Bricks";
+import { Tables } from "../../types/Tables";
 import styles from "../BrickContainer/styles.module.css";
 
 type BrickProps = {
@@ -9,6 +10,7 @@ type BrickProps = {
 	size: string;
 	willDrop: boolean;
 	color: string[];
+	cracked?: boolean;
 };
 
 interface CSSProp extends CSSProperties {
@@ -21,6 +23,7 @@ const Brick: React.FC<BrickProps> = ({
 	size,
 	willDrop,
 	color,
+	cracked,
 }) => (
 	<div
 		key={id}
@@ -42,10 +45,12 @@ const Brick: React.FC<BrickProps> = ({
 			}
 			className={classnames(styles.brick, {
 				// [styles.dropBrick]: willDrop,
+				[styles.crackedBrick]: cracked,
 				[styles.currentBrick]: currentBrick?.id === id,
 			})}
 		>
-			{id}
+			{id} - cracked: {JSON.stringify(cracked)} -{" "}
+			{JSON.stringify(willDrop)}
 		</div>
 	</div>
 );
