@@ -43,7 +43,9 @@ const AnswerDisplay: React.FC = () => {
 
 			updateGameStateMultiple({
 				tables: gameState.tables.slice(1),
-				score: increaseScore(1, gameState.score),
+				score: isCorrectAnswer
+					? increaseScore(1, gameState.score)
+					: gameState.score,
 				amountOfBricksOnField: isCorrectAnswer
 					? allowBrickOnField(gameState.amountOfBricksOnField)
 					: gameState.amountOfBricksOnField,
