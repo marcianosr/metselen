@@ -4,6 +4,7 @@ export type BrickType = {
 	willDrop: boolean;
 	hardShake?: number[];
 	color?: any;
+	cracked: boolean;
 };
 
 export enum PinkSchemeBrickColors {
