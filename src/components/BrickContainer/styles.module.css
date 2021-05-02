@@ -125,7 +125,12 @@
 }
 
 .crackedBrick {
-	background: chartreuse;
+}
+
+.cracksContainer {
+	stroke-dasharray: 400;
+	stroke-dashoffset: 450;
+	animation: animateCracks 3s ease-in forwards;
 }
 
 .dropBrick {
@@ -149,6 +154,12 @@
 	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
 	animation-delay: 450ms;
 	transform: translate3d(0, 0, 0);
+}
+
+@keyframes animateCracks {
+	to {
+		stroke-dashoffset: 0;
+	}
 }
 
 @keyframes animateCement {

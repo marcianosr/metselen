@@ -8,10 +8,20 @@ import classNames from "classnames";
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
-const getRandomBrickColor = () => {
-	return Object.values(pinkSchemeColors)[
+export type RandomColorType = {
+	key: string;
+	values: string[];
+};
+
+const getRandomBrickColor = (): RandomColorType => {
+	const getColor = Object.entries(pinkSchemeColors)[
 		Math.floor(Math.random() * Object.values(pinkSchemeColors).length)
 	];
+
+	return {
+		key: getColor[0],
+		values: getColor[1],
+	};
 };
 
 const mapColorsToBricks = (bricks: BrickType[][]) =>
