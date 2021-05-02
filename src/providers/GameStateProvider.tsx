@@ -7,12 +7,12 @@ import { bricksMapping } from "../data/levelMappings";
 const amountOfSums = flattenBricksArray(bricksMapping).length;
 
 // T represents a key of the GameState Type
-// GameState[T] resolves to a type value.
+// GameState[Action] resolves to a type value.
 //
-// GameState[T]: isGameFinished (key) that belongs to GameState type. This is adding constraints, so you won't accidently update an unknown object.
-type GameStateUpdater = <T extends keyof GameState>(
-	key: T,
-	value: GameState[T]
+// GameState[Action]: isGameFinished (key) that belongs to GameState type. This is adding constraints, so you won't accidently update an unknown object.
+type GameStateUpdater = <Action extends keyof GameState>(
+	key: Action,
+	value: GameState[Action]
 ) => void;
 type GameStateMultipleUpdater = (state: Partial<GameState>) => void;
 
@@ -30,7 +30,7 @@ type GameStateContextState = {
 };
 
 const INITIAL_GAME_STATE: GameState = {
-	timer: 700,
+	timer: 9700,
 	score: 0,
 	rows: 0,
 	tables: allTables,

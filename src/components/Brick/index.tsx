@@ -1,8 +1,7 @@
 import React, { CSSProperties } from "react";
 import classnames from "classnames";
-import { BrickType } from "../../types/Bricks";
+import { BrickType, RandomColorType } from "../../types/Bricks";
 import styles from "../BrickContainer/styles.module.css";
-import { RandomColorType } from "../BrickContainer";
 import { LightCrack, DarkCrack } from "./Cracks";
 
 type BrickProps = {
@@ -10,7 +9,7 @@ type BrickProps = {
 	currentBrick?: BrickType;
 	size: string;
 	willDrop: boolean;
-	color: RandomColorType;
+	color: RandomColorType | undefined;
 	cracked?: boolean;
 };
 
@@ -40,8 +39,8 @@ const Brick: React.FC<BrickProps> = ({
 		<div
 			style={
 				{
-					"--defaultBrickColor": color.values[0],
-					"--secondBrickColor": color.values[1],
+					"--defaultBrickColor": color?.values[0],
+					"--secondBrickColor": color?.values[1],
 				} as CSSProp
 			}
 			className={classnames(styles.brick, {
@@ -50,10 +49,10 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.currentBrick]: currentBrick?.id === id,
 			})}
 		>
-			{cracked && color.key === "normal" && (
+			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}
-			{cracked && color.key === "dark" && (
+			{cracked && color?.key === "dark" && (
 				<DarkCrack isSmall={size === "small"} />
 			)}
 		</div>

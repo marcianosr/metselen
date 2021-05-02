@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
 import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import Brick from "../Brick";
-import { BrickType, pinkSchemeColors } from "../../types/Bricks";
+import {
+	BrickType,
+	pinkSchemeColors,
+	RandomColorType,
+} from "../../types/Bricks";
 import styles from "./styles.module.css";
 import classNames from "classnames";
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
-
-export type RandomColorType = {
-	key: string;
-	values: string[];
-};
 
 const getRandomBrickColor = (): RandomColorType => {
 	const getColor = Object.entries(pinkSchemeColors)[
@@ -132,7 +131,6 @@ const BrickContainer: React.FC = () => {
 			setSlicedBricks(bricks);
 			setSlicedBrickCounter((count) => count + 1);
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [gameState.amountOfBricksOnField]);
 

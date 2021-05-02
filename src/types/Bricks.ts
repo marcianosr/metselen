@@ -3,7 +3,7 @@ export type BrickType = {
 	size: "default" | "small";
 	willDrop: boolean;
 	hardShake?: number[];
-	color?: any;
+	color?: RandomColorType;
 	cracked: boolean;
 };
 
@@ -23,4 +23,9 @@ type ColorScheme = {
 export const pinkSchemeColors: ColorScheme = {
 	normal: ["#e66465", "#cd5c7c"],
 	dark: ["#9a5879", "#d76c80"],
+};
+
+export type RandomColorType = {
+	key: string;
+	values: string[];
 };
