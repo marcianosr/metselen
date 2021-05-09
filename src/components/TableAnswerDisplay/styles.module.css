@@ -5,13 +5,17 @@
 	/* height: 100%; */
 }
 
-.sumDisplay {
+.goofyLetterStyle {
 	font-weight: 900;
 	font-family: "Palanquin Dark";
-	letter-spacing: 3px;
 	filter: drop-shadow(1px 3px 0px black);
 	color: white;
 	-webkit-text-stroke: 2px black;
+}
+
+.sumDisplay {
+	composes: goofyLetterStyle;
+	letter-spacing: 3px;
 	position: relative;
 	display: flex;
 }

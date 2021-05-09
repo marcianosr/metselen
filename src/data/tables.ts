@@ -10,7 +10,7 @@ const MULTIPLIER_RANGE = [4, 5, 6, 7, 8];
 
 const tables: TableResult[][] = TABLE_RANGE.map((range) =>
 	MULTIPLIER_RANGE.map((multiplier) => ({
-		table: `${range} * ${multiplier}`,
+		table: `${range} x ${multiplier}`,
 		result: multiplier * range,
 		correct: "untouched",
 	}))
