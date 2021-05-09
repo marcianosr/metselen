@@ -1,0 +1,34 @@
+.answerInputContainer {
+	--border-size: 3px;
+	padding: var(--border-size);
+	display: flex;
+	height: 130px;
+}
+
+.answerInput {
+	border: 0;
+	border-bottom: 5px #000000 dotted;
+	/* border-radius: 5px; */
+	/* border-bottom: 3px black solid; */
+	padding: 0.25rem 0.75rem 0rem 0.75rem;
+	font-size: 6.5rem;
+	font-family: "Palanquin Dark";
+	font-weight: 900;
+	-webkit-text-stroke: 2px black;
+	color: white;
+	text-align: center;
+
+	width: 140px;
+	overflow: hidden;
+	margin-left: 1rem;
+}
+
+.answerInput:focus {
+	outline: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}

@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useCallback } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
 import { GameState } from "../../types/GameState";
 import { Tables } from "../../types/Tables";
+import styles from "./styles.module.css";
 
 const increaseScore = (amount: number, score: number) => amount + score;
 const increaseBricksOnField = (amount: number, score: number) => amount + score;
@@ -79,17 +80,20 @@ const AnswerDisplay: React.FC = () => {
 	}, [givenAnswer, validateAnswer, gameState.isGameFinished]);
 
 	return (
-		<>
+		<div className={styles.answerInputContainer}>
 			<input
 				type="number"
 				id="answer"
 				name="answer"
+				autoFocus
 				value={givenAnswer}
+				disabled={gameState.isGameFinished}
+				className={styles.answerInput}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => {
 					setGivenAnswer(e.target.value);
 				}}
 			/>
-		</>
+		</div>
 	);
 };
 

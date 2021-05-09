@@ -2,5 +2,43 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
+	/* height: 100%; */
+}
+
+.sumDisplay {
+	font-weight: 900;
+	font-family: "Palanquin Dark";
+	letter-spacing: 3px;
+	filter: drop-shadow(1px 3px 0px black);
+	color: white;
+	-webkit-text-stroke: 2px black;
+	position: relative;
+	display: flex;
+}
+
+.sumDisplay div:nth-child(1) {
+	font-size: 7rem;
+	transform: rotate(-5deg);
+	align-self: center;
+	margin: -2px;
+}
+
+.sumDisplay div:nth-child(3) {
+	font-size: 6.5rem;
+
+	transform: rotate(7deg);
+	align-self: center;
+	margin: -2px;
+}
+
+.sumDisplay div:nth-child(2) {
+	font-size: 4rem;
+	align-self: center;
+	margin: -3px;
+}
+
+.sumDisplay div:nth-child(4) {
+	font-size: 4rem;
+	margin-left: 0.5rem;;
+	align-self: center;
 }
