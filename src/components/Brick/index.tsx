@@ -49,6 +49,7 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.currentBrick]: currentBrick?.id === id,
 			})}
 		>
+			<div className={styles.brickShadow}></div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}

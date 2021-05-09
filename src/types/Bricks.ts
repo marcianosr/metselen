@@ -7,13 +7,6 @@ export type BrickType = {
 	cracked: boolean;
 };
 
-export enum PinkSchemeBrickColors {
-	Normal = "#cd5c7c",
-	Dark = "#9a5879",
-	VeryDark = "#665776",
-	Light = "#d76c80",
-}
-
 // Make generic in future
 type ColorScheme = {
 	normal: string[];
@@ -21,8 +14,8 @@ type ColorScheme = {
 };
 
 export const pinkSchemeColors: ColorScheme = {
-	normal: ["#e66465", "#cd5c7c"],
-	dark: ["#9a5879", "#d76c80"],
+	normal: ["#D76C80", "#D76C80"],
+	dark: ["#DF597A", "#DF597A"],
 };
 
 export type RandomColorType = {

@@ -1,11 +1,19 @@
+:root {
+	--defaultBrickColor: #D76C80;
+	--secondBrickColor: #DF597A;
+
+	
+}
+
 .wallContainer {
 	--containerWidth: 700px;
 	--brickHeight: 50px;
-	--brickGap: 5px;
+	--brickGap: 4px;
 	--brickWidth: 20%;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
 	--brickRounding: 4px;
+	--brickShadowColor: #B75F70;
 
 	--brickDropAnimationDuration: 500ms;
 
@@ -14,19 +22,18 @@
 
 	--cementLayerAnimationDuration: 500ms;
 	--cementLayerAnimationDelay: 500ms;
-
-	--defaultBrickColor: #e66465;
-	--secondBrickColor: #cd5c7c;
+	--cementWidth: 3px;
+	--cementHeight: 5px;
 	--defaultCementColor: #005170;
-	--secondCementColor: #0b6892;
+	--secondCementColor: #3683a7;
 
 	width: var(--containerWidth);
 	margin: 0 auto;
 	/* debug: container to wrap around */
-	/* border: 5px solid violet;  */
+	/* border: 10px solid #72b8f3;  */
+	border-radius: 5px;
 	margin-top: auto;
 	height: 100%;
-	padding: 2rem;
 }
 
 .brickRowContainer {
@@ -45,14 +52,10 @@
 }
 
 .cementRow {
-	background: linear-gradient(
-		-90deg,
-		var(--defaultCementColor),
-		var(--secondCementColor)
-	);
-	height: var(--brickGap);
-	margin-left: 0.25rem;
-	margin-right: 0.25rem;
+	background-color: var(--defaultCementColor);
+	height: var(--cementHeight);
+	margin-left: 1.75rem;
+	margin-right: 0.75rem;
 	animation-name: animateCement;
 	animation-duration: var(--cementLayerAnimationDuration);
 	animation-delay: var(--cementLayerAnimationDelay);
@@ -61,71 +64,58 @@
 
 /* Move to util as this is a composition class */
 .brickCementProperties {
-	height: var(--brickHeight);
+	height: calc(var(--brickHeight) + 3px);
 	width: var(--brickSize);
 	background-color: var(--defaultCementColor);
 }
 
-.brickRow .brickCementSide:first-child {
-	border-bottom-right-radius: var(--brickRounding);
-	border-top-right-radius: var(--brickRounding);
-}
-
-.brickRow .brickCementSide:last-child {
-	border-bottom-left-radius: var(--brickRounding);
-	border-top-left-radius: var(--brickRounding);
-}
-
 .brickCementSide {
 	composes: brickCementProperties;
-	padding-left: calc(var(--brickGap));
 }
 
 /* should be used as showCompletedrRow */
 .brickCementRow {
 	composes: brickCementProperties;
-	padding-top: calc(var(--brickGap));
 }
 
 .brickCementSide:last-child {
-	padding-left: 0;
+	border-left: var(--cementWidth) solid var(--defaultCementColor);
 	/* Make sure the bricks in the end will fit (without cement) */
 	--brickSize: var(--brickWidth);
 }
 
 .brickCementSide:last-child.smallBrick {
-	padding-left: 0;
 	/* Make sure the bricks in the end will fit (without cement)  */
 	--brickSizeSmall: calc(var(--brickWidth) / 2);
 }
 
 .brick {
-	background-color: var(--defaultBrickColor);
 	height: var(--brickHeight);
-	border-radius: var(--brickRounding);
+	border-right: var(--cementWidth) solid var(--defaultCementColor);
+	
 	background: linear-gradient(
-		120deg,
+		90deg,
 		var(--defaultBrickColor),
 		var(--secondBrickColor)
 	);
+	position: relative;
 }
+
+.brickShadow {
+	position: absolute;
+	bottom: 0;
+	background-color: var(--brickShadowColor);
+	width: 100%;
+	height: 8px;;
+}
+
 
 .smallBrick {
 	width: var(--brickSizeSmall);
 }
 
-.smallBrick:last-child {
-	/* --brickSizeSmall: calc(
-		var(--brickWidth) / 2
-	); Make sure the bricks in the end will fit (without cement) */
-}
-
-.currentBrick {
-	/* background: gold; */
-}
-
-.crackedBrick {
-}
+.currentBrick {}
+.crackedBrick {}
 
 .cracksContainer {
 	stroke-dasharray: 400;
