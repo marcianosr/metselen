@@ -52,7 +52,8 @@
 }
 
 .cementRow {
-	background-color: var(--defaultCementColor);
+	/* background-color: var(--defaultCementColor); */
+	background-color: #1e7596;
 	height: var(--cementHeight);
 	margin-left: 1.75rem;
 	margin-right: 0.75rem;
@@ -92,7 +93,8 @@
 .brick {
 	height: var(--brickHeight);
 	border-right: var(--cementWidth) solid var(--defaultCementColor);
-	
+	border-top: var(--cementWidth) solid var(--defaultCementColor);
+    border-bottom: var(--cementWidth) solid var(--defaultCementColor);
 	background: linear-gradient(
 		90deg,
 		var(--defaultBrickColor),

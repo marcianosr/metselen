@@ -6,6 +6,8 @@ import BrickContainer from "../BrickContainer";
 import TableAnswerDisplay from "../TableAnswerDisplay";
 import Modal from "../Modal";
 
+import styles from "./styles.module.css";
+
 const GameContainer = () => {
 	const { gameState, onResetGame, updateGameState } = useGameState();
 	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
@@ -23,7 +25,7 @@ const GameContainer = () => {
 	return (
 		<section className="gameContainer">
 			<>
-				<h1>Tijd: {timer}</h1>
+				<strong className={styles.timer}>Tijd: {timer}</strong>
 				<TableAnswerDisplay />
 				{!gameState.isGameFinished && <BrickContainer />}
 				<h1>Punten: {gameState.score}</h1>
