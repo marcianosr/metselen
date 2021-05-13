@@ -8,7 +8,7 @@
 .goofyLetterStyle {
 	font-weight: 900;
 	font-family: var(--defaultFont);
-	filter: drop-shadow(1px 3px 0px black);
+	filter: drop-shadow(2px 3px 0px black);
 	color: white;
 	-webkit-text-stroke: 2px black;
 }
@@ -24,21 +24,19 @@
 	font-size: 7rem;
 	/* transform: rotate(-5deg); */
 	align-self: center;
-	/* margin: -2px; */
 }
 
 .sumDisplay div:nth-child(3) {
 	font-size: 7rem;
-
 	/* transform: rotate(7deg); */
 	align-self: center;
-	margin: 0px;
+	margin-top: -7px;
+	margin-left: 5px;
 }
 
 .sumDisplay div:nth-child(2) {
 	font-size: 4rem;
 	align-self: center;
-	/* margin: -3px; */
 }
 
 .sumDisplay div:nth-child(4) {

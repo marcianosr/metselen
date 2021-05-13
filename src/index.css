@@ -2,7 +2,7 @@
 
 
 :root {
-	--defaultFont: var(--defaultFont);
+	--defaultFont: "Palanquin Dark";
 }
 
 body {
