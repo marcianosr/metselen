@@ -65,7 +65,7 @@
 
 /* Move to util as this is a composition class */
 .brickCementProperties {
-	height: calc(var(--brickHeight) + 3px);
+	height: calc(var(--brickHeight) + 6px);
 	width: var(--brickSize);
 	background-color: var(--defaultCementColor);
 }
