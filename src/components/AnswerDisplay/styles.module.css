@@ -12,10 +12,6 @@
 	/* border-bottom: 3px black solid; */
 	padding: 0.25rem 0.75rem 0rem 0.75rem;
 	font-size: 6.5rem;
-	font-family: var(--defaultFont);
-	font-weight: 900;
-	-webkit-text-stroke: 2px black;
-	color: white;
 	text-align: center;
 
 	width: 140px;

@@ -3,6 +3,8 @@ import { useGameState } from "../../providers/GameStateProvider";
 import { GameState } from "../../types/GameState";
 import { Tables } from "../../types/Tables";
 import styles from "./styles.module.css";
+import textStyles from "../../typography.module.css";
+import classNames from "classnames";
 
 const increaseScore = (amount: number, score: number) => amount + score;
 const increaseBricksOnField = (amount: number, score: number) => amount + score;
@@ -88,7 +90,7 @@ const AnswerDisplay: React.FC = () => {
 				autoFocus
 				value={givenAnswer}
 				disabled={gameState.isGameFinished}
-				className={styles.answerInput}
+				className={classNames(styles.answerInput, textStyles.defaultText)}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => {
 					setGivenAnswer(e.target.value);
 				}}

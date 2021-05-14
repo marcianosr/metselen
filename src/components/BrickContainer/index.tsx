@@ -155,6 +155,7 @@ const BrickContainer: React.FC = () => {
 												size={brick.size}
 												color={brick.color}
 												cracked={brick.cracked}
+												sum={gameState.answers[brick.id - 1].table}
 											/>
 										)
 									);

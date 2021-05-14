@@ -1,0 +1,9 @@
+.defaultText {
+    font-family: var(--defaultFont);
+	font-weight: 900;
+	font-size: 2rem;
+	letter-spacing: -3px;
+	filter: drop-shadow(2px 2px 0px black);
+	color: white;
+	-webkit-text-stroke: 1px black;
+}

@@ -1,8 +1,9 @@
 import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType, RandomColorType } from "../../types/Bricks";
-import styles from "../BrickContainer/styles.module.css";
 import { LightCrack, DarkCrack } from "./Cracks";
+import styles from "../BrickContainer/styles.module.css";
+import typographyStyles from "../../typography.module.css";
 
 type BrickProps = {
 	id: number;
@@ -11,6 +12,7 @@ type BrickProps = {
 	willDrop: boolean;
 	color: RandomColorType | undefined;
 	cracked?: boolean;
+	sum: string;
 };
 
 interface CSSProp extends CSSProperties {
@@ -24,6 +26,7 @@ const Brick: React.FC<BrickProps> = ({
 	willDrop,
 	color,
 	cracked,
+	sum
 }) => (
 	<div
 		key={id}
@@ -50,6 +53,7 @@ const Brick: React.FC<BrickProps> = ({
 			})}
 		>
 			<div className={styles.brickShadow}></div>
+			<div className={classnames(typographyStyles.defaultText, styles.sum)}>{sum}</div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}
