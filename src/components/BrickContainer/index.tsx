@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGameState } from "../../providers/GameStateProvider";
 import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
+import { BrickRowContainer, BrickRow } from "../BrickRowContainer";
 import Brick from "../Brick";
 import {
 	BrickType,
@@ -135,45 +136,41 @@ const BrickContainer: React.FC = () => {
 
 	return (
 		<section className={styles.brickContainer}>
-			<div className={styles.brickRowContainer}>
-				{bricks.map((brickRow: BrickType[], idx) => {
-					return (
-						<>
-							<div key={idx} className={styles.brickRow}>
-								{brickRow.map((brick: BrickType) => {
-									const showBrick =
-										gameState.amountOfBricksOnField >=
-										brick.id;
+			<BrickRowContainer>
+				{bricks.map((brickRow: BrickType[], idx) => (
+					<>
+						<BrickRow idx={idx}>
+							{brickRow.map((brick: BrickType) => {
+								const showBrick =
+									gameState.amountOfBricksOnField >= brick.id;
 
-									return (
-										showBrick && (
-											<Brick
-												id={brick.id}
-												currentBrick={currentBrick}
-												willDrop={brick.willDrop}
-												size={brick.size}
-												color={brick.color}
-												cracked={brick.cracked}
-												text={
-													gameState.answers[
-														brick.id - 1
-													].table
-												}
-											/>
-										)
-									);
-								})}
-							</div>
-							<div
-								className={classNames({
-									[styles.cementRow]:
-										slicedBricks[idx].length === 0,
-								})}
-							></div>
-						</>
-					);
-				})}
-			</div>
+								return (
+									showBrick && (
+										<Brick
+											id={brick.id}
+											currentBrick={currentBrick}
+											willDrop={brick.willDrop}
+											size={brick.size}
+											color={brick.color}
+											cracked={brick.cracked}
+											text={
+												gameState.answers[brick.id - 1]
+													.table
+											}
+										/>
+									)
+								);
+							})}
+						</BrickRow>
+						<div
+							className={classNames({
+								[styles.cementRow]:
+									slicedBricks[idx].length === 0,
+							})}
+						></div>
+					</>
+				))}
+			</BrickRowContainer>
 		</section>
 	);
 };

@@ -10,7 +10,6 @@
 	--brickWidth: 20%;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
-	--brickRounding: 4px;
 	--brickShadowColor: #b75f70;
 
 	--brickDropAnimationDuration: 500ms;
@@ -32,21 +31,6 @@
 	border-radius: 5px;
 	margin-top: auto;
 	height: 100%;
-}
-
-.brickRowContainer {
-	display: flex;
-	align-content: flex-start;
-	flex-wrap: wrap-reverse;
-	height: 100%;
-	position: relative;
-}
-
-.brickRow {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row-reverse;
-	flex: 1 1 100%;
 }
 
 .cementRow {

@@ -1,0 +1,14 @@
+.brickRowContainer {
+	display: flex;
+	align-content: flex-start;
+	flex-wrap: wrap-reverse;
+	height: 100%;
+	position: relative;
+}
+
+.brickRow {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row-reverse;
+	flex: 1 1 100%;
+}
