@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;700&display=swap");
 
 :root {
 	--defaultFont: "Palanquin Dark";
@@ -22,4 +22,8 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+
+h1 {
+	margin: 0;
 }

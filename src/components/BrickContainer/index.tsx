@@ -12,10 +12,11 @@ import classNames from "classnames";
 
 const HARD_SHAKE_BRICK_ANIMATION_LENGTH = 1220; // In ms. Delay + duration of the animation.
 
-const getRandomBrickColor = (): RandomColorType => {
-	const getColor = Object.entries(pinkSchemeColors)[
-		Math.floor(Math.random() * Object.values(pinkSchemeColors).length)
-	];
+export const getRandomBrickColor = (): RandomColorType => {
+	const getColor =
+		Object.entries(pinkSchemeColors)[
+			Math.floor(Math.random() * Object.values(pinkSchemeColors).length)
+		];
 
 	return {
 		key: getColor[0],
@@ -46,9 +47,8 @@ const BrickContainer: React.FC = () => {
 	const [currentBrick, setCurrentBrick] = useState<BrickType>();
 
 	useEffect(() => {
-		const currentBrick = flattenBricksArray(bricks)[
-			gameState.amountOfBricksOnField
-		];
+		const currentBrick =
+			flattenBricksArray(bricks)[gameState.amountOfBricksOnField];
 
 		if (currentAnswer === "incorrect") {
 			setBricks(
@@ -70,9 +70,8 @@ const BrickContainer: React.FC = () => {
 	}, [answers.length]);
 
 	useEffect(() => {
-		const previousBrick = flattenBricksArray(bricks)[
-			gameState.amountOfBricksOnField - 1
-		];
+		const previousBrick =
+			flattenBricksArray(bricks)[gameState.amountOfBricksOnField - 1];
 
 		if (previousBrick && currentAnswer === "correct") {
 			setCurrentBrick({
@@ -135,7 +134,7 @@ const BrickContainer: React.FC = () => {
 	}, [gameState.amountOfBricksOnField]);
 
 	return (
-		<section className={styles.wallContainer}>
+		<section className={styles.brickContainer}>
 			<div className={styles.brickRowContainer}>
 				{bricks.map((brickRow: BrickType[], idx) => {
 					return (
@@ -155,7 +154,11 @@ const BrickContainer: React.FC = () => {
 												size={brick.size}
 												color={brick.color}
 												cracked={brick.cracked}
-												sum={gameState.answers[brick.id - 1].table}
+												text={
+													gameState.answers[
+														brick.id - 1
+													].table
+												}
 											/>
 										)
 									);

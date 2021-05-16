@@ -9,10 +9,10 @@ type BrickProps = {
 	id: number;
 	currentBrick?: BrickType;
 	size: string;
-	willDrop: boolean;
+	willDrop?: boolean;
 	color: RandomColorType | undefined;
 	cracked?: boolean;
-	sum: string;
+	text: string;
 };
 
 interface CSSProp extends CSSProperties {
@@ -26,7 +26,7 @@ const Brick: React.FC<BrickProps> = ({
 	willDrop,
 	color,
 	cracked,
-	sum
+	text,
 }) => (
 	<div
 		key={id}
@@ -53,7 +53,14 @@ const Brick: React.FC<BrickProps> = ({
 			})}
 		>
 			<div className={styles.brickShadow}></div>
-			<div className={classnames(typographyStyles.defaultText, styles.sum)}>{sum}</div>
+			<div
+				className={classnames(
+					typographyStyles.defaultText,
+					styles.text
+				)}
+			>
+				{text}
+			</div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}

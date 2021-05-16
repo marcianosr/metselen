@@ -1,11 +1,9 @@
 :root {
-	--defaultBrickColor: #D76C80;
-	--secondBrickColor: #DF597A;
-
-	
+	--defaultBrickColor: #d76c80;
+	--secondBrickColor: #df597a;
 }
 
-.wallContainer {
+.brickContainer {
 	--containerWidth: 700px;
 	--brickHeight: 50px;
 	--brickGap: 4px;
@@ -13,7 +11,7 @@
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
 	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
 	--brickRounding: 4px;
-	--brickShadowColor: #B75F70;
+	--brickShadowColor: #b75f70;
 
 	--brickDropAnimationDuration: 500ms;
 
@@ -65,7 +63,7 @@
 
 /* Move to util as this is a composition class */
 .brickCementProperties {
-	height: calc(var(--brickHeight) + 3px);
+	height: calc(var(--brickHeight) + 6px);
 	width: var(--brickSize);
 	background-color: var(--defaultCementColor);
 }
@@ -94,7 +92,7 @@
 	height: var(--brickHeight);
 	border-right: var(--cementWidth) solid var(--defaultCementColor);
 	border-top: var(--cementWidth) solid var(--defaultCementColor);
-    border-bottom: var(--cementWidth) solid var(--defaultCementColor);
+	border-bottom: var(--cementWidth) solid var(--defaultCementColor);
 	background: linear-gradient(
 		90deg,
 		var(--defaultBrickColor),
@@ -111,13 +109,14 @@
 	height: 8px;
 }
 
-
 .smallBrick {
 	width: var(--brickSizeSmall);
 }
 
-.currentBrick {}
-.crackedBrick {}
+.currentBrick {
+}
+.crackedBrick {
+}
 
 .cracksContainer {
 	stroke-dasharray: 400;
@@ -148,8 +147,8 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.sum {
-    position: absolute;
+.text {
+	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
