@@ -2,12 +2,11 @@
 	--border-size: 3px;
 	padding: var(--border-size);
 	display: flex;
-	height: 130px;
+	height: 100px;
 }
 
 .answerInput {
 	border: 0;
-	border-bottom: 5px #000000 dotted;
 	/* border-radius: 5px; */
 	/* border-bottom: 3px black solid; */
 	padding: 0.25rem 0.75rem 0rem 0.75rem;

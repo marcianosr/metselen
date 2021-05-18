@@ -1,3 +1,7 @@
+:root {
+	--defaultBrickColor: #d76c80;
+}
+
 .gameContainer {
 	display: flex;
 	flex-direction: column;
