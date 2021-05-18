@@ -90,7 +90,7 @@ const AnswerDisplay: React.FC = () => {
 				autoFocus
 				value={givenAnswer}
 				disabled={gameState.isGameFinished}
-				className={classNames(styles.answerInput, textStyles.defaultText)}
+				className={classNames(styles.answerInput)}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => {
 					setGivenAnswer(e.target.value);
 				}}

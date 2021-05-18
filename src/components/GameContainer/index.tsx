@@ -25,8 +25,14 @@ const GameContainer = () => {
 	return (
 		<section className="gameContainer">
 			<>
-				<strong className={styles.timer}>Tijd: {timer}</strong>
-				<TableAnswerDisplay />
+				<section className={styles.gameInfoContainer}>
+					<ul className={styles.pointsList}>
+						<li className={styles.points}>Punten</li>
+						<li className={styles.points}>Punten</li>
+					</ul>
+					<TableAnswerDisplay />
+					<strong className={styles.timer}>{timer}</strong>
+				</section>
 				{!gameState.isGameFinished && <BrickContainer />}
 				<h1>Punten: {gameState.score}</h1>
 				<h1>Rijen: {gameState.rows}</h1>

@@ -2,15 +2,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* height: 100%; */
-}
-
-.goofyLetterStyle {
-	font-weight: 900;
-	font-family: var(--defaultFont);
-	filter: drop-shadow(2px 3px 0px black);
-	color: white;
-	-webkit-text-stroke: 2px black;
+	flex: 1;
 }
 
 .sumDisplay {
@@ -43,5 +35,6 @@
 .sumDisplay div:nth-child(4) {
 	font-size: 4rem;
 	align-self: center;
-	transform: rotate(6deg);
+	transform: rotate(-6deg);
+	margin-left: -0.25rem;
 }
