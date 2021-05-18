@@ -1,0 +1,25 @@
+/* 
+  Composable classes that should not be used in the JS directly, but only for CSS composition. 
+  Default styles which can be overridden in component styles with CSS vars. 
+*/
+
+.brickWallComposition {
+	--defaultContainerWidth: 700px;
+
+	width: var(--defaultContainerWidth);
+	margin: 0 auto;
+	/* debug: container to wrap around */
+	/* border: 10px solid #72b8f3;  */
+	margin-top: auto;
+	height: 100%;
+}
+
+.brickSize {
+	--brickWidth: 20%;
+	--brickHeight: 50px;
+	--brickGap: 4px;
+	--brickSize: calc(var(--brickWidth) - var(--brickGap));
+	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
+
+	height: var(--brickHeight);
+}

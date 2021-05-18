@@ -2,7 +2,8 @@ import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType, RandomColorType } from "../../types/Bricks";
 import { LightCrack, DarkCrack } from "./Cracks";
-import styles from "../BrickContainer/styles.module.css";
+import brickContainerStyles from "../BrickContainer/styles.module.css";
+import styles from "./styles.module.css";
 import typographyStyles from "../../typography.module.css";
 
 type BrickProps = {
@@ -30,7 +31,7 @@ const Brick: React.FC<BrickProps> = ({
 }) => (
 	<div
 		key={id}
-		className={classnames(styles.brickCementSide, {
+		className={classnames(brickContainerStyles.brickCementSide, {
 			[styles.dropBrick]: willDrop,
 			[styles.smallBrick]: size === "small",
 			[styles.hardShakeBrick]:

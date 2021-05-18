@@ -1,41 +1,21 @@
-:root {
-	--defaultBrickColor: #d76c80;
-	--secondBrickColor: #df597a;
+.brickContainer {
+	composes: brickWallComposition from "../../composition.css";
 }
 
-.brickContainer {
-	--containerWidth: 700px;
-	--brickHeight: 50px;
-	--brickGap: 4px;
-	--brickWidth: 20%;
-	--brickSize: calc(var(--brickWidth) - var(--brickGap));
-	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
-	--brickShadowColor: #b75f70;
-
-	--brickDropAnimationDuration: 500ms;
-
-	--hardShakeBrickAnimationDuration: 600ms;
-	--hardShakeBrickAnimationDelay: 450ms;
-
-	--cementLayerAnimationDuration: 500ms;
-	--cementLayerAnimationDelay: 500ms;
+.cementComposition {
 	--cementWidth: 3px;
 	--cementHeight: 5px;
 	--defaultCementColor: #005170;
 	--secondCementColor: #3683a7;
-
-	width: var(--containerWidth);
-	margin: 0 auto;
-	/* debug: container to wrap around */
-	/* border: 10px solid #72b8f3;  */
-	border-radius: 5px;
-	margin-top: auto;
-	height: 100%;
+	--thirdCementColor: #1e7596;
 }
 
 .cementRow {
+	--cementLayerAnimationDuration: 500ms;
+	--cementLayerAnimationDelay: 500ms;
 	/* background-color: var(--defaultCementColor); */
-	background-color: #1e7596;
+	composes: cementComposition;
+	background-color: var(--thirdCementColor);
 	height: var(--cementHeight);
 	margin-left: 1.75rem;
 	margin-right: 0.75rem;
@@ -47,9 +27,11 @@
 
 /* Move to util as this is a composition class */
 .brickCementProperties {
+	composes: cementComposition;
+	composes: brickSize from "../../composition.css";
+	background-color: var(--defaultCementColor);
 	height: calc(var(--brickHeight) + 6px);
 	width: var(--brickSize);
-	background-color: var(--defaultCementColor);
 }
 
 .brickCementSide {
@@ -72,144 +54,11 @@
 	--brickSizeSmall: calc(var(--brickWidth) / 2);
 }
 
-.brick {
-	height: var(--brickHeight);
-	border-right: var(--cementWidth) solid var(--defaultCementColor);
-	border-top: var(--cementWidth) solid var(--defaultCementColor);
-	border-bottom: var(--cementWidth) solid var(--defaultCementColor);
-	background: linear-gradient(
-		90deg,
-		var(--defaultBrickColor),
-		var(--secondBrickColor)
-	);
-	position: relative;
-}
-
-.brickShadow {
-	position: absolute;
-	bottom: 0;
-	background-color: var(--brickShadowColor);
-	width: 100%;
-	height: 8px;
-}
-
-.smallBrick {
-	width: var(--brickSizeSmall);
-}
-
-.currentBrick {
-}
-.crackedBrick {
-}
-
-.cracksContainer {
-	stroke-dasharray: 400;
-	stroke-dashoffset: 450;
-	animation: animateCracks 3s ease-in forwards;
-}
-
-.dropBrick {
-	animation-name: dropBrick;
-	animation-delay: 0ms;
-	animation-duration: var(--brickDropAnimationDuration);
-	animation-timing-function: ease-in;
-}
-
-.hardShakeBrick {
-	animation-name: hardShakeBrick;
-	animation-duration: var(--hardShakeBrickAnimationDuration);
-	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
-	animation-delay: var(--hardShakeBrickAnimationDelay);
-	transform: translate3d(0, 0, 0);
-}
-
-.softShakeBrick {
-	animation-name: softShakeBrick;
-	animation-duration: 520ms;
-	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
-	animation-delay: 450ms;
-	transform: translate3d(0, 0, 0);
-}
-
-.text {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
-
-@keyframes animateCracks {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
 @keyframes animateCement {
 	from {
 		width: 0;
 	}
 	to {
 		width: 100%;
-	}
-}
-
-@keyframes dropBrick {
-	0% {
-		opacity: 0;
-		transform: translate(0, -100px) rotate(-5deg);
-	}
-	70% {
-		opacity: 1;
-		transform: translate(0, -100px) rotate(-5deg);
-	}
-	100% {
-		opacity: 1;
-		transform: translate(0, 0);
-	}
-}
-
-@keyframes softShakeBrick {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
-
-	20%,
-	80% {
-		transform: translate3d(1px, 0, 0);
-	}
-
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-2px, 2px, 0);
-	}
-
-	40%,
-	60% {
-		transform: translate3d(2px, 0, 0);
-	}
-}
-
-@keyframes hardShakeBrick {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
-
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
-	}
-
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-3px, 4px, 0);
-	}
-
-	40%,
-	60% {
-		transform: translate3d(3px, 0, 0);
 	}
 }
