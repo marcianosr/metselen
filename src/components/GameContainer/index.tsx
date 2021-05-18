@@ -27,15 +27,20 @@ const GameContainer = () => {
 			<>
 				<section className={styles.gameInfoContainer}>
 					<ul className={styles.pointsList}>
-						<li className={styles.points}>Punten</li>
-						<li className={styles.points}>Punten</li>
+						{/* <li className={styles.points}>Punten</li> */}
+						<li className={styles.points}>
+							<span>{gameState.score}</span>
+							<span>punten</span>
+						</li>
+						<li className={styles.points}>
+							<span>{gameState.rows}</span>
+							<span>rijen</span>
+						</li>
 					</ul>
 					<TableAnswerDisplay />
 					<strong className={styles.timer}>{timer}</strong>
 				</section>
 				{!gameState.isGameFinished && <BrickContainer />}
-				<h1>Punten: {gameState.score}</h1>
-				<h1>Rijen: {gameState.rows}</h1>
 			</>
 			{gameState.isGameFinished && (
 				<Modal>

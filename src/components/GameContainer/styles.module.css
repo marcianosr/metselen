@@ -14,6 +14,15 @@
 	font-size: 2.5rem;
 }
 
+.points span:first-child {
+	font-size: 3rem;
+	margin-right: 0.25rem;
+}
+
+.points span:last-child {
+	font-size: 2rem;
+}
+
 .pointsList {
 	list-style: none;
 	margin: 0;
