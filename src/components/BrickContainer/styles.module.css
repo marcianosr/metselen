@@ -27,9 +27,7 @@
 
 /* Move to util as this is a composition class */
 .brickCementProperties {
-	composes: cementComposition;
 	composes: brickSize from "../../composition.css";
-	/* background-color: var(--defaultCementColor); */
 	height: calc(var(--brickHeight) + 6px);
 	width: var(--brickSize);
 }

@@ -34,18 +34,23 @@ const Brick: React.FC<BrickProps> = ({
 }) => (
 	<div
 		key={id}
-		className={classnames(brickContainerStyles.brickCementSide, {
-			[styles.dropBrick]: willDrop,
-			[styles.smallBrick]: size === "small",
-			[styles.hardShakeBrick]:
-				currentBrick?.hardShake?.length &&
-				currentBrick?.hardShake.includes(id),
+		className={classnames(
+			brickContainerStyles.brickCementSide,
+			styles.brickContainer,
+			{
+				[styles.dropBrick]: willDrop,
+				[styles.smallBrick]: size === "small",
+				[styles.hardShakeBrick]:
+					currentBrick?.hardShake?.length &&
+					currentBrick?.hardShake.includes(id),
 
-			// [styles.dropBrick]: !willDrop,
-			[styles.disabledBrick]: disabled,
-			[styles.largeBrick]: size === "large",
-			[styles.lastBrick]: isLastBrick,
-		})}
+				// [styles.dropBrick]: !willDrop,
+
+				[styles.disabledBrick]: disabled,
+				[styles.largeBrick]: size === "large",
+				[styles.lastBrick]: isLastBrick,
+			}
+		)}
 	>
 		<div
 			style={
@@ -59,9 +64,12 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.crackedBrick]: cracked,
 				[styles.currentBrick]: currentBrick?.id === id,
 				[styles.disabledBrickInner]: disabled,
+				[styles.lastBrickInner]: isLastBrick,
 			})}
 		>
-			{!disabled && <div className={styles.brickShadow}></div>}
+			{!disabled && !isLastBrick && (
+				<div className={styles.brickShadow}></div>
+			)}
 			<div className={classnames(styles.text)}>{text}</div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />

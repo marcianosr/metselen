@@ -8,11 +8,16 @@
 	border-right: var(--cementWidth) solid var(--defaultCementColor);
 	border-top: var(--cementWidth) solid var(--defaultCementColor);
 	border-bottom: var(--cementWidth) solid var(--defaultCementColor);
+
 	background: linear-gradient(
 		90deg,
 		var(--defaultBrickColor),
 		var(--secondBrickColor)
 	);
+}
+
+.brickContainer:last-child:not(.lastBrick) .brick {
+	border-left: var(--cementWidth) solid var(--defaultCementColor);
 }
 
 .brick {
@@ -40,9 +45,19 @@
 	width: calc(var(--brickSize) * 3);
 }
 
+.lastBrick {
+	margin: auto;
+	/* border-left: none; */
+}
+
+.lastBrickInner {
+	background: gold;
+	border: 4px solid goldenrod;
+}
+
 .disabledBrick:last-child {
 	/* border-left: 1px solid red; */
-	border-left: var(--cementWidth) dashed var(--defaultCementColor);
+	/* border-left: var(--cementWidth) dashed var(--defaultCementColor); */
 }
 
 .disabledBrickInner {
@@ -52,11 +67,11 @@
 	border-right: var(--cementWidth) dashed var(--defaultCementColor);
 	border-top: var(--cementWidth) dashed var(--defaultCementColor);
 	border-bottom: var(--cementWidth) dashed var(--defaultCementColor);
+	/* border-left: var(--cementWidth) dashed var(--defaultCementColor); */
 }
 
-.lastBrick {
-	background: gold;
-	margin: auto;
+.disabledBrick:last-child .disabledBrickInner {
+	border-left: var(--cementWidth) dashed var(--defaultCementColor);
 }
 
 .currentBrick {
