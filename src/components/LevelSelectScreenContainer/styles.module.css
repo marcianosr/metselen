@@ -1,0 +1,74 @@
+.levelSelectContainer {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	border-bottom: 10px solid crimson;
+	height: 100%;
+}
+
+.selectLevelTitle {
+	font-size: 4rem;
+	letter-spacing: -5px;
+	align-self: flex-start;
+}
+
+.gameInfoContainer {
+	/* display: flex;
+	flex-direction: column;
+	justify-self: center; */
+
+	display: grid;
+	grid-template-rows: max-content max-content;
+	justify-content: center;
+}
+
+.gameInfo {
+	display: flex;
+	margin-top: -3rem;
+}
+
+.worldText {
+	composes: defaultText from "../../typography.module.css";
+}
+
+.worldText span {
+	font-size: 2rem;
+	letter-spacing: -2px;
+	margin-right: 0.5rem;
+}
+
+.worldText span + span {
+	font-size: 4rem;
+	margin-right: 0;
+}
+
+.seperator {
+	composes: defaultText from "../../typography.module.css";
+	font-size: 4rem;
+	margin: 0 1.25rem;
+}
+
+.totalBricksContainer {
+	display: flex;
+	flex: 1;
+	align-items: center;
+}
+
+.totalBricksContainer div:first-child {
+	margin-right: 0.5rem;
+	align-items: center;
+}
+
+.totalBricksText {
+	composes: defaultText from "../../typography.module.css";
+	font-size: 3rem;
+	margin-top: 0.5rem;
+}
+
+.brick {
+	composes: cementComposition from "../BrickContainer/styles.module.css";
+	margin-top: 1.5rem;
+	border: 2px solid var(--defaultCementColor);
+	width: 40px;
+	height: 20px;
+	background: var(--defaultBrickColor);
+}
