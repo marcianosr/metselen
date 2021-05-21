@@ -1,21 +1,24 @@
 import { getRandomBrickColor } from "../components/BrickContainer";
 import { BrickType, RandomColorType } from "../types/Bricks";
+import { levels } from "../data/levelMappings";
+import { flattenBricksArray } from "../utils";
 
 export type World = {
 	name: string;
 	world: number;
 	brickScore: {
 		current: number;
-		max: number;
+		max: number | null;
 	};
-	levels: BrickLevelType[][];
+	levels: WorldBrick[][];
 };
 
-type BrickLevelType = Pick<BrickType, "id" | "size" | "color"> & {
+type WorldBrick = Pick<BrickType, "id" | "size" | "color"> & {
 	isUnlocked: boolean;
 	bricksNeeded: number;
 	text: string;
 	color: RandomColorType;
+	maxBricks: number | null;
 };
 
 export const worlds: World[] = [
@@ -24,7 +27,10 @@ export const worlds: World[] = [
 		world: 1,
 		brickScore: {
 			current: 0,
-			max: 54,
+			max: levels.reduce(
+				(acc, curr) => acc + flattenBricksArray(curr.layout).length,
+				0
+			),
 		},
 		levels: [
 			[
@@ -35,6 +41,7 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "1",
 					color: getRandomBrickColor(),
+					maxBricks: flattenBricksArray(levels[0].layout).length,
 				},
 				{
 					id: 2,
@@ -43,6 +50,7 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "2",
 					color: getRandomBrickColor(),
+					maxBricks: flattenBricksArray(levels[0].layout).length,
 				},
 				{
 					id: 3,
@@ -51,6 +59,7 @@ export const worlds: World[] = [
 					bricksNeeded: 5,
 					text: "1 & 2",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 4,
@@ -59,6 +68,7 @@ export const worlds: World[] = [
 					bricksNeeded: 12,
 					text: "3",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 5,
@@ -67,6 +77,7 @@ export const worlds: World[] = [
 					bricksNeeded: 20,
 					text: "3",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 			],
 			[
@@ -77,6 +88,7 @@ export const worlds: World[] = [
 					bricksNeeded: 32,
 					text: "4",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 7,
@@ -85,6 +97,7 @@ export const worlds: World[] = [
 					bricksNeeded: 43,
 					text: "2 - 4",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 8,
@@ -93,6 +106,7 @@ export const worlds: World[] = [
 					bricksNeeded: 57,
 					text: "5",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 9,
@@ -101,6 +115,7 @@ export const worlds: World[] = [
 					bricksNeeded: 70,
 					text: "1 - 5",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 10,
@@ -109,6 +124,7 @@ export const worlds: World[] = [
 					bricksNeeded: 72,
 					text: "6",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 11,
@@ -117,6 +133,7 @@ export const worlds: World[] = [
 					bricksNeeded: 83,
 					text: "7",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 			],
 			[
@@ -127,6 +144,7 @@ export const worlds: World[] = [
 					bricksNeeded: 100,
 					text: "4-7",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 13,
@@ -135,6 +153,7 @@ export const worlds: World[] = [
 					bricksNeeded: 113,
 					text: "8",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 14,
@@ -143,6 +162,7 @@ export const worlds: World[] = [
 					bricksNeeded: 130,
 					text: "1 - 8",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 15,
@@ -151,6 +171,7 @@ export const worlds: World[] = [
 					bricksNeeded: 150,
 					text: "9",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 16,
@@ -159,6 +180,7 @@ export const worlds: World[] = [
 					bricksNeeded: 175,
 					text: "4 - 9",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 			],
 			[
@@ -169,6 +191,7 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 18,
@@ -177,6 +200,7 @@ export const worlds: World[] = [
 					bricksNeeded: 201,
 					text: "10",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 19,
@@ -185,6 +209,7 @@ export const worlds: World[] = [
 					bricksNeeded: 232,
 					text: "5 - 10",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 20,
@@ -193,6 +218,7 @@ export const worlds: World[] = [
 					bricksNeeded: 265,
 					text: "3 - 10",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 21,
@@ -201,6 +227,7 @@ export const worlds: World[] = [
 					bricksNeeded: 285,
 					text: "2 - 9",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 				{
 					id: 22,
@@ -209,6 +236,7 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 			],
 			[
@@ -219,6 +247,7 @@ export const worlds: World[] = [
 					bricksNeeded: 300,
 					text: "1 - 10",
 					color: getRandomBrickColor(),
+					maxBricks: null,
 				},
 			],
 		],
