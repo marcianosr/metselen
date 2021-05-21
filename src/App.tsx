@@ -1,17 +1,17 @@
 import { useState } from "react";
-import GameContainer from "./components/GameContainer";
+import GameContainer from "./components/LevelContainer";
 import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer";
-import { GameStateProvider } from "./providers/GameStateProvider";
+import { LevelStateProvider } from "./providers/LevelStateProvider";
 import "./App.css";
 
 function App() {
 	const [showGame, setShowGame] = useState(false);
 	return (
-		<GameStateProvider>
+		<LevelStateProvider>
 			<button onClick={() => setShowGame(!showGame)}>Toggle mode</button>
 			{showGame && <GameContainer />}
 			{!showGame && <LevelSelectScreenContainer />}
-		</GameStateProvider>
+		</LevelStateProvider>
 	);
 }
 

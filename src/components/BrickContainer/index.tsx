@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useGameState } from "../../providers/GameStateProvider";
+import { useLevelState } from "../../providers/LevelStateProvider";
 import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import { BrickRowContainer, BrickRow } from "../BrickRowContainer";
 import Brick from "../Brick";
@@ -34,11 +34,11 @@ const mapColorsToBricks = (bricks: BrickType[][]) =>
 	);
 
 const BrickContainer: React.FC = () => {
-	const { gameState, updateGameState } = useGameState();
-	const { answers, currentAnswer } = gameState;
+	const { levelState, updateLevelState } = useLevelState();
+	const { answers, currentAnswer } = levelState;
 
 	const [bricks, setBricks] = useState<BrickType[][]>( // TODO: Not sure why I need to strictly type this. Answer: Because I think TS doesn't infer complexer types.
-		mapColorsToBricks(gameState.mapping)
+		mapColorsToBricks(levelState.mapping)
 	);
 
 	const [slicedBricks, setSlicedBricks] = useState<BrickType[][]>(bricks);
@@ -49,7 +49,7 @@ const BrickContainer: React.FC = () => {
 
 	useEffect(() => {
 		const currentBrick =
-			flattenBricksArray(bricks)[gameState.amountOfBricksOnField];
+			flattenBricksArray(bricks)[levelState.amountOfBricksOnField];
 
 		if (currentAnswer === "incorrect") {
 			setBricks(
@@ -72,7 +72,7 @@ const BrickContainer: React.FC = () => {
 
 	useEffect(() => {
 		const previousBrick =
-			flattenBricksArray(bricks)[gameState.amountOfBricksOnField - 1];
+			flattenBricksArray(bricks)[levelState.amountOfBricksOnField - 1];
 
 		if (previousBrick && currentAnswer === "correct") {
 			setCurrentBrick({
@@ -122,17 +122,17 @@ const BrickContainer: React.FC = () => {
 
 		if (slicedBrickCounter === bricks[currentRow].length && isValidRow) {
 			increaseValidRow((row) => row + 1);
-			updateGameState("rows", validRow + 1);
+			updateLevelState("rows", validRow + 1);
 		}
 
-		if (gameState.amountOfBricksOnField !== 0) {
+		if (levelState.amountOfBricksOnField !== 0) {
 			const bricks = [...slicedBricks];
 			bricks[currentRow] = [...slicedBricks[currentRow].slice(1)];
 			setSlicedBricks(bricks);
 			setSlicedBrickCounter((count) => count + 1);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [gameState.amountOfBricksOnField]);
+	}, [levelState.amountOfBricksOnField]);
 
 	return (
 		<section className={styles.brickContainer}>
@@ -142,7 +142,8 @@ const BrickContainer: React.FC = () => {
 						<BrickRow idx={idx}>
 							{brickRow.map((brick: BrickType) => {
 								const showBrick =
-									gameState.amountOfBricksOnField >= brick.id;
+									levelState.amountOfBricksOnField >=
+									brick.id;
 
 								return (
 									showBrick && (
@@ -154,7 +155,7 @@ const BrickContainer: React.FC = () => {
 											color={brick.color}
 											cracked={brick.cracked}
 											text={
-												gameState.answers[brick.id - 1]
+												levelState.answers[brick.id - 1]
 													.table
 											}
 										/>

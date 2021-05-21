@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGameState } from "../../providers/GameStateProvider";
+import { useLevelState } from "../../providers/LevelStateProvider";
 import useTimer from "../../hooks/useTimer";
 
 import BrickContainer from "../BrickContainer";
@@ -8,45 +8,45 @@ import Modal from "../Modal";
 
 import styles from "./styles.module.css";
 
-const GameContainer = () => {
-	const { gameState, onResetGame, updateGameState } = useGameState();
+const LevelContainer = () => {
+	const { levelState, onResetLevel, updateLevelState } = useLevelState();
 	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
-		gameState.timer
+		levelState.timer
 	);
-	const allTablesCompleted = gameState.tables.length === 0;
+	const allTablesCompleted = levelState.tables.length === 0;
 
 	useEffect(() => {
 		if (allTablesCompleted || timerFinished) {
-			updateGameState("isGameFinished", true);
+			updateLevelState("isGameFinished", true);
 			stopTimer();
 		}
 	}, [allTablesCompleted, timerFinished]);
 
 	return (
-		<section className="gameContainer">
+		<section className={styles.levelContainer}>
 			<>
 				<section className={styles.gameInfoContainer}>
 					<ul className={styles.pointsList}>
 						{/* <li className={styles.points}>Punten</li> */}
 						<li className={styles.points}>
-							<span>{gameState.score}</span>
+							<span>{levelState.score}</span>
 							<span>punten</span>
 						</li>
 						<li className={styles.points}>
-							<span>{gameState.rows}</span>
+							<span>{levelState.rows}</span>
 							<span>rijen</span>
 						</li>
 					</ul>
 					<TableAnswerDisplay />
 					<strong className={styles.timer}>{timer}</strong>
 				</section>
-				{!gameState.isGameFinished && <BrickContainer />}
+				{!levelState.isGameFinished && <BrickContainer />}
 			</>
-			{gameState.isGameFinished && (
+			{levelState.isGameFinished && (
 				<Modal>
 					<button
 						onClick={() => {
-							onResetGame();
+							onResetLevel();
 							resetTimer();
 						}}
 					>
@@ -58,4 +58,4 @@ const GameContainer = () => {
 	);
 };
 
-export default GameContainer;
+export default LevelContainer;

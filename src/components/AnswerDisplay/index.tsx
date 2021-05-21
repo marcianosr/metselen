@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useCallback } from "react";
-import { useGameState } from "../../providers/GameStateProvider";
-import { GameState } from "../../types/GameState";
+import { useLevelState } from "../../providers/LevelStateProvider";
+import { LevelState } from "../../types/LevelState";
 import { Tables } from "../../types/Tables";
 import styles from "./styles.module.css";
 import textStyles from "../../typography.module.css";
@@ -21,43 +21,43 @@ const increaseBricksOnField = (amount: number, score: number) => amount + score;
 const allowBrickOnField = (amountOfBricksOnField: number) =>
 	increaseBricksOnField(1, amountOfBricksOnField);
 
-const markAnswerCorrect = (gameState: GameState) => {
-	const currentTable = gameState.tables[0];
+const markAnswerCorrect = (levelState: LevelState) => {
+	const currentTable = levelState.tables[0];
 
 	currentTable.correct = "yes";
 	return [currentTable];
 };
 
-const markAnswerWrong = (gameState: GameState) => {
-	const currentTable = gameState.tables[0];
+const markAnswerWrong = (levelState: LevelState) => {
+	const currentTable = levelState.tables[0];
 
 	currentTable.correct = "no";
 	return [currentTable];
 };
 
 const AnswerDisplay: React.FC = () => {
-	const { gameState, updateGameStateMultiple } = useGameState();
+	const { levelState, updateLevelStateMultiple } = useLevelState();
 	const [givenAnswer, setGivenAnswer] = React.useState<string>("");
 
 	// research the need of 'useCallBack'.
 	const validateAnswer = useCallback(
 		(answer: string) => {
-			const isCorrectAnswer = gameState.tables[0].result === +answer;
+			const isCorrectAnswer = levelState.tables[0].result === +answer;
 
-			updateGameStateMultiple({
-				tables: gameState.tables.slice(1),
+			updateLevelStateMultiple({
+				tables: levelState.tables.slice(1),
 				score: isCorrectAnswer
-					? increaseScore(1, gameState.score)
-					: gameState.score,
+					? increaseScore(1, levelState.score)
+					: levelState.score,
 				amountOfBricksOnField: isCorrectAnswer
-					? allowBrickOnField(gameState.amountOfBricksOnField)
-					: gameState.amountOfBricksOnField,
+					? allowBrickOnField(levelState.amountOfBricksOnField)
+					: levelState.amountOfBricksOnField,
 
 				answers: [
-					...gameState.answers,
+					...levelState.answers,
 					...(isCorrectAnswer
-						? markAnswerCorrect(gameState)
-						: markAnswerWrong(gameState)),
+						? markAnswerCorrect(levelState)
+						: markAnswerWrong(levelState)),
 				],
 				currentAnswer: isCorrectAnswer ? "correct" : "incorrect",
 			});
@@ -65,21 +65,21 @@ const AnswerDisplay: React.FC = () => {
 			clearTextField();
 		},
 		// research the need of these dependencies.
-		[gameState, updateGameStateMultiple]
+		[levelState, updateLevelStateMultiple]
 	);
 
 	const clearTextField = (): void => setGivenAnswer("");
 
 	useEffect(() => {
 		const handleEnter = (e: KeyboardEvent): boolean | void =>
-			!gameState.isGameFinished &&
+			!levelState.isGameFinished &&
 			e.key === "Enter" &&
 			validateAnswer(givenAnswer);
 
 		window.addEventListener("keydown", handleEnter);
 
 		return () => window.removeEventListener("keydown", handleEnter);
-	}, [givenAnswer, validateAnswer, gameState.isGameFinished]);
+	}, [givenAnswer, validateAnswer, levelState.isGameFinished]);
 
 	return (
 		<div className={styles.answerInputContainer}>
@@ -89,7 +89,7 @@ const AnswerDisplay: React.FC = () => {
 				name="answer"
 				autoFocus
 				value={givenAnswer}
-				disabled={gameState.isGameFinished}
+				disabled={levelState.isGameFinished}
 				className={classNames(styles.answerInput)}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => {
 					setGivenAnswer(e.target.value);

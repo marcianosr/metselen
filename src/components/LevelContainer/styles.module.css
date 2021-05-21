@@ -31,8 +31,11 @@
 	flex: 1;
 }
 
-.gameContainer {
-	background: steelblue;
+.levelContainer {
+	display: flex;
+	flex-direction: column;
+	align-content: flex-end;
+	height: 100%;
 }
 
 .gameInfoContainer {

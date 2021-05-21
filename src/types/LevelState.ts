@@ -1,7 +1,7 @@
 import { Tables } from "./Tables";
 import { BrickType } from "./Bricks";
 
-export type GameState = {
+export type LevelState = {
 	timer: number;
 	rows: number;
 	score: number;
@@ -14,7 +14,7 @@ export type GameState = {
 	currentAnswer: string | null;
 };
 
-export type GameStateProps = {
-	gameState: GameState;
-	setGameState: (gameState: GameState) => void;
+export type LevelStateProps = {
+	levelState: LevelState;
+	setLevelState: (levelState: LevelState) => void;
 };
