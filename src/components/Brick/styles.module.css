@@ -95,12 +95,6 @@
 	transform: translate3d(0, 0, 0);
 }
 
-.icon {
-	width: 40px;
-	height: 20px;
-	border-left: var(--cementWidth) solid var(--defaultCementColor);
-}
-
 @keyframes dropBrick {
 	0% {
 		opacity: 0;
