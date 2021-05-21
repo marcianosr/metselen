@@ -51,10 +51,32 @@
 }
 
 .lastBrickInner {
-	background: gold;
-	border: 4px solid goldenrod;
+	background: linear-gradient(
+		140deg,
+		#5d4a1f 5%,
+		#d1b464 34%,
+		#ffffac 67%,
+		#d1b464 85%,
+		#5d4a1f 97%
+	);
+	background-size: 1000% 1000%;
+
+	border: 4px solid #8a6e2f;
+	background-size: 200% 300%;
+	animation: animateGoldenBrick 10s linear infinite;
 }
 
+@keyframes animateGoldenBrick {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 .disabledBrick:last-child {
 	/* border-left: 1px solid red; */
 	/* border-left: var(--cementWidth) dashed var(--defaultCementColor); */

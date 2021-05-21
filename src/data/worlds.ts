@@ -215,7 +215,7 @@ export const worlds: World[] = [
 				{
 					id: 23,
 					size: "large",
-					isUnlocked: false,
+					isUnlocked: true,
 					bricksNeeded: 300,
 					text: "1 - 10",
 					color: getRandomBrickColor(),
