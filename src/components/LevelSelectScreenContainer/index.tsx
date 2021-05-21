@@ -6,10 +6,12 @@ import brickContainerStyles from "../BrickContainer/styles.module.css";
 import textStyles from "../../typography.module.css";
 import { BrickRow, BrickRowContainer } from "../BrickRowContainer";
 import { useGameState } from "../../providers/GameStateProvider";
+import { flattenBricksArray } from "../../utils";
 
 const LevelSelectScreenContainer = () => {
 	const { gameState } = useGameState();
-	console.log("d", gameState);
+	const totalLevels = flattenBricksArray(gameState.worlds[0].levels).length;
+
 	return (
 		<section className={styles.levelSelectContainer}>
 			<section className={styles.gameInfoContainer}>
@@ -42,17 +44,18 @@ const LevelSelectScreenContainer = () => {
 						<BrickRowContainer>
 							{gameState.worlds[0].levels.map((brickRow, idx) => (
 								<BrickRow idx={idx}>
-									{brickRow.map((brick) => {
-										return (
-											<Brick
-												id={brick.id}
-												size={brick.size}
-												color={brick.color}
-												text={brick.text}
-												disabled={!brick.isUnlocked}
-											/>
-										);
-									})}
+									{brickRow.map((brick) => (
+										<Brick
+											id={brick.id}
+											size={brick.size}
+											color={brick.color}
+											text={brick.text}
+											disabled={!brick.isUnlocked}
+											isLastBrick={
+												totalLevels === brick.id
+											}
+										/>
+									))}
 								</BrickRow>
 							))}
 						</BrickRowContainer>
