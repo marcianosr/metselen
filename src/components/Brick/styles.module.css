@@ -35,6 +35,11 @@
 	width: var(--brickSizeSmall);
 }
 
+.largeBrick {
+	composes: brickSize from "../../composition.css";
+	width: calc(var(--brickSize) * 3);
+}
+
 .disabledBrick:last-child {
 	/* border-left: 1px solid red; */
 	border-left: var(--cementWidth) dashed var(--defaultCementColor);
@@ -47,6 +52,11 @@
 	border-right: var(--cementWidth) dashed var(--defaultCementColor);
 	border-top: var(--cementWidth) dashed var(--defaultCementColor);
 	border-bottom: var(--cementWidth) dashed var(--defaultCementColor);
+}
+
+.lastBrick {
+	background: gold;
+	margin: auto;
 }
 
 .currentBrick {
@@ -62,10 +72,11 @@
 
 .text {
 	composes: defaultText from "../../typography.module.css";
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: -0.5rem;
 }
 
 .dropBrick {

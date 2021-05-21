@@ -14,6 +14,7 @@ type BrickProps = {
 	cracked?: boolean;
 	text: string;
 	disabled?: boolean;
+	isLastBrick?: boolean;
 };
 
 interface CSSProp extends CSSProperties {
@@ -29,6 +30,7 @@ const Brick: React.FC<BrickProps> = ({
 	cracked,
 	text,
 	disabled,
+	isLastBrick,
 }) => (
 	<div
 		key={id}
@@ -38,10 +40,11 @@ const Brick: React.FC<BrickProps> = ({
 			[styles.hardShakeBrick]:
 				currentBrick?.hardShake?.length &&
 				currentBrick?.hardShake.includes(id),
-				
+
 			// [styles.dropBrick]: !willDrop,
 			[styles.disabledBrick]: disabled,
-
+			[styles.largeBrick]: size === "large",
+			[styles.lastBrick]: isLastBrick,
 		})}
 	>
 		<div
@@ -56,7 +59,6 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.crackedBrick]: cracked,
 				[styles.currentBrick]: currentBrick?.id === id,
 				[styles.disabledBrickInner]: disabled,
-
 			})}
 		>
 			{!disabled && <div className={styles.brickShadow}></div>}
