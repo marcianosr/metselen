@@ -35,6 +35,23 @@
 	width: var(--brickSizeSmall);
 }
 
+.disabledBrick:last-child {
+	/* border-left: 1px solid red; */
+	border-left: var(--cementWidth) dashed var(--defaultCementColor);
+}
+
+.disabledBrickInner {
+	background: none;
+	/* border-style: dashed; */
+	/* border-left: 0; */
+	border-right: var(--cementWidth) dashed var(--defaultCementColor);
+	border-top: var(--cementWidth) dashed var(--defaultCementColor);
+	border-bottom: var(--cementWidth) dashed var(--defaultCementColor);
+
+}
+
+
+
 .currentBrick {
 }
 .crackedBrick {
@@ -47,6 +64,7 @@
 }
 
 .text {
+	composes: defaultText from "../../typography.module.css";
 	position: absolute;
 	left: 50%;
 	top: 50%;

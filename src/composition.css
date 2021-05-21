@@ -19,7 +19,7 @@
 	--brickHeight: 50px;
 	--brickGap: 4px;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));
-	--brickSizeSmall: calc(var(--brickWidth) / 2 - var(--brickGap));
+	--brickSizeSmall: calc(var(--brickWidth) / 2);
 
-	height: var(--brickHeight);
+	height: var(--brickHeight)
 }

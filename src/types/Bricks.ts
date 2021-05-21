@@ -1,10 +1,10 @@
 export type BrickType = {
 	id: number;
 	size: "default" | "small";
-	willDrop: boolean;
+	willDrop?: boolean;
 	hardShake?: number[];
 	color?: RandomColorType;
-	cracked: boolean;
+	cracked?: boolean;
 };
 
 // Make generic in future

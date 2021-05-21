@@ -4,7 +4,6 @@ import { BrickType, RandomColorType } from "../../types/Bricks";
 import { LightCrack, DarkCrack } from "./Cracks";
 import brickContainerStyles from "../BrickContainer/styles.module.css";
 import styles from "./styles.module.css";
-import typographyStyles from "../../typography.module.css";
 
 type BrickProps = {
 	id: number;
@@ -14,6 +13,7 @@ type BrickProps = {
 	color: RandomColorType | undefined;
 	cracked?: boolean;
 	text: string;
+	disabled?: boolean;
 };
 
 interface CSSProp extends CSSProperties {
@@ -28,6 +28,7 @@ const Brick: React.FC<BrickProps> = ({
 	color,
 	cracked,
 	text,
+	disabled,
 }) => (
 	<div
 		key={id}
@@ -37,7 +38,10 @@ const Brick: React.FC<BrickProps> = ({
 			[styles.hardShakeBrick]:
 				currentBrick?.hardShake?.length &&
 				currentBrick?.hardShake.includes(id),
+				
 			// [styles.dropBrick]: !willDrop,
+			[styles.disabledBrick]: disabled,
+
 		})}
 	>
 		<div
@@ -51,17 +55,12 @@ const Brick: React.FC<BrickProps> = ({
 				// [styles.dropBrick]: willDrop,
 				[styles.crackedBrick]: cracked,
 				[styles.currentBrick]: currentBrick?.id === id,
+				[styles.disabledBrickInner]: disabled,
+
 			})}
 		>
-			<div className={styles.brickShadow}></div>
-			<div
-				className={classnames(
-					typographyStyles.defaultText,
-					styles.text
-				)}
-			>
-				{text}
-			</div>
+			{!disabled && <div className={styles.brickShadow}></div>}
+			<div className={classnames(styles.text)}>{text}</div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}
