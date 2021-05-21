@@ -2,9 +2,9 @@ import React, { createContext } from "react";
 import { tables, getRandomTable } from "../data/tables";
 import { LevelState } from "../types/LevelState";
 import { flattenBricksArray } from "../utils";
-import { bricksMapping } from "../data/levelMappings";
+import { levels } from "../data/levelMappings";
 
-const amountOfSums = flattenBricksArray(bricksMapping).length;
+const amountOfSums = flattenBricksArray(levels[0].layout).length;
 
 // T represents a key of the LevelState Type
 // LevelState[Action] resolves to a type value.
@@ -35,8 +35,8 @@ const INITIAL_LEVEL_STATE: LevelState = {
 	rows: 0,
 	tables: allTables,
 	answers: [],
-	bricks: flattenBricksArray(bricksMapping),
-	mapping: bricksMapping,
+	bricks: flattenBricksArray(levels[0].layout),
+	mapping: levels[0].layout,
 	isGameFinished: false,
 	amountOfBricksOnField: 0,
 	currentAnswer: null,
