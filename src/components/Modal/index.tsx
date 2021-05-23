@@ -1,8 +1,17 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const Modal: React.FC = ({ children }) => (
-	<div className={styles.modal}>{children}</div>
+type ModalProps = {
+	hideModal?: (id: number | null) => void;
+};
+const Modal: React.FC<ModalProps> = ({ hideModal, children }) => (
+	<>
+		<div
+			className={styles.backdrop}
+			onClick={() => hideModal && hideModal(null)}
+		></div>
+		<div className={styles.modal}>{children}</div>
+	</>
 );
 
 export default Modal;

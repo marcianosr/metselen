@@ -73,7 +73,7 @@ const LevelSelectScreenContainer = () => {
 											/>
 
 											{modalId === brick.id && (
-												<Modal>
+												<Modal hideModal={setModalId}>
 													<h2>
 														Name level {modalId}
 													</h2>

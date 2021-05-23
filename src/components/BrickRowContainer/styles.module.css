@@ -3,7 +3,6 @@
 	align-content: flex-start;
 	flex-wrap: wrap-reverse;
 	height: 100%;
-	position: relative;
 }
 
 .brickRow {
