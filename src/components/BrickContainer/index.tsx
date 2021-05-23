@@ -49,7 +49,9 @@ const BrickContainer: React.FC = () => {
 
 	useEffect(() => {
 		const currentBrick =
-			flattenBricksArray(bricks)[levelState.amountOfBricksOnField];
+			flattenBricksArray<BrickType>(bricks)[
+				levelState.amountOfBricksOnField
+			];
 
 		if (currentAnswer === "incorrect") {
 			setBricks(
@@ -72,7 +74,9 @@ const BrickContainer: React.FC = () => {
 
 	useEffect(() => {
 		const previousBrick =
-			flattenBricksArray(bricks)[levelState.amountOfBricksOnField - 1];
+			flattenBricksArray<BrickType>(bricks)[
+				levelState.amountOfBricksOnField - 1
+			];
 
 		if (previousBrick && currentAnswer === "correct") {
 			setCurrentBrick({

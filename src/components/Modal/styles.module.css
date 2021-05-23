@@ -1,5 +1,4 @@
 .modal {
-	background-color: red;
 	position: absolute;
 	margin: 0 auto;
 	top: calc(50% - 100px);
@@ -7,9 +6,18 @@
 	right: 0;
 	width: 400px;
 	height: 200px;
-	display: flex;
+	z-index: 1;
+	background-color: var(--defaultBrickColor);
+	display: grid;
+	grid-template-rows: auto auto auto;
+	justify-content: center;
+	padding: 2rem;
 }
 
 .modal button {
 	margin: auto;
+}
+
+.modal ul {
+	background-color: red;
 }

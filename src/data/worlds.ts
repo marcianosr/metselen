@@ -13,7 +13,7 @@ export type World = {
 	levels: WorldBrick[][];
 };
 
-type WorldBrick = Pick<BrickType, "id" | "size" | "color"> & {
+export type WorldBrick = Pick<BrickType, "id" | "size" | "color"> & {
 	isUnlocked: boolean;
 	bricksNeeded: number;
 	text: string;
@@ -28,7 +28,8 @@ export const worlds: World[] = [
 		brickScore: {
 			current: 0,
 			max: levels.reduce(
-				(acc, curr) => acc + flattenBricksArray(curr.layout).length,
+				(acc, curr) =>
+					acc + flattenBricksArray<BrickType>(curr.layout).length,
 				0
 			),
 		},
@@ -41,7 +42,8 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "1",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray(levels[0].layout).length,
+					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
+						.length,
 				},
 				{
 					id: 2,
@@ -50,7 +52,8 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "2",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray(levels[0].layout).length,
+					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
+						.length,
 				},
 				{
 					id: 3,

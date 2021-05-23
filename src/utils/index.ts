@@ -1,10 +1,11 @@
+import { WorldBrick } from "../data/worlds";
 import { BrickType } from "../types/Bricks";
 
 export const toBrickIds = (mapping: BrickType[][]) =>
 	mapping.map((bricks) => bricks.map((brick) => brick.id));
 
-export const flattenBricksArray = (mapping: BrickType[][]) =>
-	mapping.flatMap((row: BrickType[]) => row);
+export const flattenBricksArray = <B>(mapping: B[][]): B[] =>
+	mapping.flatMap((row: B[]) => row);
 
 export const neighbours = (currentId: number, mapping: number[][]) => {
 	//////////////////////////////////

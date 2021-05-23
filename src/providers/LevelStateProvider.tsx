@@ -3,6 +3,7 @@ import { tables, getRandomTable } from "../data/tables";
 import { LevelState } from "../types/LevelState";
 import { flattenBricksArray } from "../utils";
 import { levels } from "../data/levelMappings";
+import { BrickType } from "../types/Bricks";
 
 const amountOfSums = flattenBricksArray(levels[0].layout).length;
 
@@ -35,7 +36,7 @@ const INITIAL_LEVEL_STATE: LevelState = {
 	rows: 0,
 	tables: allTables,
 	answers: [],
-	bricks: flattenBricksArray(levels[0].layout),
+	bricks: flattenBricksArray<BrickType>(levels[0].layout),
 	mapping: levels[0].layout,
 	isGameFinished: false,
 	amountOfBricksOnField: 0,

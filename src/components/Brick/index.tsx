@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, Dispatch, SetStateAction } from "react";
 import classnames from "classnames";
 import { BrickType, RandomColorType } from "../../types/Bricks";
 import { LightCrack, DarkCrack } from "./Cracks";
@@ -15,6 +15,7 @@ type BrickProps = {
 	text: string;
 	disabled?: boolean;
 	isLastBrick?: boolean;
+	onClick?: () => void;
 };
 
 interface CSSProp extends CSSProperties {
@@ -31,9 +32,11 @@ const Brick: React.FC<BrickProps> = ({
 	text,
 	disabled,
 	isLastBrick,
+	onClick,
 }) => (
 	<div
 		key={id}
+		onClick={onClick}
 		className={classnames(
 			brickContainerStyles.brickCementSide,
 			styles.brickContainer,
