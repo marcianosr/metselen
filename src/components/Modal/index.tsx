@@ -2,14 +2,12 @@ import React from "react";
 import styles from "./styles.module.css";
 
 type ModalProps = {
-	hideModal?: (id: number | null) => void;
+	onClickBackdrop?: () => void;
 };
-const Modal: React.FC<ModalProps> = ({ hideModal, children }) => (
+
+const Modal: React.FC<ModalProps> = ({ onClickBackdrop, children }) => (
 	<>
-		<div
-			className={styles.backdrop}
-			onClick={() => hideModal && hideModal(null)}
-		></div>
+		<div className={styles.backdrop} onClick={onClickBackdrop}></div>
 		<div className={styles.modal}>{children}</div>
 	</>
 );
