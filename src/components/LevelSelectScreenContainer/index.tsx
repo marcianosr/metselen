@@ -11,6 +11,7 @@ import { WorldBrick } from "../../data/worlds";
 import styles from "./styles.module.css";
 import brickContainerStyles from "../BrickContainer/styles.module.css";
 import textStyles from "../../typography.module.css";
+import brickStyles from "../Brick/styles.module.css";
 
 const LevelSelectScreenContainer = () => {
 	const {
@@ -35,9 +36,9 @@ const LevelSelectScreenContainer = () => {
 						<span>Wereld</span>
 						<span>{worlds[0].world}</span>
 					</small>
-					<span className={styles.seperator}> - </span>
+					<span className={styles.separator}> - </span>
 					<div className={styles.totalBricksContainer}>
-						<div className={styles.brick}></div>
+						<div className={brickStyles.iconBrick}></div>
 						<div className={styles.totalBricksText}>
 							{worlds[0].brickScore.current}/
 							{worlds[0].brickScore.max}

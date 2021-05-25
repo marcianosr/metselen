@@ -1,6 +1,4 @@
 .brickComposition {
-	--defaultBrickColor: #d76c80;
-	--secondBrickColor: #df597a;
 	--brickShadowColor: #b75f70;
 
 	composes: cementComposition from "../BrickContainer/styles.module.css";
@@ -141,6 +139,15 @@
 	animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);
 	animation-delay: 450ms;
 	transform: translate3d(0, 0, 0);
+}
+
+.iconBrick {
+	composes: cementComposition from "../BrickContainer/styles.module.css";
+	margin-top: 1.5rem;
+	border: 2px solid var(--defaultCementColor);
+	width: 40px;
+	height: 20px;
+	background: var(--defaultBrickColor);
 }
 
 @keyframes dropBrick {

@@ -6,6 +6,8 @@ type Level = {
 	layout: BrickType[][];
 };
 
+// Refactor later: Merge these properties of levels with the levels arr in worlds object
+
 const LEVEL_ONE: Level = {
 	name: "",
 	level: 1,
@@ -166,6 +168,13 @@ const LEVEL_TWO: Level = {
 			{ id: 20, size: "default", willDrop: true, cracked: false },
 			{ id: 21, size: "default", willDrop: true, cracked: false },
 			{ id: 22, size: "default", willDrop: true, cracked: false },
+		],
+		[
+			{ id: 23, size: "default", willDrop: true, cracked: false },
+			{ id: 24, size: "default", willDrop: true, cracked: false },
+			{ id: 25, size: "default", willDrop: true, cracked: false },
+			{ id: 26, size: "default", willDrop: true, cracked: false },
+			{ id: 27, size: "default", willDrop: true, cracked: false },
 		],
 	],
 };

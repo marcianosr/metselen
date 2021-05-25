@@ -41,7 +41,7 @@
 	margin-right: 0;
 }
 
-.seperator {
+.separator {
 	composes: defaultText from "../../typography.module.css";
 	font-size: 4rem;
 	margin: 0 1.25rem;
@@ -62,13 +62,4 @@
 	composes: defaultText from "../../typography.module.css";
 	font-size: 3rem;
 	margin-top: 0.5rem;
-}
-
-.brick {
-	composes: cementComposition from "../BrickContainer/styles.module.css";
-	margin-top: 1.5rem;
-	border: 2px solid var(--defaultCementColor);
-	width: 40px;
-	height: 20px;
-	background: var(--defaultBrickColor);
 }

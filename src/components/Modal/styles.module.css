@@ -1,25 +1,24 @@
 .modal {
+	--modalPink: #ffa9a9;
+	--modalDarkerPink: #ff8b8b;
+	--modalWidth: 600px;
+
 	position: absolute;
 	margin: 0 auto;
 	top: calc(50% - 100px);
 	left: 0;
 	right: 0;
-	width: 400px;
-	height: 200px;
+	width: var(--modalWidth);
 	z-index: 3;
-	background-color: var(--defaultBrickColor);
+	background-color: var(--modalPink);
 	display: grid;
 	grid-template-rows: auto auto auto;
 	justify-content: center;
-	padding: 2rem;
 }
 
 .modal button {
 	margin: auto;
-}
-
-.modal ul {
-	background-color: red;
+	margin-bottom: 1.5rem;
 }
 
 .backdrop {

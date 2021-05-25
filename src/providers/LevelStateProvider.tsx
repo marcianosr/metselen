@@ -4,6 +4,8 @@ import { LevelState } from "../types/LevelState";
 import { flattenBricksArray } from "../utils";
 import { levels } from "../data/levelMappings";
 import { BrickType } from "../types/Bricks";
+import { useGameState } from "./GameStateProvider";
+import { WorldBrick } from "../data/worlds";
 
 const amountOfSums = flattenBricksArray(levels[0].layout).length;
 
@@ -26,9 +28,12 @@ type LevelStateContextState = {
 	levelState: LevelState;
 	setLevelState: (levelState: LevelState) => void;
 	onResetLevel: () => void;
+	onPlayLevel: (levelId: number) => void;
 	updateLevelState: LevelStateUpdater;
 	updateLevelStateMultiple: LevelStateMultipleUpdater;
 };
+
+type LevelStateProviderProps = {};
 
 const INITIAL_LEVEL_STATE: LevelState = {
 	timer: 9700,
@@ -47,14 +52,18 @@ export const LevelStateContext = createContext<LevelStateContextState>({
 	levelState: INITIAL_LEVEL_STATE,
 	setLevelState: () => {},
 	onResetLevel: () => {},
+	onPlayLevel: (levelId: number) => {},
 	updateLevelState: () => {},
 	updateLevelStateMultiple: () => {},
 });
 
-export const LevelStateProvider: React.FC = ({ children }) => {
+export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
+	children,
+}) => {
 	const [levelState, setLevelState] = React.useState<LevelState>({
 		...INITIAL_LEVEL_STATE,
 	});
+	const { updateGameStateMultiple } = useGameState();
 
 	const updateLevelState: LevelStateUpdater = (key, value) => {
 		setLevelState({
@@ -73,6 +82,14 @@ export const LevelStateProvider: React.FC = ({ children }) => {
 	console.log("levelState", levelState);
 
 	const reset = () => setLevelState({ ...INITIAL_LEVEL_STATE });
+	const playLevel = (levelId: number) => {
+		updateLevelState("mapping", levels[levelId - 1].layout);
+		updateGameStateMultiple({
+			screen: {
+				current: "level",
+			},
+		});
+	};
 
 	return (
 		<LevelStateContext.Provider
@@ -80,6 +97,7 @@ export const LevelStateProvider: React.FC = ({ children }) => {
 				levelState,
 				setLevelState,
 				onResetLevel: reset,
+				onPlayLevel: playLevel,
 				updateLevelState,
 				updateLevelStateMultiple,
 			}}

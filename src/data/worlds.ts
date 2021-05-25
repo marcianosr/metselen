@@ -44,6 +44,7 @@ export const worlds: World[] = [
 					color: getRandomBrickColor(),
 					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
 						.length,
+					...levels[0],
 				},
 				{
 					id: 2,
@@ -54,6 +55,7 @@ export const worlds: World[] = [
 					color: getRandomBrickColor(),
 					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
 						.length,
+					...levels[1],
 				},
 				{
 					id: 3,

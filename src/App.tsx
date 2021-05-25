@@ -1,23 +1,30 @@
-import { useState } from "react";
-import GameContainer from "./components/LevelContainer";
+import LevelContainer from "./components/LevelContainer";
 import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer";
 import { LevelStateProvider } from "./providers/LevelStateProvider";
+import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
 import "./App.css";
-import { GameStateProvider } from "./providers/GameStateProvider";
 
 function App() {
-	const [showGame, setShowGame] = useState(false);
 	return (
 		<GameStateProvider>
 			<LevelStateProvider>
-				<button onClick={() => setShowGame(!showGame)}>
-					Toggle mode
-				</button>
-				{showGame && <GameContainer />}
-				{!showGame && <LevelSelectScreenContainer />}
+				<ScreenManager />
 			</LevelStateProvider>
 		</GameStateProvider>
 	);
 }
 
 export default App;
+
+const ScreenManager = () => {
+	const { gameState } = useGameState();
+
+	return (
+		<>
+			{gameState.screen.current === "level" && <LevelContainer />}
+			{gameState.screen.current === "levelSelection" && (
+				<LevelSelectScreenContainer />
+			)}
+		</>
+	);
+};

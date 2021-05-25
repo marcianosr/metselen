@@ -14,16 +14,20 @@ type GameStateMultipleUpdater = (state: Partial<GameState>) => void;
 
 type GameStateContextState = {
 	gameState: GameState;
-	setGameState: (levelState: GameState) => void;
+	setGameState: (gameState: GameState) => void;
 	updateGameState: GameStateUpdater;
 	updateGameStateMultiple: GameStateMultipleUpdater;
 };
 
 const INITIAL_GAME_STATE = {
 	worlds,
+	currentLevel: 0,
+	// Refactor screen changes  to it's own provider
+	screen: {
+		current: "levelSelection"
+	}
 };
 
-console.log(INITIAL_GAME_STATE);
 
 export const GameStateContext = createContext<GameStateContextState>({
 	gameState: INITIAL_GAME_STATE,
@@ -35,6 +39,10 @@ export const GameStateContext = createContext<GameStateContextState>({
 export const GameStateProvider: React.FC = ({ children }) => {
 	const [gameState, setGameState] = React.useState<GameState>({
 		worlds,
+		currentLevel: INITIAL_GAME_STATE.currentLevel,
+		screen: {
+			current: "levelSelection"
+		}
 	});
 
 	const updateGameState: GameStateUpdater = (key, value) => {
