@@ -1,13 +1,26 @@
 .timer,
 .points {
 	composes: defaultText from "../../typography.module.css";
-	flex: 1;
-	align-self: center;
 }
 
 .timer {
 	font-size: 3rem;
+	margin-top: -1.5rem;
+}
+
+.timerAndLevel {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 0;
 	text-align: right;
+}
+
+.levelText {
+	composes: defaultText from "../../typography.module.css";
+}
+
+.levelNumber {
+	font-size: 3rem;
 }
 
 .points {

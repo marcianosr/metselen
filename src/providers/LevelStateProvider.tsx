@@ -85,6 +85,7 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 	const playLevel = (levelId: number) => {
 		updateLevelState("mapping", levels[levelId - 1].layout);
 		updateGameStateMultiple({
+			currentLevel: levelId,
 			screen: {
 				current: "level",
 			},

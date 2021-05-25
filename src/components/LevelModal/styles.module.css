@@ -63,6 +63,7 @@
 	background-color: var(--secondBrickColor);
 	transform: scale(1.05);
 }
+
 .text {
 	composes: defaultText from "../../typography.module.css";
 	font-size: 1.75rem;

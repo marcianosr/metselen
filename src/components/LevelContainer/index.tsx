@@ -7,12 +7,16 @@ import TableAnswerDisplay from "../TableAnswerDisplay";
 import Modal from "../Modal";
 
 import styles from "./styles.module.css";
+import { useGameState } from "../../providers/GameStateProvider";
 
 const LevelContainer = () => {
 	const { levelState, onResetLevel, updateLevelState } = useLevelState();
 	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
 		levelState.timer
 	);
+	const {
+		gameState: { currentLevel },
+	} = useGameState();
 	const allTablesCompleted = levelState.tables.length === 0;
 
 	useEffect(() => {
@@ -38,7 +42,15 @@ const LevelContainer = () => {
 						</li>
 					</ul>
 					<TableAnswerDisplay />
-					<strong className={styles.timer}>{timer}</strong>
+					<section className={styles.timerAndLevel}>
+						<span className={styles.levelText}>
+							Level{" "}
+							<span className={styles.levelNumber}>
+								{currentLevel}
+							</span>
+						</span>
+						<strong className={styles.timer}>{timer}</strong>
+					</section>
 				</section>
 				{!levelState.isGameFinished && <BrickContainer />}
 			</>
