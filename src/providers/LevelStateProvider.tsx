@@ -1,5 +1,4 @@
 import React, { createContext } from "react";
-import { tables, getRandomTable } from "../data/tables";
 import { LevelState } from "../types/LevelState";
 import { flattenBricksArray } from "../utils";
 import { levels } from "../data/levelMappings";
@@ -7,7 +6,6 @@ import { BrickType } from "../types/Bricks";
 import { useGameState } from "./GameStateProvider";
 import { WorldBrick } from "../data/worlds";
 
-const amountOfSums = flattenBricksArray(levels[0].layout).length;
 
 // T represents a key of the LevelState Type
 // LevelState[Action] resolves to a type value.
@@ -19,10 +17,6 @@ type LevelStateUpdater = <Action extends keyof LevelState>(
 ) => void;
 type LevelStateMultipleUpdater = (state: Partial<LevelState>) => void;
 
-const allTables = [...Array(amountOfSums)].map((_, i) => ({
-	id: i + 1,
-	...getRandomTable(tables),
-}));
 
 type LevelStateContextState = {
 	levelState: LevelState;
@@ -36,10 +30,10 @@ type LevelStateContextState = {
 type LevelStateProviderProps = {};
 
 const INITIAL_LEVEL_STATE: LevelState = {
-	timer: 9700,
+	timer: levels[0].time,
 	score: 0,
 	rows: 0,
-	tables: allTables,
+	tables: levels[0].tables,
 	answers: [],
 	bricks: flattenBricksArray<BrickType>(levels[0].layout),
 	mapping: levels[0].layout,
@@ -82,8 +76,12 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 	console.log("levelState", levelState);
 
 	const reset = () => setLevelState({ ...INITIAL_LEVEL_STATE });
-	const playLevel = (levelId: number) => {
-		updateLevelState("mapping", levels[levelId - 1].layout);
+	const setupConfigForLevel  = (levelId: number) => {
+		updateLevelStateMultiple({
+			mapping: levels[levelId - 1].layout,
+			tables: levels[levelId - 1].tables, 
+			timer: levels[levelId - 1].time
+		})
 		updateGameStateMultiple({
 			currentLevel: levelId,
 			screen: {
@@ -98,7 +96,7 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 				levelState,
 				setLevelState,
 				onResetLevel: reset,
-				onPlayLevel: playLevel,
+				onPlayLevel: setupConfigForLevel ,
 				updateLevelState,
 				updateLevelStateMultiple,
 			}}

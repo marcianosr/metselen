@@ -24,10 +24,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 	const { onPlayLevel } = useLevelState();
 	const levels = flattenBricksArray<WorldBrick>(worlds[0].levels);
 
-	const hideModal = () => {
-		setModalId(null);
-	};
-
+	const hideModal = () => setModalId(null);
 	const startLevel = (id: number) => onPlayLevel(id);
 
 	return (
