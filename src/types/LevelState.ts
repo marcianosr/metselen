@@ -7,7 +7,7 @@ export type LevelState = {
 	score: number;
 	bricks: BrickType[];
 	mapping: BrickType[][];
-	tables: Tables[];
+	tables: any;
 	answers: Tables[];
 	isGameFinished: boolean;
 	amountOfBricksOnField: number;

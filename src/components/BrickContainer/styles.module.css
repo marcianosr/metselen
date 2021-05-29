@@ -5,8 +5,8 @@
 .cementComposition {
 	--cementWidth: 3px;
 	--cementHeight: 5px;
-	--defaultCementColor: #005170;
-	--secondCementColor: #3683a7;
+	--defaultCementColor: var(--primaryBlue);
+	--secondCementColor: var(--secondaryBlue);
 	--thirdCementColor: #1e7596;
 }
 

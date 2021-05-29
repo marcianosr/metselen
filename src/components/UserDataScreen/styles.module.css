@@ -1,0 +1,124 @@
+main {
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 200px 400px;
+}
+
+.gameTitle {
+	composes: defaultText from "../../typography.module.css";
+	font-size: 8rem;
+	letter-spacing: -0.7rem;
+	justify-self: center;
+	-webkit-text-stroke: 1.5px black;
+	filter: drop-shadow(4px 4px 0px black);
+	display: flex;
+	color: var(--defaultBrickColor);
+}
+
+.gameTitle span {
+	display: flex;
+}
+.gameTitle span:first-child {
+	transform: rotate(-10deg);
+}
+.gameTitle span:nth-of-type(2) {
+	transform: rotate(-5deg);
+}
+.gameTitle span:nth-of-type(3) {
+	transform: rotate(9deg);
+	margin-top: 0.5rem;
+}
+.gameTitle span:nth-of-type(4) {
+	transform: rotate(12deg);
+	margin-top: 1.5rem;
+	margin-left: -1.25rem;
+}
+
+.gameTitle span:nth-of-type(5) {
+	transform: rotate(-12deg);
+	margin-top: 1rem;
+	margin-left: -1rem;
+}
+
+.gameTitle span:nth-of-type(6) {
+	transform: rotate(5deg);
+	margin-left: 0.5rem;
+}
+
+.gameTitle span:nth-of-type(7) {
+	transform: rotate(-9deg);
+	margin-left: -0.75rem;
+	margin-top: -0.5rem;
+}
+
+.gameTitle span:nth-of-type(8) {
+	transform: rotate(9deg);
+	margin-left: 0.5rem;
+}
+
+.formContainer {
+	--inputWidth: 300px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input {
+	height: 55px;
+	padding: 0;
+	width: var(--inputWidth);
+	border: 3px solid var(--primaryBlue);
+	font-family: var(--defaultFont);
+	font-weight: 900;
+	font-size: 3.5rem;
+	letter-spacing: -0.065em;
+	color: black;
+	text-align: center;
+	box-shadow: 6px 4px 0px var(--primaryBlue);
+}
+
+.title {
+	font-size: 3rem;
+	text-align: right;
+	margin-right: 1rem;
+	composes: defaultText from "../../typography.module.css";
+}
+
+.inputNameContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.line {
+	position: absolute;
+	height: 10px;
+	width: calc(100% - 6px);
+	width: var(--inputWidth);
+	background-color: #e9e9e9;
+	top: 3px;
+	left: 3px;
+}
+
+.button {
+	background-color: var(--defaultBrickColor);
+	border: 0;
+	padding: 0 1rem;
+	width: 150px;
+	height: 100%;
+	border: 2px solid var(--primaryBlue);
+	box-shadow: -3px 3px 0px var(--primaryBlue);
+	transition: transform 0.25s;
+	position: relative;
+	z-index: 1;
+}
+
+.button:hover {
+	background-color: var(--secondBrickColor);
+	transform: translateX(3px);
+}
+
+.buttonText {
+	composes: defaultText from "../../typography.module.css";
+}

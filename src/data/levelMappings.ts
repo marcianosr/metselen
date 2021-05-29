@@ -301,11 +301,12 @@ export const withGeneratedTables = (levels: Level[]) =>
 		tables: getTablesForLevel(flattenBricksArray(level.layout).length, level.ranges),
 	}));
 
-const getTablesForLevel = (amountOfTables: number, ranges: { multiplication: number[], tables: number[]}) => {
+const getTablesForLevel = (amountOfTables: number, ranges: { multiplication: number[], tables: number[]}): TableResult[] => {
 	const list = []; 
 	for (let idx = 0; idx < amountOfTables; idx++) {
 		list.push(getRandomTable(makeTables(ranges.tables, ranges.multiplication), ranges.tables, ranges.multiplication))
 	}
+	console.log(list)
 	return list;
 };
 

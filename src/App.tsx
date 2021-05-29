@@ -1,7 +1,8 @@
+import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
+import { LevelStateProvider } from "./providers/LevelStateProvider";
 import LevelContainer from "./components/LevelContainer";
 import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer";
-import { LevelStateProvider } from "./providers/LevelStateProvider";
-import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
+import UserDataScreen from "./components/UserDataScreen";
 import "./App.css";
 
 function App() {
@@ -21,10 +22,14 @@ const ScreenManager = () => {
 
 	return (
 		<>
-			{gameState.screen.current === "level" && <LevelContainer />}
+			{gameState.screen.current === "enterName" && (
+				<UserDataScreen />
+			)}
 			{gameState.screen.current === "levelSelection" && (
 				<LevelSelectScreenContainer />
 			)}
+			{gameState.screen.current === "level" && <LevelContainer />}
+
 		</>
 	);
 };

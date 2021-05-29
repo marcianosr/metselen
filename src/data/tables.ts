@@ -8,7 +8,6 @@ export type TableResult = {
 export const makeTables = (tableRange: number[], multiplierRange:number[]): TableResult[][] => 
 	tableRange.map((range, idx) =>
 	multiplierRange.map((multiplier) => ({
-		id: idx,
 		table: `${range} x ${multiplier}`,
 		result: multiplier * range,
 		correct: "untouched",

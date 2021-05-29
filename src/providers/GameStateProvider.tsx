@@ -24,7 +24,7 @@ const INITIAL_GAME_STATE = {
 	currentLevel: 0,
 	// Refactor screen changes  to it's own provider
 	screen: {
-		current: "levelSelection",
+		current: "enterName",
 	},
 };
 
@@ -40,7 +40,7 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		worlds,
 		currentLevel: INITIAL_GAME_STATE.currentLevel,
 		screen: {
-			current: "levelSelection",
+			current: "enterName",
 		},
 	});
 
