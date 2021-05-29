@@ -5,6 +5,16 @@
 	height: 100%;
 }
 
+.header {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.user {
+	composes: defaultText from "../../typography.module.css";
+	margin-left: 1rem;
+}
+
 .selectLevelTitle {
 	font-size: 4rem;
 	letter-spacing: -5px;

@@ -13,39 +13,54 @@ import brickContainerStyles from "../BrickContainer/styles.module.css";
 import textStyles from "../../typography.module.css";
 import brickStyles from "../Brick/styles.module.css";
 
-const LevelSelectScreenContainer = () => {
+type LevelSelectScreenContainerProps = {
+	user: {
+		id: string;
+		name: string;
+	};
+};
+const LevelSelectScreenContainer: React.FC<LevelSelectScreenContainerProps> = ({
+	user,
+}) => {
 	const {
 		gameState: { worlds },
 	} = useGameState();
 	const totalLevels = flattenBricksArray<WorldBrick>(worlds[0].levels).length;
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
 
+	console.log("user", user);
+
 	return (
 		<section className={styles.levelSelectContainer}>
-			<section className={styles.gameInfoContainer}>
-				<h1
-					className={classNames(
-						textStyles.defaultText,
-						styles.selectLevelTitle
-					)}
-				>
-					Selecteer level
-				</h1>
-				<section className={styles.gameInfo}>
-					<small className={styles.worldText}>
-						<span>Wereld</span>
-						<span>{worlds[0].world}</span>
-					</small>
-					<span className={styles.separator}> - </span>
-					<div className={styles.totalBricksContainer}>
-						<div className={brickStyles.iconBrick}></div>
-						<div className={styles.totalBricksText}>
-							{worlds[0].brickScore.current}/
-							{worlds[0].brickScore.max}
+			<header className={styles.header}>
+				<div className={styles.user}>{user.name}</div>
+
+				<div className={styles.gameInfoContainer}>
+					<h1
+						className={classNames(
+							textStyles.defaultText,
+							styles.selectLevelTitle
+						)}
+					>
+						Selecteer level
+					</h1>
+					<section className={styles.gameInfo}>
+						<small className={styles.worldText}>
+							<span>Wereld</span>
+							<span>{worlds[0].world}</span>
+						</small>
+						<span className={styles.separator}> - </span>
+						<div className={styles.totalBricksContainer}>
+							<div className={brickStyles.iconBrick}></div>
+							<div className={styles.totalBricksText}>
+								{worlds[0].brickScore.current}/
+								{worlds[0].brickScore.max}
+							</div>
 						</div>
-					</div>
-				</section>
-			</section>
+					</section>
+				</div>
+			</header>
+
 			<section className={brickContainerStyles.brickContainer}>
 				<div className={brickContainerStyles.brickRowContainer}>
 					<section className={styles.brickContainer}>

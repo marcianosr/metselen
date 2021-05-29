@@ -65,7 +65,7 @@ main {
 }
 
 .input {
-	height: 55px;
+	height: 56px;
 	padding: 0;
 	width: var(--inputWidth);
 	border: 3px solid var(--primaryBlue);
@@ -88,7 +88,7 @@ main {
 .inputNameContainer {
 	position: relative;
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 }
 
 .line {
@@ -105,13 +105,12 @@ main {
 	background-color: var(--defaultBrickColor);
 	border: 0;
 	padding: 0 1rem;
+	margin-left: ;
 	width: 150px;
 	height: 100%;
 	border: 2px solid var(--primaryBlue);
 	box-shadow: -3px 3px 0px var(--primaryBlue);
 	transition: transform 0.25s;
-	position: relative;
-	z-index: 1;
 }
 
 .button:hover {
@@ -121,4 +120,9 @@ main {
 
 .buttonText {
 	composes: defaultText from "../../typography.module.css";
+}
+
+.error {
+	border-color: red;
+	box-shadow: 6px 4px 0px darkred;
 }
