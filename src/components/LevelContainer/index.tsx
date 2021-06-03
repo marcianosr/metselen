@@ -23,6 +23,17 @@ const LevelContainer = () => {
 		if (allTablesCompleted || timerFinished) {
 			updateLevelState("isGameFinished", true);
 			stopTimer();
+			// localStorage.setItem(
+			// 	"user",
+			// 	JSON.stringify({
+			// 		scores: [
+			// 			{
+			// 				level: currentLevel,
+			// 				bricks: levelState.score,
+			// 			},
+			// 		],
+			// 	})
+			// );
 		}
 	}, [allTablesCompleted, timerFinished]);
 
@@ -41,7 +52,7 @@ const LevelContainer = () => {
 							<span>rijen</span>
 						</li>
 					</ul>
-					<TableAnswerDisplay />
+					{!allTablesCompleted && <TableAnswerDisplay />}
 					<section className={styles.timerAndLevel}>
 						<span className={styles.levelText}>
 							Level{" "}

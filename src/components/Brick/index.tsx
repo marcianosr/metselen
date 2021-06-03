@@ -73,13 +73,13 @@ const Brick: React.FC<BrickProps> = ({
 			{!disabled && !isLastBrick && (
 				<div className={styles.brickShadow}></div>
 			)}
-			<div className={classnames(styles.text)}>{text}</div>
 			{cracked && color?.key === "normal" && (
 				<LightCrack isSmall={size === "small"} />
 			)}
 			{cracked && color?.key === "dark" && (
 				<DarkCrack isSmall={size === "small"} />
 			)}
+			<div className={styles.text}>{text}</div>
 		</div>
 	</div>
 );

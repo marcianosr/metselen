@@ -1,5 +1,6 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames";
+import { useLocalStorage } from "react-use";
 
 import Brick from "../Brick";
 import { BrickRow, BrickRowContainer } from "../BrickRowContainer";
@@ -7,33 +8,25 @@ import { useGameState } from "../../providers/GameStateProvider";
 import { flattenBricksArray } from "../../utils";
 import LevelModal from "../LevelModal";
 import { WorldBrick } from "../../data/worlds";
+import { SaveGameState } from "../UserDataScreen";
 
 import styles from "./styles.module.css";
 import brickContainerStyles from "../BrickContainer/styles.module.css";
 import textStyles from "../../typography.module.css";
 import brickStyles from "../Brick/styles.module.css";
 
-type LevelSelectScreenContainerProps = {
-	user: {
-		id: string;
-		name: string;
-	};
-};
-const LevelSelectScreenContainer: React.FC<LevelSelectScreenContainerProps> = ({
-	user,
-}) => {
+const LevelSelectScreenContainer: React.FC = () => {
 	const {
 		gameState: { worlds },
 	} = useGameState();
 	const totalLevels = flattenBricksArray<WorldBrick>(worlds[0].levels).length;
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
-
-	console.log("user", user);
+	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 
 	return (
 		<section className={styles.levelSelectContainer}>
 			<header className={styles.header}>
-				<div className={styles.user}>{user.name}</div>
+				<div className={styles.user}>{savedGameState?.username}</div>
 
 				<div className={styles.gameInfoContainer}>
 					<h1

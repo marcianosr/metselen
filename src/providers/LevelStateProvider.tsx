@@ -6,7 +6,6 @@ import { BrickType } from "../types/Bricks";
 import { useGameState } from "./GameStateProvider";
 import { WorldBrick } from "../data/worlds";
 
-
 // T represents a key of the LevelState Type
 // LevelState[Action] resolves to a type value.
 //
@@ -16,7 +15,6 @@ type LevelStateUpdater = <Action extends keyof LevelState>(
 	value: LevelState[Action]
 ) => void;
 type LevelStateMultipleUpdater = (state: Partial<LevelState>) => void;
-
 
 type LevelStateContextState = {
 	levelState: LevelState;
@@ -76,12 +74,12 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 	console.log("levelState", levelState);
 
 	const reset = () => setLevelState({ ...INITIAL_LEVEL_STATE });
-	const setupConfigForLevel  = (levelId: number) => {
+	const setupConfigForLevel = (levelId: number) => {
 		updateLevelStateMultiple({
 			mapping: levels[levelId - 1].layout,
-			tables: levels[levelId - 1].tables, 
-			timer: levels[levelId - 1].time
-		})
+			tables: levels[levelId - 1].tables,
+			timer: levels[levelId - 1].time,
+		});
 		updateGameStateMultiple({
 			currentLevel: levelId,
 			screen: {
@@ -96,7 +94,7 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 				levelState,
 				setLevelState,
 				onResetLevel: reset,
-				onPlayLevel: setupConfigForLevel ,
+				onPlayLevel: setupConfigForLevel,
 				updateLevelState,
 				updateLevelStateMultiple,
 			}}

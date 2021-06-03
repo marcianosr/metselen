@@ -105,6 +105,11 @@
 	animation: animateCracks 3s ease-in forwards;
 }
 
+.brick svg {
+	position: absolute;
+	top: 0;
+}
+
 .text {
 	composes: defaultText from "../../typography.module.css";
 
