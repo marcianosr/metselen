@@ -3,7 +3,8 @@ import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
 import { LevelStateProvider } from "./providers/LevelStateProvider";
 import LevelContainer from "./components/LevelContainer";
 import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer";
-import UserDataScreen, { SaveGameState } from "./components/UserDataScreen";
+import UserDataScreen from "./components/UserDataScreen";
+import { SaveGameState } from "./data/saveGameState";
 import "./App.css";
 import { useEffect } from "react";
 

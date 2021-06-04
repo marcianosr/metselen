@@ -1,4 +1,7 @@
 import { useEffect } from "react";
+import { useLocalStorage } from "react-use";
+import { SaveGameState, SaveGameStateLevel } from "../../data/saveGameState";
+
 import { useLevelState } from "../../providers/LevelStateProvider";
 import useTimer from "../../hooks/useTimer";
 
@@ -17,23 +20,41 @@ const LevelContainer = () => {
 	const {
 		gameState: { currentLevel },
 	} = useGameState();
+	const [savedGameState, setSavedGameState] =
+		useLocalStorage<SaveGameState>("saveGameState");
+
 	const allTablesCompleted = levelState.tables.length === 0;
+
+	const saveLevelDataToStorage = () => {
+		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
+
+		setSavedGameState({
+			...savedGameState,
+			worlds: {
+				levels: levelsFromStorage[currentLevel - 1]
+					? updateSaveDataForLevel(levelsFromStorage)
+					: createSaveDataForLevel(levelsFromStorage),
+			},
+		});
+	};
+
+	const createSaveDataForLevel = (levels: SaveGameStateLevel[]) => [
+		...levels,
+		{ current: currentLevel, score: levelState.score },
+	];
+
+	const updateSaveDataForLevel = (levels: SaveGameStateLevel[]) => {
+		levels[currentLevel - 1].score = levelState.score;
+		levels[currentLevel - 1].current = currentLevel;
+
+		return levels;
+	};
 
 	useEffect(() => {
 		if (allTablesCompleted || timerFinished) {
 			updateLevelState("isGameFinished", true);
 			stopTimer();
-			// localStorage.setItem(
-			// 	"user",
-			// 	JSON.stringify({
-			// 		scores: [
-			// 			{
-			// 				level: currentLevel,
-			// 				bricks: levelState.score,
-			// 			},
-			// 		],
-			// 	})
-			// );
+			saveLevelDataToStorage();
 		}
 	}, [allTablesCompleted, timerFinished]);
 
@@ -42,7 +63,6 @@ const LevelContainer = () => {
 			<>
 				<section className={styles.gameInfoContainer}>
 					<ul className={styles.pointsList}>
-						{/* <li className={styles.points}>Punten</li> */}
 						<li className={styles.points}>
 							<span>{levelState.score}</span>
 							<span>punten</span>

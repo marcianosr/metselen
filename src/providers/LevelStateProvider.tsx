@@ -71,7 +71,7 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 		});
 	};
 
-	console.log("levelState", levelState);
+	// console.log("levelState", levelState);
 
 	const reset = () => setLevelState({ ...INITIAL_LEVEL_STATE });
 	const setupConfigForLevel = (levelId: number) => {

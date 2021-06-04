@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useState } from "react";
 import classNames from "classnames";
 import { useLocalStorage } from "react-use";
 
@@ -8,7 +8,7 @@ import { useGameState } from "../../providers/GameStateProvider";
 import { flattenBricksArray } from "../../utils";
 import LevelModal from "../LevelModal";
 import { WorldBrick } from "../../data/worlds";
-import { SaveGameState } from "../UserDataScreen";
+import { SaveGameState } from "../../data/saveGameState";
 
 import styles from "./styles.module.css";
 import brickContainerStyles from "../BrickContainer/styles.module.css";

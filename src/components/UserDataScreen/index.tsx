@@ -1,39 +1,12 @@
-import classNames from "classnames";
-import { v4 as uuidv4 } from "uuid";
-import { useLocalStorage } from "react-use";
 import React, { ChangeEvent, useState } from "react";
+import classNames from "classnames";
+import { useLocalStorage } from "react-use";
 import { useGameState } from "../../providers/GameStateProvider";
+import {
+	INITIAL_SAVE_GAME_DATA,
+	SaveGameState,
+} from "../../data/saveGameState";
 import styles from "./styles.module.css";
-
-type Level = {
-	score: number;
-};
-
-type World = {
-	score: number;
-	levels: Level[];
-};
-
-export type SaveGameState = {
-	id: string;
-	username: string;
-	worlds: World[];
-};
-
-const INITIAL_SAVE_GAME_DATA: SaveGameState = {
-	id: uuidv4(),
-	username: "",
-	worlds: [
-		{
-			score: 0,
-			levels: [
-				{
-					score: 0,
-				},
-			],
-		},
-	],
-};
 
 const UserDataScreen: React.FC = () => {
 	const { updateGameState } = useGameState();
