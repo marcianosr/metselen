@@ -1,12 +1,15 @@
 import React from "react";
+import { useLocalStorage } from "react-use";
+
+import { useLevelState } from "../../providers/LevelStateProvider";
 import { WorldBrick } from "../../data/worlds";
+import { SaveGameState } from "../../data/saveGameState";
 import { useGameState } from "../../providers/GameStateProvider";
 import { flattenBricksArray } from "../../utils";
 import Modal from "../Modal";
 
 import styles from "./styles.module.css";
 import brickStyles from "../Brick/styles.module.css";
-import { useLevelState } from "../../providers/LevelStateProvider";
 
 type LevelModalProps = {
 	modalId: number | null;
@@ -26,6 +29,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 
 	const hideModal = () => setModalId(null);
 	const startLevel = (id: number) => onPlayLevel(id);
+	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 
 	return (
 		<Modal onClickBackdrop={() => hideModal()}>
@@ -60,8 +64,8 @@ const LevelModal: React.FC<LevelModalProps> = ({
 				</ul>
 			</section>
 
-			{worlds[0].brickScore.current >=
-			levels[selectedBrick.id - 1].bricksNeeded ? (
+			{savedGameState?.worlds.score ||
+			0 >= levels[selectedBrick.id - 1].bricksNeeded ? (
 				<button
 					className={styles.brickButton}
 					onClick={() => startLevel(selectedBrick.id)}
