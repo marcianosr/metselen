@@ -46,7 +46,7 @@ const LevelSelectScreenContainer: React.FC = () => {
 						<div className={styles.totalBricksContainer}>
 							<div className={brickStyles.iconBrick}></div>
 							<div className={styles.totalBricksText}>
-								{worlds[0].brickScore.current}/
+								{savedGameState?.worlds.score}/
 								{worlds[0].brickScore.max}
 							</div>
 						</div>

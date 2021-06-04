@@ -28,19 +28,16 @@ const LevelContainer = () => {
 	const saveLevelDataToStorage = () => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
 
-		const isNewHighscore =
-			levelsFromStorage[currentLevel - 1].score <= levelState.score;
-
-		if (isNewHighscore) {
-			setSavedGameState({
-				...savedGameState,
-				worlds: {
-					levels: levelsFromStorage[currentLevel - 1]
-						? updateSaveDataForLevel(levelsFromStorage)
-						: createSaveDataForLevel(levelsFromStorage),
-				},
-			});
-		}
+		setSavedGameState({
+			...savedGameState,
+			worlds: {
+				...savedGameState?.worlds,
+				levels: levelsFromStorage[currentLevel - 1]
+					? updateSaveDataForLevel(levelsFromStorage)
+					: createSaveDataForLevel(levelsFromStorage),
+				score: updateWorldScore(levelsFromStorage),
+			},
+		});
 	};
 
 	const createSaveDataForLevel = (levels: SaveGameStateLevel[]) => [
@@ -49,11 +46,19 @@ const LevelContainer = () => {
 	];
 
 	const updateSaveDataForLevel = (levels: SaveGameStateLevel[]) => {
+		const isNewHighscore =
+			levels[currentLevel - 1].score <= levelState.score;
+
+		if (!isNewHighscore) return levels;
+
 		levels[currentLevel - 1].score = levelState.score;
 		levels[currentLevel - 1].current = currentLevel;
 
 		return levels;
 	};
+
+	const updateWorldScore = (levels: SaveGameStateLevel[]) =>
+		levels.reduce((totalScore, level) => totalScore + level.score, 0);
 
 	useEffect(() => {
 		if (allTablesCompleted || timerFinished) {
