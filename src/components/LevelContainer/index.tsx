@@ -28,14 +28,19 @@ const LevelContainer = () => {
 	const saveLevelDataToStorage = () => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
 
-		setSavedGameState({
-			...savedGameState,
-			worlds: {
-				levels: levelsFromStorage[currentLevel - 1]
-					? updateSaveDataForLevel(levelsFromStorage)
-					: createSaveDataForLevel(levelsFromStorage),
-			},
-		});
+		const isNewHighscore =
+			levelsFromStorage[currentLevel - 1].score =< levelState.score;
+
+		if (isNewHighscore) {
+			setSavedGameState({
+				...savedGameState,
+				worlds: {
+					levels: levelsFromStorage[currentLevel - 1]
+						? updateSaveDataForLevel(levelsFromStorage)
+						: createSaveDataForLevel(levelsFromStorage),
+				},
+			});
+		}
 	};
 
 	const createSaveDataForLevel = (levels: SaveGameStateLevel[]) => [
