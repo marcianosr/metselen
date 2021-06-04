@@ -29,7 +29,7 @@ const LevelContainer = () => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
 
 		const isNewHighscore =
-			levelsFromStorage[currentLevel - 1].score =< levelState.score;
+			levelsFromStorage[currentLevel - 1].score <= levelState.score;
 
 		if (isNewHighscore) {
 			setSavedGameState({
