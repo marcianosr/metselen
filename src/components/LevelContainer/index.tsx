@@ -32,9 +32,7 @@ const LevelContainer = () => {
 			...savedGameState,
 			worlds: {
 				...savedGameState?.worlds,
-				levels: levelsFromStorage[currentLevel - 1]
-					? updateSaveDataForLevel(levelsFromStorage)
-					: createSaveDataForLevel(levelsFromStorage),
+				levels: updateSaveDataForLevel(levelsFromStorage),
 				score: updateWorldScore(levelsFromStorage),
 			},
 		});
@@ -67,6 +65,19 @@ const LevelContainer = () => {
 			saveLevelDataToStorage();
 		}
 	}, [allTablesCompleted, timerFinished]);
+
+	useEffect(() => {
+		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
+
+		setSavedGameState({
+			...savedGameState,
+			worlds: {
+				...savedGameState?.worlds,
+				levels: createSaveDataForLevel(levelsFromStorage),
+				score: updateWorldScore(levelsFromStorage),
+			},
+		});
+	}, []);
 
 	return (
 		<section className={styles.levelContainer}>

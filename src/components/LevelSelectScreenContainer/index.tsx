@@ -22,6 +22,7 @@ const LevelSelectScreenContainer: React.FC = () => {
 	const totalLevels = flattenBricksArray<WorldBrick>(worlds[0].levels).length;
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
+	const levelsFromStorage = savedGameState?.worlds?.score;
 
 	return (
 		<section className={styles.levelSelectContainer}>
@@ -60,31 +61,37 @@ const LevelSelectScreenContainer: React.FC = () => {
 						<BrickRowContainer>
 							{worlds[0].levels.map((brickRow, idx) => (
 								<BrickRow idx={idx}>
-									{brickRow.map((brick) => (
-										<>
-											<Brick
-												id={brick.id}
-												size={brick.size}
-												color={brick.color}
-												text={brick.text}
-												disabled={!brick.isUnlocked}
-												isLastBrick={
-													totalLevels === brick.id
-												}
-												onClick={() =>
-													setModalId(brick.id)
-												}
-											/>
+									{brickRow.map((brick) => {
+										const isUnlocked =
+											(levelsFromStorage || false) <
+											brick.bricksNeeded;
 
-											{modalId === brick.id && (
-												<LevelModal
-													modalId={modalId}
-													setModalId={setModalId}
-													selectedBrick={brick}
+										return (
+											<>
+												<Brick
+													id={brick.id}
+													size={brick.size}
+													color={brick.color}
+													text={brick.text}
+													disabled={isUnlocked}
+													isLastBrick={
+														totalLevels === brick.id
+													}
+													onClick={() =>
+														setModalId(brick.id)
+													}
 												/>
-											)}
-										</>
-									))}
+
+												{modalId === brick.id && (
+													<LevelModal
+														modalId={modalId}
+														setModalId={setModalId}
+														selectedBrick={brick}
+													/>
+												)}
+											</>
+										);
+									})}
 								</BrickRow>
 							))}
 						</BrickRowContainer>
