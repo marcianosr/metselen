@@ -31,6 +31,10 @@ const LevelModal: React.FC<LevelModalProps> = ({
 	const startLevel = (id: number) => onPlayLevel(id);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const storedWorldScore = savedGameState?.worlds.score || 0;
+	const storedLevelScore =
+		(savedGameState?.worlds.levels &&
+			savedGameState?.worlds.levels[selectedBrick.id - 1]?.score) ||
+		0;
 
 	return (
 		<Modal onClickBackdrop={() => hideModal()}>
@@ -46,7 +50,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 					<li>
 						<span>Totaal:</span>
 						<span className={styles.statsNumbers}>
-							{worlds[0].brickScore.current}/
+							{storedLevelScore}/
 							{levels[selectedBrick.id - 1].maxBricks}
 						</span>
 						<div className={brickStyles.iconBrick}></div>
