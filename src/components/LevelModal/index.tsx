@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocalStorage } from "react-use";
+import { levels } from "../../data/levelMappings";
 
 import { useLevelState } from "../../providers/LevelStateProvider";
 import { WorldBrick } from "../../data/worlds";
@@ -25,7 +26,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 		gameState: { worlds },
 	} = useGameState();
 	const { onPlayLevel } = useLevelState();
-	const levels = flattenBricksArray<WorldBrick>(worlds[0].levels);
+	const worldLevels = flattenBricksArray<WorldBrick>(worlds[0].levels);
 
 	const hideModal = () => setModalId(null);
 	const startLevel = (id: number) => onPlayLevel(id);
@@ -35,6 +36,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 		(savedGameState?.worlds.levels &&
 			savedGameState?.worlds.levels[selectedBrick.id - 1]?.score) ||
 		0;
+	const levelIsUnderConstruction = levels[selectedBrick.id - 1] === undefined;
 
 	return (
 		<Modal onClickBackdrop={() => hideModal()}>
@@ -42,7 +44,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 			<section className={styles.darkerBackground}>
 				<strong className={styles.subTitle}>
 					<span>Tafels van : </span>
-					<span>{levels[selectedBrick.id - 1].text}</span>
+					<span>{worldLevels[selectedBrick.id - 1].text}</span>
 				</strong>
 			</section>
 			<section className={styles.darkerBackground}>
@@ -51,7 +53,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 						<span>Totaal:</span>
 						<span className={styles.statsNumbers}>
 							{storedLevelScore}/
-							{levels[selectedBrick.id - 1].maxBricks}
+							{worldLevels[selectedBrick.id - 1].maxBricks}
 						</span>
 						<div className={brickStyles.iconBrick}></div>
 					</li>
@@ -62,20 +64,31 @@ const LevelModal: React.FC<LevelModalProps> = ({
 					<li>
 						<span>Ontgrendeld na:</span>
 						<span className={styles.statsNumbers}>
-							{levels[selectedBrick.id - 1].bricksNeeded}
+							{worldLevels[selectedBrick.id - 1].bricksNeeded}
 						</span>
 						<div className={brickStyles.iconBrick}></div>
 					</li>
 				</ul>
 			</section>
 
-			{storedWorldScore >= levels[selectedBrick.id - 1].bricksNeeded ? (
-				<button
-					className={styles.brickButton}
-					onClick={() => startLevel(selectedBrick.id)}
-				>
-					<span className={styles.text}>Start!</span>
-				</button>
+			{storedWorldScore >=
+			worldLevels[selectedBrick.id - 1].bricksNeeded ? (
+				<>
+					{levelIsUnderConstruction ? (
+						<strong>
+							Helaas kun je dit level nog niet spelen, omdat de
+							metselaars hun constructies nog aan het uittekenen
+							zijn!
+						</strong>
+					) : (
+						<button
+							className={styles.brickButton}
+							onClick={() => startLevel(selectedBrick.id)}
+						>
+							<span className={styles.text}>Start!</span>
+						</button>
+					)}
+				</>
 			) : (
 				<strong>
 					Verdien meer stenen om dit level te ontgrendelen!
