@@ -30,6 +30,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 	const hideModal = () => setModalId(null);
 	const startLevel = (id: number) => onPlayLevel(id);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
+	const storedWorldScore = savedGameState?.worlds.score || 0;
 
 	return (
 		<Modal onClickBackdrop={() => hideModal()}>
@@ -64,8 +65,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 				</ul>
 			</section>
 
-			{savedGameState?.worlds.score ||
-			0 >= levels[selectedBrick.id - 1].bricksNeeded ? (
+			{storedWorldScore >= levels[selectedBrick.id - 1].bricksNeeded ? (
 				<button
 					className={styles.brickButton}
 					onClick={() => startLevel(selectedBrick.id)}
