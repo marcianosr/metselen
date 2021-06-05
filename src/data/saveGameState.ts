@@ -21,11 +21,11 @@ export const INITIAL_SAVE_GAME_DATA: SaveGameState = {
 	id: uuidv4(),
 	username: "",
 	worlds: {
-		current: 0,
+		current: 1,
 		score: 0,
 		levels: [
 			{
-				current: 0,
+				current: 1,
 				score: 0,
 			},
 		],

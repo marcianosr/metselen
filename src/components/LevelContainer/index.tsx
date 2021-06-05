@@ -69,6 +69,12 @@ const LevelContainer = () => {
 	useEffect(() => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
 
+		const levelAlreadyExists = levelsFromStorage.find(
+			(level) => level.current === currentLevel
+		);
+
+		if (levelAlreadyExists) return;
+
 		setSavedGameState({
 			...savedGameState,
 			worlds: {
