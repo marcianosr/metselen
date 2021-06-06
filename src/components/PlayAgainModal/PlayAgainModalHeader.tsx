@@ -7,14 +7,12 @@ type PlayAgainModalHeaderProps = {
 	storedHighscore: number;
 	timerFinished: boolean;
 	allTablesCompleted: boolean;
-	percentageCompleted: number;
 };
 
 const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 	storedHighscore,
 	allTablesCompleted,
 	timerFinished,
-	percentageCompleted,
 }) => {
 	const { levelState } = useLevelState();
 	const {
@@ -25,17 +23,12 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 		<header>
 			{(timerFinished && !allTablesCompleted) ||
 				(timerFinished && allTablesCompleted && (
-					<h1 className={styles.title}>
-						Oh nee! De tijd is om! Dit level is nu{" "}
-						{percentageCompleted}% compleet.
-					</h1>
+					<h1 className={styles.title}>Game over!</h1>
 				))}
 			{!timerFinished &&
 				allTablesCompleted &&
 				storedHighscore !== levelState.score && (
-					<h1 className={styles.title}>
-						Dit level is voor {percentageCompleted}% compleet.
-					</h1>
+					<h1 className={styles.title}>Level gehaald!</h1>
 				)}
 
 			{!timerFinished &&

@@ -66,6 +66,9 @@ const LevelSelectScreenContainer: React.FC = () => {
 											(levelsFromStorage || false) <
 											brick.bricksNeeded;
 
+										const levelIsPlayable =
+											!brick.nonPlayable;
+
 										return (
 											<>
 												<Brick
@@ -82,13 +85,18 @@ const LevelSelectScreenContainer: React.FC = () => {
 													}
 												/>
 
-												{modalId === brick.id && (
-													<LevelModal
-														modalId={modalId}
-														setModalId={setModalId}
-														selectedBrick={brick}
-													/>
-												)}
+												{levelIsPlayable &&
+													modalId === brick.id && (
+														<LevelModal
+															modalId={modalId}
+															setModalId={
+																setModalId
+															}
+															selectedBrick={
+																brick
+															}
+														/>
+													)}
 											</>
 										);
 									})}

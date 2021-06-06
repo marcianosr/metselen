@@ -34,7 +34,6 @@ const PlayAgainModal = () => {
 					storedHighscore={storedHighscore}
 					timerFinished={timerFinished}
 					allTablesCompleted={allTablesCompleted}
-					percentageCompleted={percentageCompleted}
 				/>
 				<TextCollectionWrapper>
 					<h2 className={styles.subTitle}>Jouw resultaten</h2>
@@ -43,7 +42,8 @@ const PlayAgainModal = () => {
 						<li className={styles.listItem}>
 							<span>totaal:</span>{" "}
 							<span>
-								{levelState.score}/{levelState.bricks.length}
+								{levelState.score}/{levelState.bricks.length} (
+								{percentageCompleted}%)
 							</span>
 						</li>
 						<li className={styles.listItem}>

@@ -19,6 +19,7 @@ export type WorldBrick = Pick<BrickType, "id" | "size" | "color"> & {
 	text: string;
 	color: RandomColorType;
 	maxBricks: number | null;
+	nonPlayable?: boolean;
 };
 
 export const worlds: World[] = [
@@ -197,6 +198,7 @@ export const worlds: World[] = [
 					text: "",
 					color: getRandomBrickColor(),
 					maxBricks: null,
+					nonPlayable: true,
 				},
 				{
 					id: 18,
@@ -242,6 +244,7 @@ export const worlds: World[] = [
 					text: "",
 					color: getRandomBrickColor(),
 					maxBricks: null,
+					nonPlayable: true,
 				},
 			],
 			[
