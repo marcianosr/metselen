@@ -30,7 +30,7 @@ const UserDataScreen: React.FC = () => {
 			...saveGameState,
 			username,
 		});
-		updateGameState("screen", { current: "levelSelection" });
+		updateGameState("screen", { current: "overworld" });
 	};
 
 	return (

@@ -26,14 +26,14 @@ const ScreenManager = () => {
 
 	useEffect(() => {
 		if (user?.username) {
-			updateGameState("screen", { current: "levelSelection" });
+			updateGameState("screen", { current: "overworld" });
 		}
 	}, [user]);
 
 	return (
 		<>
 			{gameState.screen.current === "enterName" && <UserDataScreen />}
-			{gameState.screen.current === "levelSelection" && (
+			{gameState.screen.current === "overworld" && (
 				<LevelSelectScreenContainer />
 			)}
 			{gameState.screen.current === "level" && <LevelContainer />}
