@@ -71,9 +71,11 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 		});
 	};
 
-	// console.log("levelState", levelState);
+	console.log("levelState", levelState);
 
-	const reset = () => setLevelState({ ...INITIAL_LEVEL_STATE });
+	const reset = () => {
+		return setLevelState(INITIAL_LEVEL_STATE);
+	};
 	const setupConfigForLevel = (levelId: number) => {
 		updateLevelStateMultiple({
 			mapping: levels[levelId - 1].layout,

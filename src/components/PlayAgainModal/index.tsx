@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { useLocalStorage } from "react-use";
 import { SaveGameState } from "../../data/saveGameState";
-import useTimer from "../../hooks/useTimer";
 import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import Modal from "../Modal";
@@ -9,10 +8,20 @@ import PlayAgainModalHeader from "./PlayAgainModalHeader";
 import PlayAgainModalFooter from "./PlayAgainModalFooter";
 import styles from "./styles.module.css";
 import TextCollectionWrapper from "../Modal/TextCollectionWrapper";
+import { useEffect } from "react";
 
-const PlayAgainModal = () => {
+type PlayAgainModalProps = {
+	stopTimer: () => void;
+	resetTimer: () => void;
+	timerFinished: boolean;
+};
+
+const PlayAgainModal: React.FC<PlayAgainModalProps> = ({
+	resetTimer,
+	timerFinished,
+	stopTimer,
+}) => {
 	const { levelState } = useLevelState();
-	const { timerFinished } = useTimer(levelState.timer);
 	const {
 		gameState: { currentLevel },
 	} = useGameState();
@@ -26,6 +35,12 @@ const PlayAgainModal = () => {
 	const storedPercentageCompleted =
 		(levelsFromStorage[currentLevel - 1].score / levelState.bricks.length) *
 		100;
+
+	useEffect(() => {
+		if (allTablesCompleted || timerFinished) {
+			stopTimer();
+		}
+	}, [allTablesCompleted, timerFinished]);
 
 	return (
 		<Modal>
@@ -64,7 +79,7 @@ const PlayAgainModal = () => {
 						</li>
 					</ul>
 				</TextCollectionWrapper>
-				<PlayAgainModalFooter />
+				<PlayAgainModalFooter resetTimer={resetTimer} />
 			</section>
 		</Modal>
 	);

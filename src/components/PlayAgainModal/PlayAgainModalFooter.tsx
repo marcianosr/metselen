@@ -1,16 +1,19 @@
-import React from "react";
 import classNames from "classnames";
 import Button from "../Button";
 import { useLevelState } from "../../providers/LevelStateProvider";
-import useTimer from "../../hooks/useTimer";
 
 import styles from "./styles.module.css";
 import { useGameState } from "../../providers/GameStateProvider";
 
-const PlayAgainModalFooter = () => {
+type PlayAgainModalFooterProps = {
+	resetTimer: () => void;
+};
+
+const PlayAgainModalFooter: React.FC<PlayAgainModalFooterProps> = ({
+	resetTimer,
+}) => {
 	const { updateGameState } = useGameState();
-	const { levelState, onResetLevel } = useLevelState();
-	const { resetTimer } = useTimer(levelState.timer);
+	const { onResetLevel } = useLevelState();
 
 	const returnToOverworld = () =>
 		updateGameState("screen", { current: "overworld" });

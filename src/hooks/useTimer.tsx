@@ -12,18 +12,22 @@ const useTimer = (amount: number) => {
 
 	const stopTimer = () => window.clearTimeout(timerRef.current || 0);
 
-	useEffect(() => {
-		timerRef.current = window.setTimeout(() => {
+	const startTimer = () =>
+		(timerRef.current = window.setTimeout(() => {
 			setTimer(timer - 1);
-		}, 1000);
+		}, 1000));
 
+	useEffect(() => {
+		if (!timerFinished) {
+			startTimer();
+		}
 		if (timer === 0) {
 			stopTimer();
 			setTimerFinished(true);
 		}
 
 		return () => stopTimer();
-	}, [timer]);
+	}, [timer, timerFinished]);
 
 	return {
 		timer,

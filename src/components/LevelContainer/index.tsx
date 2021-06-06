@@ -15,7 +15,9 @@ import styles from "./styles.module.css";
 
 const LevelContainer = () => {
 	const { levelState, updateLevelState } = useLevelState();
-	const { stopTimer, timerFinished, timer } = useTimer(levelState.timer);
+	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
+		levelState.timer
+	);
 	const {
 		gameState: { currentLevel },
 	} = useGameState();
@@ -111,7 +113,13 @@ const LevelContainer = () => {
 				</section>
 				{!levelState.isGameFinished && <BrickContainer />}
 			</>
-			{levelState.isGameFinished && <PlayAgainModal />}
+			{levelState.isGameFinished && (
+				<PlayAgainModal
+					stopTimer={stopTimer}
+					resetTimer={resetTimer}
+					timerFinished={timerFinished}
+				/>
+			)}
 		</section>
 	);
 };
