@@ -1,0 +1,19 @@
+.brick {
+	composes: cementComposition from "../BrickContainer/styles.module.css";
+
+	background-color: var(--defaultBrickColor);
+	border: 3px solid var(--defaultCementColor);
+	min-width: 200px;
+	transition: transform 0.25s;
+	padding: 0.25rem 1rem;
+}
+
+.brick:hover {
+	background-color: var(--secondBrickColor);
+	transform: scale(1.05);
+}
+
+.text {
+	composes: defaultText from "../../typography.module.css";
+	font-size: 1.5rem;
+}
