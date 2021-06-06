@@ -11,6 +11,8 @@ import Modal from "../Modal";
 
 import styles from "./styles.module.css";
 import brickStyles from "../Brick/styles.module.css";
+import Button from "../Button";
+import TextCollectionWrapper from "../Modal/TextCollectionWrapper";
 
 type LevelModalProps = {
 	modalId: number | null;
@@ -40,60 +42,62 @@ const LevelModal: React.FC<LevelModalProps> = ({
 
 	return (
 		<Modal onClickBackdrop={() => hideModal()}>
-			<h2 className={styles.title}>Name level {modalId}</h2>
-			<section className={styles.darkerBackground}>
-				<strong className={styles.subTitle}>
-					<span>Tafels van : </span>
-					<span>{worldLevels[selectedBrick.id - 1].text}</span>
-				</strong>
-			</section>
-			<section className={styles.darkerBackground}>
-				<ul className={styles.list}>
-					<li>
-						<span>Totaal:</span>
-						<span className={styles.statsNumbers}>
-							{storedLevelScore}/
-							{worldLevels[selectedBrick.id - 1].maxBricks}
-						</span>
-						<div className={brickStyles.iconBrick}></div>
-					</li>
-					<li>
-						<span>Tijd over:</span>
-						<span className={styles.statsNumbers}>0 sec.</span>
-					</li>
-					<li>
-						<span>Ontgrendeld na:</span>
-						<span className={styles.statsNumbers}>
-							{worldLevels[selectedBrick.id - 1].bricksNeeded}
-						</span>
-						<div className={brickStyles.iconBrick}></div>
-					</li>
-				</ul>
-			</section>
+			<section className={styles.modalContainer}>
+				<h2 className={styles.title}>Name level {modalId}</h2>
+				<section className={styles.darkerBackground}>
+					<strong className={styles.subTitle}>
+						<span>Tafels van : </span>
+						<span>{worldLevels[selectedBrick.id - 1].text}</span>
+					</strong>
+				</section>
+				<TextCollectionWrapper>
+					<ul className={styles.list}>
+						<li>
+							<span>Totaal:</span>
+							<span className={styles.statsNumbers}>
+								{storedLevelScore}/
+								{worldLevels[selectedBrick.id - 1].maxBricks}
+							</span>
+							<div className={brickStyles.iconBrick}></div>
+						</li>
+						<li>
+							<span>Tijd over:</span>
+							<span className={styles.statsNumbers}>0 sec.</span>
+						</li>
+						<li>
+							<span>Ontgrendeld na:</span>
+							<span className={styles.statsNumbers}>
+								{worldLevels[selectedBrick.id - 1].bricksNeeded}
+							</span>
+							<div className={brickStyles.iconBrick}></div>
+						</li>
+					</ul>
+				</TextCollectionWrapper>
 
-			{storedWorldScore >=
-			worldLevels[selectedBrick.id - 1].bricksNeeded ? (
-				<>
-					{levelIsUnderConstruction ? (
-						<strong>
-							Helaas kun je dit level nog niet spelen, omdat de
-							metselaars hun constructies nog aan het uittekenen
-							zijn!
-						</strong>
-					) : (
-						<button
-							className={styles.brickButton}
-							onClick={() => startLevel(selectedBrick.id)}
-						>
-							<span className={styles.text}>Start!</span>
-						</button>
-					)}
-				</>
-			) : (
-				<strong>
-					Verdien meer stenen om dit level te ontgrendelen!
-				</strong>
-			)}
+				{storedWorldScore >=
+				worldLevels[selectedBrick.id - 1].bricksNeeded ? (
+					<>
+						{levelIsUnderConstruction ? (
+							<strong>
+								Helaas kun je dit level nog niet spelen, omdat
+								de metselaars hun constructies nog aan het
+								uittekenen zijn!
+							</strong>
+						) : (
+							<Button
+								variant="brick"
+								onClick={() => startLevel(selectedBrick.id)}
+							>
+								Start!
+							</Button>
+						)}
+					</>
+				) : (
+					<strong>
+						Verdien meer stenen om dit level te ontgrendelen!
+					</strong>
+				)}
+			</section>
 		</Modal>
 	);
 };

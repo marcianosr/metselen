@@ -8,7 +8,9 @@ type ModalProps = {
 const Modal: React.FC<ModalProps> = ({ onClickBackdrop, children }) => (
 	<>
 		<div className={styles.backdrop} onClick={onClickBackdrop}></div>
-		<div className={styles.modal}>{children}</div>
+		<div className={styles.modalContainer}>
+			<div className={styles.modalInner}>{children}</div>
+		</div>
 	</>
 );
 

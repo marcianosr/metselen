@@ -1,24 +1,26 @@
-.modal {
+.modalContainer {
 	--modalPink: #ffa9a9;
 	--modalDarkerPink: #ff8b8b;
 	--modalWidth: 600px;
+	--modalContentWidth: calc(var(--modalWidth) - 100px);
+
+	composes: cementComposition from "../BrickContainer/styles.module.css";
 
 	position: absolute;
 	margin: 0 auto;
-	top: calc(50% - 100px);
+	top: 50%;
+	transform: translateY(-50%);
 	left: 0;
 	right: 0;
 	width: var(--modalWidth);
 	z-index: 3;
 	background-color: var(--modalPink);
-	display: grid;
-	grid-template-rows: auto auto auto;
-	justify-content: center;
+	border: 4px solid var(--defaultCementColor);
 }
 
-.modal button {
-	margin: auto;
-	margin-bottom: 1.5rem;
+.modalInner {
+	margin: 0 auto;
+	width: var(--modalContentWidth);
 }
 
 .backdrop {
@@ -29,4 +31,20 @@
 	top: 0;
 	left: 0;
 	z-index: 2;
+}
+
+.textCollectionWrapper {
+	padding: 1rem;
+	background: var(--modalDarkerPink);
+	margin: auto;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.textCollectionWrapper > h2 {
+	margin-top: -0.5em;
+}
+
+.container {
+	width: 300px;
 }

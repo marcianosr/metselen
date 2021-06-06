@@ -1,3 +1,11 @@
+.modalContainer {
+	display: grid;
+	grid-template-rows: 70px 1fr;
+	padding: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
 .title {
 	composes: defaultText from "../../typography.module.css";
 	font-size: 2.5rem;
@@ -6,10 +14,8 @@
 
 .darkerBackground {
 	background: var(--modalDarkerPink);
-	margin-bottom: 2rem;
 	display: flex;
 	justify-content: center;
-	width: calc(var(--modalWidth) / 2);
 }
 
 .subTitle {
@@ -48,20 +54,6 @@
 
 .list li div {
 	margin-top: 0.5rem;
-}
-
-.brickButton {
-	composes: cementComposition from "../BrickContainer/styles.module.css";
-
-	background-color: var(--defaultBrickColor);
-	border: 3px solid var(--defaultCementColor);
-	min-width: 200px;
-	transition: transform 0.25s;
-}
-
-.brickButton:hover {
-	background-color: var(--secondBrickColor);
-	transform: scale(1.05);
 }
 
 .text {

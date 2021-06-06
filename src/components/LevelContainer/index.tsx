@@ -1,22 +1,21 @@
 import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
+
 import { SaveGameState, SaveGameStateLevel } from "../../data/saveGameState";
 
+import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import useTimer from "../../hooks/useTimer";
 
 import BrickContainer from "../BrickContainer";
 import TableAnswerDisplay from "../TableAnswerDisplay";
-import Modal from "../Modal";
+import PlayAgainModal from "../PlayAgainModal";
 
 import styles from "./styles.module.css";
-import { useGameState } from "../../providers/GameStateProvider";
 
 const LevelContainer = () => {
-	const { levelState, onResetLevel, updateLevelState } = useLevelState();
-	const { stopTimer, timerFinished, timer, resetTimer } = useTimer(
-		levelState.timer
-	);
+	const { levelState, updateLevelState } = useLevelState();
+	const { stopTimer, timerFinished, timer } = useTimer(levelState.timer);
 	const {
 		gameState: { currentLevel },
 	} = useGameState();
@@ -112,18 +111,7 @@ const LevelContainer = () => {
 				</section>
 				{!levelState.isGameFinished && <BrickContainer />}
 			</>
-			{levelState.isGameFinished && (
-				<Modal>
-					<button
-						onClick={() => {
-							onResetLevel();
-							resetTimer();
-						}}
-					>
-						Play again!
-					</button>
-				</Modal>
-			)}
+			{levelState.isGameFinished && <PlayAgainModal />}
 		</section>
 	);
 };
