@@ -10,6 +10,7 @@
 	font-size: 2.75rem;
 	text-align: center;
 	line-height: 1.1;
+	margin-bottom: 1rem;
 }
 
 .subTitle {
@@ -17,6 +18,14 @@
 	font-size: 2.25rem;
 	margin-top: -0.25em;
 	text-align: center;
+}
+
+.text {
+	composes: defaultText from "../../typography.module.css";
+	font-size: 1.25rem;
+	margin-top: -0.25em;
+	text-align: center;
+	display: block;
 }
 
 .listItem {

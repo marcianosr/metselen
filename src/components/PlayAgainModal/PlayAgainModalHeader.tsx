@@ -23,12 +23,20 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 		<header>
 			{(timerFinished && !allTablesCompleted) ||
 				(timerFinished && allTablesCompleted && (
-					<h1 className={styles.title}>Game over!</h1>
+					<>
+						<h1 className={styles.title}>Game over!</h1>
+						<span className={styles.text}>De tijd is om!</span>
+					</>
 				))}
 			{!timerFinished &&
 				allTablesCompleted &&
 				storedHighscore !== levelState.score && (
-					<h1 className={styles.title}>Level gehaald!</h1>
+					<>
+						<h1 className={styles.title}>Level afgelopen!</h1>
+						<span className={styles.text}>
+							Je hebt alle sommen beantwoord van dit level.
+						</span>
+					</>
 				)}
 
 			{!timerFinished &&
