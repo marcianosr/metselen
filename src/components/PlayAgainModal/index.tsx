@@ -5,16 +5,16 @@ import useTimer from "../../hooks/useTimer";
 import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import Modal from "../Modal";
-import Button from "../Button";
+import PlayAgainModalHeader from "./PlayAgainModalHeader";
+import PlayAgainModalFooter from "./PlayAgainModalFooter";
 import styles from "./styles.module.css";
 import TextCollectionWrapper from "../Modal/TextCollectionWrapper";
 
 const PlayAgainModal = () => {
-	const { levelState, onResetLevel } = useLevelState();
-	const { timerFinished, resetTimer } = useTimer(levelState.timer);
+	const { levelState } = useLevelState();
+	const { timerFinished } = useTimer(levelState.timer);
 	const {
 		gameState: { currentLevel },
-		updateGameState,
 	} = useGameState();
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
@@ -22,41 +22,20 @@ const PlayAgainModal = () => {
 	const percentageCompleted = Math.round(
 		(levelState.score / levelState.bricks.length) * 100
 	);
-
-	const returnToOverworld = () =>
-		updateGameState("screen", { current: "overworld" });
+	const storedHighscore = levelsFromStorage[currentLevel - 1].score;
+	const storedPercentageCompleted =
+		(levelsFromStorage[currentLevel - 1].score / levelState.bricks.length) *
+		100;
 
 	return (
 		<Modal>
 			<section className={styles.modalContainer}>
-				<section>
-					{(timerFinished && !allTablesCompleted) ||
-						(timerFinished && allTablesCompleted && (
-							<h1 className={styles.title}>
-								Oh nee! De tijd is om! Dit level is nu{" "}
-								{percentageCompleted}% compleet.
-							</h1>
-						))}
-					{!timerFinished &&
-						allTablesCompleted &&
-						levelsFromStorage[currentLevel - 1].score !==
-							levelState.score && (
-							<h1 className={styles.title}>
-								Dit level is voor {percentageCompleted}%
-								compleet.
-							</h1>
-						)}
-
-					{!timerFinished &&
-						allTablesCompleted &&
-						levelsFromStorage[currentLevel - 1].score ===
-							levelState.score && (
-							<h1 className={styles.title}>
-								Wow super metselaar! Level {currentLevel} is
-								uitgespeeld!
-							</h1>
-						)}
-				</section>
+				<PlayAgainModalHeader
+					storedHighscore={storedHighscore}
+					timerFinished={timerFinished}
+					allTablesCompleted={allTablesCompleted}
+					percentageCompleted={percentageCompleted}
+				/>
 				<TextCollectionWrapper>
 					<h2 className={styles.subTitle}>Jouw resultaten</h2>
 					<hr className={styles.line} />
@@ -79,32 +58,13 @@ const PlayAgainModal = () => {
 						<li className={styles.listItem}>
 							<span>beste totaal: </span>
 							<span>
-								{levelsFromStorage[currentLevel - 1].score}/
-								{levelState.bricks.length}
+								{storedHighscore}/{levelState.bricks.length} (
+								{storedPercentageCompleted}%)
 							</span>
 						</li>
 					</ul>
 				</TextCollectionWrapper>
-				<section className={classNames(styles.buttonContainer)}>
-					<Button
-						variant="brick"
-						onClick={() => {
-							onResetLevel();
-							resetTimer();
-						}}
-					>
-						Speel opnieuw
-					</Button>
-					<Button
-						variant="brick"
-						onClick={() => {
-							onResetLevel();
-							returnToOverworld();
-						}}
-					>
-						Terug naar wereld 1
-					</Button>
-				</section>
+				<PlayAgainModalFooter />
 			</section>
 		</Modal>
 	);
