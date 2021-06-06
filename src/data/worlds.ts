@@ -81,7 +81,7 @@ export const worlds: World[] = [
 					size: "default",
 					isUnlocked: false,
 					bricksNeeded: 20,
-					text: "3",
+					text: "1 - 3",
 					color: getRandomBrickColor(),
 					maxBricks: null,
 				},
