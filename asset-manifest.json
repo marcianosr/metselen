@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/metselen/static/css/main.8cdb2eb3.chunk.css",
+    "main.js": "/metselen/static/js/main.7797e27b.chunk.js",
+    "main.js.map": "/metselen/static/js/main.7797e27b.chunk.js.map",
+    "runtime-main.js": "/metselen/static/js/runtime-main.3f4b9e89.js",
+    "runtime-main.js.map": "/metselen/static/js/runtime-main.3f4b9e89.js.map",
+    "static/js/2.b95be83d.chunk.js": "/metselen/static/js/2.b95be83d.chunk.js",
+    "static/js/2.b95be83d.chunk.js.map": "/metselen/static/js/2.b95be83d.chunk.js.map",
+    "static/js/3.1f902fe3.chunk.js": "/metselen/static/js/3.1f902fe3.chunk.js",
+    "static/js/3.1f902fe3.chunk.js.map": "/metselen/static/js/3.1f902fe3.chunk.js.map",
+    "index.html": "/metselen/index.html",
+    "static/css/main.8cdb2eb3.chunk.css.map": "/metselen/static/css/main.8cdb2eb3.chunk.css.map",
+    "static/js/2.b95be83d.chunk.js.LICENSE.txt": "/metselen/static/js/2.b95be83d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3f4b9e89.js",
+    "static/js/2.b95be83d.chunk.js",
+    "static/css/main.8cdb2eb3.chunk.css",
+    "static/js/main.7797e27b.chunk.js"
+  ]
+}
