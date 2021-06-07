@@ -9,9 +9,26 @@ import UserDataScreen from "./components/UserDataScreen";
 import { SaveGameState } from "./data/saveGameState";
 import "./App.css";
 
+type Config = {
+	analytics: {
+		development: string;
+		production: string;
+		test: string;
+	};
+};
+const configs: Config = {
+	analytics: {
+		development: process.env.REACT_APP_INSIGHTS_API_KEY_DEV || "",
+		production: process.env.REACT_APP_INSIGHTS_API_KEY_PRD || "",
+		test: "",
+	},
+};
+
+console.log("NODE ENV:", process.env.NODE_ENV);
+
 function App() {
 	useEffect(() => {
-		init(process.env.REACT_APP_INSIGHTS_API_KEY_DEV || "");
+		init(configs.analytics[process.env.NODE_ENV]);
 	}, []);
 
 	return (
