@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { track, parameters } from "insights-js";
 import classNames from "classnames";
 import { useLocalStorage } from "react-use";
 import { useGameState } from "../../providers/GameStateProvider";
@@ -15,6 +16,16 @@ const UserDataScreen: React.FC = () => {
 	>("saveGameState", INITIAL_SAVE_GAME_DATA);
 	const [error, setError] = useState("");
 	const [username, setUsername] = useState("");
+
+	useEffect(() => {
+		track({
+			id: "Create user screen",
+			parameters: {
+				locale: parameters.locale(),
+				refererrer: parameters.referrer(),
+			},
+		});
+	}, []);
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setUsername(e.target.value);

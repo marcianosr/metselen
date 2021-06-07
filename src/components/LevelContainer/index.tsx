@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
+import { track } from "insights-js";
 
 import { SaveGameState, SaveGameStateLevel } from "../../data/saveGameState";
 
@@ -25,9 +26,24 @@ const LevelContainer = () => {
 		useLocalStorage<SaveGameState>("saveGameState");
 
 	const allTablesCompleted = levelState.tables.length === 0;
+	const user = savedGameState?.username || "";
 
 	const saveLevelDataToStorage = () => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
+
+		track({
+			id: `Level scores from ${user}`,
+			parameters: {
+				highScore: {
+					value:
+						levelsFromStorage[currentLevel - 1].score.toString() ||
+						"",
+				},
+				attemptedScore: {
+					value: levelState.score.toString() || "",
+				},
+			},
+		});
 
 		setSavedGameState({
 			...savedGameState,
@@ -75,6 +91,15 @@ const LevelContainer = () => {
 		);
 
 		if (levelAlreadyExists) return;
+
+		track({
+			id: "Started level",
+			parameters: {
+				[`level-${currentLevel}`]: {
+					value: savedGameState?.username || "",
+				},
+			},
+		});
 
 		setSavedGameState({
 			...savedGameState,

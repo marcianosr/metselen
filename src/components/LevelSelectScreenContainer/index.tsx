@@ -1,4 +1,5 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+import { track } from "insights-js";
 import classNames from "classnames";
 import { useLocalStorage } from "react-use";
 
@@ -22,7 +23,19 @@ const LevelSelectScreenContainer: React.FC = () => {
 	const totalLevels = flattenBricksArray<WorldBrick>(worlds[0].levels).length;
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
-	const levelsFromStorage = savedGameState?.worlds?.score;
+	const worldsScore = savedGameState?.worlds?.score;
+	const user = savedGameState?.username || "";
+
+	useEffect(() => {
+		track({
+			id: "Worlds score by user",
+			parameters: {
+				[`user: ${user}`]: {
+					value: worldsScore?.toString() || "",
+				},
+			},
+		});
+	}, []);
 
 	return (
 		<section className={styles.levelSelectContainer}>
@@ -63,7 +76,7 @@ const LevelSelectScreenContainer: React.FC = () => {
 								<BrickRow idx={idx}>
 									{brickRow.map((brick) => {
 										const isUnlocked =
-											(levelsFromStorage || false) <
+											(worldsScore || false) <
 											brick.bricksNeeded;
 
 										const levelIsPlayable =
@@ -80,9 +93,21 @@ const LevelSelectScreenContainer: React.FC = () => {
 													isLastBrick={
 														totalLevels === brick.id
 													}
-													onClick={() =>
-														setModalId(brick.id)
-													}
+													onClick={() => {
+														setModalId(brick.id);
+
+														track({
+															id: "Opened modal from level",
+															parameters: {
+																[`level-${brick.id}`]:
+																	{
+																		value:
+																			savedGameState?.username ||
+																			"",
+																	},
+															},
+														});
+													}}
 												/>
 
 												{levelIsPlayable &&

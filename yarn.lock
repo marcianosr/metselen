@@ -5062,6 +5062,11 @@ dotenv@8.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+
 duplexer@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -6644,6 +6649,11 @@ inline-style-prefixer@^6.0.0:
   integrity sha512-XTHvRUS4ZJNzC1GixJRmOlWSS45fSt+DJoyQC9ytj0WxQfcgofQtDtyKKYxHUqEsWCs+LIWftPF1ie7+i012Fg==
   dependencies:
     css-in-js-utils "^2.0.0"
+
+insights-js@^1.2.10:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/insights-js/-/insights-js-1.2.10.tgz#e109c83c9d5052c8a4b099f7ecde6924aef538e0"
+  integrity sha512-BFk00KuGKK9ri4hAC8CuP8ap1xvYfDtU+J6VU9tBhcMKFPIoLR9LTFkb7H0HLW2ltT232DAb8xIlAmZ1JVT7dA==
 
 internal-ip@^4.3.0:
   version "4.3.0"

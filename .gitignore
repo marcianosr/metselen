@@ -24,3 +24,4 @@ yarn-error.log*
 
 todo
 .eslintcache
+.env

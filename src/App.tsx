@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
+import { init, track, parameters } from "insights-js";
 import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
 import { LevelStateProvider } from "./providers/LevelStateProvider";
 import LevelContainer from "./components/LevelContainer";
@@ -6,9 +8,12 @@ import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer"
 import UserDataScreen from "./components/UserDataScreen";
 import { SaveGameState } from "./data/saveGameState";
 import "./App.css";
-import { useEffect } from "react";
 
 function App() {
+	useEffect(() => {
+		init(process.env.REACT_APP_INSIGHTS_API_KEY_DEV || "");
+	}, []);
+
 	return (
 		<GameStateProvider>
 			<LevelStateProvider>
@@ -27,6 +32,18 @@ const ScreenManager = () => {
 	useEffect(() => {
 		if (user?.username) {
 			updateGameState("screen", { current: "overworld" });
+			track({
+				id: "User registered",
+				parameters: {
+					browser: {
+						value: window.navigator.userAgent,
+					},
+					username: {
+						value: user.username,
+					},
+					screenType: parameters.screenType(),
+				},
+			});
 		}
 	}, [user]);
 
