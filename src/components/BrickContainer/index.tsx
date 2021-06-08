@@ -152,21 +152,19 @@ const BrickContainer: React.FC = () => {
 
 								return (
 									showBrick && (
-										<Fragment key={brick.id}>
-											<Brick
-												id={brick.id}
-												currentBrick={currentBrick}
-												willDrop={brick.willDrop}
-												size={brick.size}
-												color={brick.color}
-												cracked={brick.cracked}
-												text={
-													levelState.answers[
-														brick.id - 1
-													].table
-												}
-											/>
-										</Fragment>
+										<Brick
+											key={brick.id}
+											id={brick.id}
+											currentBrick={currentBrick}
+											willDrop={brick.willDrop}
+											size={brick.size}
+											color={brick.color}
+											cracked={brick.cracked}
+											text={
+												levelState.answers[brick.id - 1]
+													.table
+											}
+										/>
 									)
 								);
 							})}
