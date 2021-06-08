@@ -32,9 +32,10 @@ const PlayAgainModal: React.FC<PlayAgainModalProps> = ({
 		(levelState.score / levelState.bricks.length) * 100
 	);
 	const storedHighscore = levelsFromStorage[currentLevel - 1].score;
-	const storedPercentageCompleted =
+	const storedPercentageCompleted = Math.round(
 		(levelsFromStorage[currentLevel - 1].score / levelState.bricks.length) *
-		100;
+			100
+	);
 
 	useEffect(() => {
 		if (allTablesCompleted || timerFinished) {
