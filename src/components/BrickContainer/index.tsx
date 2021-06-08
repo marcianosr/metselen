@@ -152,7 +152,7 @@ const BrickContainer: React.FC = () => {
 
 								return (
 									showBrick && (
-										<Fragment key={idx}>
+										<Fragment key={brick.id}>
 											<Brick
 												id={brick.id}
 												currentBrick={currentBrick}
