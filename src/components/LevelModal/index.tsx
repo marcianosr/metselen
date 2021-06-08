@@ -25,14 +25,16 @@ const LevelModal: React.FC<LevelModalProps> = ({
 	selectedBrick,
 }) => {
 	const {
-		gameState: { worlds },
+		gameState: { worlds, currentWorld },
 	} = useGameState();
 	const { onPlayLevel } = useLevelState();
-	const worldLevels = flattenBricksArray<WorldBrick>(worlds[0].levels);
+	const worldConfig = flattenBricksArray<WorldBrick>(
+		worlds[currentWorld - 1].levels
+	);
+	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 
 	const hideModal = () => setModalId(null);
 	const startLevel = (id: number) => onPlayLevel(id);
-	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const storedWorldScore = savedGameState?.worlds.score || 0;
 	const storedLevelScore =
 		(savedGameState?.worlds.levels &&
@@ -47,7 +49,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 				<section className={styles.darkerBackground}>
 					<strong className={styles.subTitle}>
 						<span>Tafels van : </span>
-						<span>{worldLevels[selectedBrick.id - 1].text}</span>
+						<span>{worldConfig[selectedBrick.id - 1].text}</span>
 					</strong>
 				</section>
 				<TextCollectionWrapper>
@@ -56,7 +58,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 							<span>Totaal:</span>
 							<span className={styles.statsNumbers}>
 								{storedLevelScore}/
-								{worldLevels[selectedBrick.id - 1].maxBricks}
+								{worldConfig[selectedBrick.id - 1].maxBricks}
 							</span>
 							<div className={brickStyles.iconBrick}></div>
 						</li>
@@ -67,7 +69,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 						<li>
 							<span>Ontgrendeld na:</span>
 							<span className={styles.statsNumbers}>
-								{worldLevels[selectedBrick.id - 1].bricksNeeded}
+								{worldConfig[selectedBrick.id - 1].bricksNeeded}
 							</span>
 							<div className={brickStyles.iconBrick}></div>
 						</li>
@@ -75,7 +77,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
 				</TextCollectionWrapper>
 
 				{storedWorldScore >=
-				worldLevels[selectedBrick.id - 1].bricksNeeded ? (
+				worldConfig[selectedBrick.id - 1].bricksNeeded ? (
 					<>
 						{levelIsUnderConstruction ? (
 							<strong>

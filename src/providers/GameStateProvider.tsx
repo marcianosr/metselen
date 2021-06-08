@@ -21,7 +21,8 @@ type GameStateContextState = {
 
 const INITIAL_GAME_STATE = {
 	worlds,
-	currentLevel: 0,
+	currentWorld: 1,
+	currentLevel: 1,
 	// Refactor screen changes  to it's own provider
 	screen: {
 		current: "enterName",
@@ -38,6 +39,7 @@ export const GameStateContext = createContext<GameStateContextState>({
 export const GameStateProvider: React.FC = ({ children }) => {
 	const [gameState, setGameState] = React.useState<GameState>({
 		worlds,
+		currentWorld: INITIAL_GAME_STATE.currentWorld,
 		currentLevel: INITIAL_GAME_STATE.currentLevel,
 		screen: {
 			current: "enterName",

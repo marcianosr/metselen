@@ -18,9 +18,11 @@ import brickStyles from "../Brick/styles.module.css";
 
 const LevelSelectScreenContainer: React.FC = () => {
 	const {
-		gameState: { worlds },
+		gameState: { worlds, currentWorld },
 	} = useGameState();
-	const totalLevels = flattenBricksArray<WorldBrick>(worlds[0].levels).length;
+	const totalLevels = flattenBricksArray<WorldBrick>(
+		worlds[currentWorld - 1].levels
+	).length;
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const worldsScore = savedGameState?.worlds?.score;
@@ -54,14 +56,14 @@ const LevelSelectScreenContainer: React.FC = () => {
 					<section className={styles.gameInfo}>
 						<small className={styles.worldText}>
 							<span>Wereld</span>
-							<span>{worlds[0].world}</span>
+							<span>{worlds[currentWorld - 1].world}</span>
 						</small>
 						<span className={styles.separator}> - </span>
 						<div className={styles.totalBricksContainer}>
 							<div className={brickStyles.iconBrick}></div>
 							<div className={styles.totalBricksText}>
 								{savedGameState?.worlds.score}/
-								{worlds[0].brickScore.max}
+								{worlds[currentWorld - 1].brickScore.max}
 							</div>
 						</div>
 					</section>
@@ -72,61 +74,69 @@ const LevelSelectScreenContainer: React.FC = () => {
 				<div className={brickContainerStyles.brickRowContainer}>
 					<section className={styles.brickContainer}>
 						<BrickRowContainer>
-							{worlds[0].levels.map((brickRow, idx) => (
-								<BrickRow idx={idx}>
-									{brickRow.map((brick) => {
-										const isUnlocked =
-											(worldsScore || false) <
-											brick.bricksNeeded;
+							{worlds[currentWorld - 1].levels.map(
+								(brickRow, idx) => (
+									<BrickRow idx={idx}>
+										{brickRow.map((brick) => {
+											const isUnlocked =
+												(worldsScore || false) <
+												brick.bricksNeeded;
 
-										const levelIsPlayable =
-											!brick.nonPlayable;
+											const levelIsPlayable =
+												!brick.nonPlayable;
 
-										return (
-											<>
-												<Brick
-													id={brick.id}
-													size={brick.size}
-													color={brick.color}
-													text={brick.text}
-													disabled={isUnlocked}
-													isLastBrick={
-														totalLevels === brick.id
-													}
-													onClick={() => {
-														setModalId(brick.id);
+											return (
+												<>
+													<Brick
+														id={brick.id}
+														size={brick.size}
+														color={brick.color}
+														text={brick.text}
+														disabled={isUnlocked}
+														isLastBrick={
+															totalLevels ===
+															brick.id
+														}
+														onClick={() => {
+															setModalId(
+																brick.id
+															);
 
-														track({
-															id: "Opened modal from level",
-															parameters: {
-																[`level-${brick.id}`]:
-																	{
-																		value:
-																			savedGameState?.username ||
-																			"",
-																	},
-															},
-														});
-													}}
-												/>
+															track({
+																id: "Opened modal from level",
+																parameters: {
+																	[`level-${brick.id}`]:
+																		{
+																			value:
+																				savedGameState?.username ||
+																				"",
+																		},
+																},
+															});
+														}}
+													/>
 
-												{levelIsPlayable &&
-													modalId === brick.id && (
-														<LevelModal
-															modalId={modalId}
-															setModalId={
-																setModalId
-															}
-															selectedBrick={
-																brick
-															}
-														/>
-													)}
-											</>
-										);
-									})}
-								</BrickRow>
-							))}
+													{levelIsPlayable &&
+														modalId ===
+															brick.id && (
+															<LevelModal
+																modalId={
+																	modalId
+																}
+																setModalId={
+																	setModalId
+																}
+																selectedBrick={
+																	brick
+																}
+															/>
+														)}
+												</>
+											);
+										})}
+									</BrickRow>
+								)
+							)}
 						</BrickRowContainer>
 					</section>
 				</div>
