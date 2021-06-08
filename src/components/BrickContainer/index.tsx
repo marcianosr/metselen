@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import { neighbours, toBrickIds, flattenBricksArray } from "../../utils";
 import { BrickRowContainer, BrickRow } from "../BrickRowContainer";
@@ -70,6 +70,7 @@ const BrickContainer: React.FC = () => {
 				)
 			);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [answers.length]);
 
 	useEffect(() => {
@@ -142,7 +143,7 @@ const BrickContainer: React.FC = () => {
 		<section className={styles.brickContainer}>
 			<BrickRowContainer>
 				{bricks.map((brickRow: BrickType[], idx) => (
-					<>
+					<Fragment key={idx}>
 						<BrickRow idx={idx}>
 							{brickRow.map((brick: BrickType) => {
 								const showBrick =
@@ -151,18 +152,21 @@ const BrickContainer: React.FC = () => {
 
 								return (
 									showBrick && (
-										<Brick
-											id={brick.id}
-											currentBrick={currentBrick}
-											willDrop={brick.willDrop}
-											size={brick.size}
-											color={brick.color}
-											cracked={brick.cracked}
-											text={
-												levelState.answers[brick.id - 1]
-													.table
-											}
-										/>
+										<Fragment key={idx}>
+											<Brick
+												id={brick.id}
+												currentBrick={currentBrick}
+												willDrop={brick.willDrop}
+												size={brick.size}
+												color={brick.color}
+												cracked={brick.cracked}
+												text={
+													levelState.answers[
+														brick.id - 1
+													].table
+												}
+											/>
+										</Fragment>
 									)
 								);
 							})}
@@ -173,7 +177,7 @@ const BrickContainer: React.FC = () => {
 									slicedBricks[idx].length === 0,
 							})}
 						></div>
-					</>
+					</Fragment>
 				))}
 			</BrickRowContainer>
 		</section>

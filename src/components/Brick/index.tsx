@@ -1,4 +1,4 @@
-import React, { CSSProperties, Dispatch, SetStateAction } from "react";
+import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType, RandomColorType } from "../../types/Bricks";
 import { LightCrack, DarkCrack } from "./Cracks";

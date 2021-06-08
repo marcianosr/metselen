@@ -4,7 +4,6 @@ import { flattenBricksArray } from "../utils";
 import { levels } from "../data/levelsConfig";
 import { BrickType } from "../types/Bricks";
 import { useGameState } from "./GameStateProvider";
-import { WorldBrick } from "../data/worldsConfig";
 
 // T represents a key of the LevelState Type
 // LevelState[Action] resolves to a type value.

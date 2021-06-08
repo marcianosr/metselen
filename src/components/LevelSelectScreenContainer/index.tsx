@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { Fragment, SetStateAction, useEffect, useState } from "react";
 import { track } from "insights-js";
 import classNames from "classnames";
 import { useLocalStorage } from "react-use";
@@ -37,6 +37,7 @@ const LevelSelectScreenContainer: React.FC = () => {
 				},
 			},
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -76,65 +77,70 @@ const LevelSelectScreenContainer: React.FC = () => {
 						<BrickRowContainer>
 							{worlds[currentWorld - 1].levels.map(
 								(brickRow, idx) => (
-									<BrickRow idx={idx}>
-										{brickRow.map((brick) => {
-											const isUnlocked =
-												(worldsScore || false) <
-												brick.bricksNeeded;
+									<Fragment key={idx}>
+										<BrickRow idx={idx}>
+											{brickRow.map((brick) => {
+												const isUnlocked =
+													(worldsScore || false) <
+													brick.bricksNeeded;
 
-											const levelIsPlayable =
-												!brick.nonPlayable;
+												const levelIsPlayable =
+													!brick.nonPlayable;
 
-											return (
-												<>
-													<Brick
-														id={brick.id}
-														size={brick.size}
-														color={brick.color}
-														text={brick.text}
-														disabled={isUnlocked}
-														isLastBrick={
-															totalLevels ===
-															brick.id
-														}
-														onClick={() => {
-															setModalId(
+												return (
+													<Fragment key={brick.id}>
+														<Brick
+															id={brick.id}
+															size={brick.size}
+															color={brick.color}
+															text={brick.text}
+															disabled={
+																isUnlocked
+															}
+															isLastBrick={
+																totalLevels ===
 																brick.id
-															);
+															}
+															onClick={() => {
+																setModalId(
+																	brick.id
+																);
 
-															track({
-																id: "Opened modal from level",
-																parameters: {
-																	[`level-${brick.id}`]:
+																track({
+																	id: "Opened modal from level",
+																	parameters:
 																		{
-																			value:
-																				savedGameState?.username ||
-																				"",
+																			[`level-${brick.id}`]:
+																				{
+																					value:
+																						savedGameState?.username ||
+																						"",
+																				},
 																		},
-																},
-															});
-														}}
-													/>
+																});
+															}}
+														/>
 
-													{levelIsPlayable &&
-														modalId ===
-															brick.id && (
-															<LevelModal
-																modalId={
-																	modalId
-																}
-																setModalId={
-																	setModalId
-																}
-																selectedBrick={
-																	brick
-																}
-															/>
-														)}
-												</>
-											);
-										})}
-									</BrickRow>
+														{levelIsPlayable &&
+															modalId ===
+																brick.id && (
+																<LevelModal
+																	modalId={
+																		modalId
+																	}
+																	setModalId={
+																		setModalId
+																	}
+																	selectedBrick={
+																		brick
+																	}
+																/>
+															)}
+													</Fragment>
+												);
+											})}
+										</BrickRow>
+									</Fragment>
 								)
 							)}
 						</BrickRowContainer>

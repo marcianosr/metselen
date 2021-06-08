@@ -2,18 +2,15 @@ import React from "react";
 import { WorldBrick, worlds } from "../../data/worldsConfig";
 import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
-import { BrickType } from "../../types/Bricks";
 import { flattenBricksArray } from "../../utils";
 import styles from "./styles.module.css";
 
 type PlayAgainModalHeaderProps = {
-	storedHighscore: number;
 	timerFinished: boolean;
 	allTablesCompleted: boolean;
 };
 
 const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
-	storedHighscore,
 	allTablesCompleted,
 	timerFinished,
 }) => {

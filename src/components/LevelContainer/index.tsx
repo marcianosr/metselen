@@ -81,6 +81,7 @@ const LevelContainer = () => {
 			stopTimer();
 			saveLevelDataToStorage();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allTablesCompleted, timerFinished]);
 
 	useEffect(() => {
@@ -109,6 +110,7 @@ const LevelContainer = () => {
 				score: updateWorldScore(levelsFromStorage),
 			},
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

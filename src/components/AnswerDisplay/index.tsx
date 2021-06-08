@@ -1,9 +1,7 @@
 import React, { ChangeEvent, useEffect, useCallback } from "react";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import { LevelState } from "../../types/LevelState";
-import { Tables } from "../../types/Tables";
 import styles from "./styles.module.css";
-import textStyles from "../../typography.module.css";
 import classNames from "classnames";
 
 const increaseScore = (amount: number, score: number) => amount + score;

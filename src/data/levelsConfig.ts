@@ -1,5 +1,5 @@
 import { BrickType } from "../types/Bricks";
-import { Tables } from "../types/Tables";
+// import { Tables } from "../types/Tables";
 import { flattenBricksArray } from "../utils";
 import { getRandomTable, makeTables, TableResult } from "./tables";
 
@@ -317,7 +317,6 @@ const getTablesForLevel = (
 			)
 		);
 	}
-	console.log(list);
 	return list;
 };
 

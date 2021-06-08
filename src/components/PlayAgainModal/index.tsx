@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { useLocalStorage } from "react-use";
 import { SaveGameState } from "../../data/saveGameState";
 import { useGameState } from "../../providers/GameStateProvider";
@@ -41,13 +40,13 @@ const PlayAgainModal: React.FC<PlayAgainModalProps> = ({
 		if (allTablesCompleted || timerFinished) {
 			stopTimer();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allTablesCompleted, timerFinished]);
 
 	return (
 		<Modal>
 			<section className={styles.modalContainer}>
 				<PlayAgainModalHeader
-					storedHighscore={storedHighscore}
 					timerFinished={timerFinished}
 					allTablesCompleted={allTablesCompleted}
 				/>
