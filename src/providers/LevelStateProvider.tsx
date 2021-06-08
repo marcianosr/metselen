@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { LevelState } from "../types/LevelState";
 import { flattenBricksArray } from "../utils";
-import { levels } from "../data/levelMappings";
+import { levels } from "../data/levelsConfig";
 import { BrickType } from "../types/Bricks";
 import { useGameState } from "./GameStateProvider";
 import { WorldBrick } from "../data/worlds";

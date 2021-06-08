@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocalStorage } from "react-use";
-import { levels } from "../../data/levelMappings";
+import { levels } from "../../data/levelsConfig";
 
 import { useLevelState } from "../../providers/LevelStateProvider";
 import { WorldBrick } from "../../data/worlds";

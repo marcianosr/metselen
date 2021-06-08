@@ -1,6 +1,6 @@
 import { getRandomBrickColor } from "../components/BrickContainer";
 import { BrickType, RandomColorType } from "../types/Bricks";
-import { levels } from "../data/levelMappings";
+import { levels } from "../data/levelsConfig";
 import { flattenBricksArray } from "../utils";
 
 export type World = {
@@ -54,7 +54,7 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "2",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
+					maxBricks: flattenBricksArray<BrickType>(levels[1].layout)
 						.length,
 					...levels[1],
 				},
@@ -65,7 +65,9 @@ export const worlds: World[] = [
 					bricksNeeded: 5,
 					text: "1 & 2",
 					color: getRandomBrickColor(),
-					maxBricks: null,
+					maxBricks: flattenBricksArray<BrickType>(levels[2].layout)
+						.length,
+					...levels[2],
 				},
 				{
 					id: 4,

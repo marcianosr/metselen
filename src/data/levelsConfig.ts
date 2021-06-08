@@ -9,12 +9,11 @@ type Level = {
 	layout: BrickType[][];
 	time: number;
 	ranges: {
-		multiplication: number[],
-		tables: number[]
-	}
+		multiplication: number[];
+		tables: number[];
+	};
 	// tables: Tables[]
 };
-
 
 // Refactor later: Merge these properties of levels with the levels arr in worlds object
 
@@ -24,7 +23,7 @@ const LEVEL_ONE: Level = {
 	time: 100,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [1]
+		tables: [1],
 	},
 	layout: [
 		[
@@ -111,7 +110,7 @@ const LEVEL_TWO: Level = {
 	time: 100,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [2]
+		tables: [2],
 	},
 	layout: [
 		[
@@ -205,7 +204,7 @@ const LEVEL_THREE: Level = {
 	time: 100,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [1, 2]
+		tables: [1, 2],
 	},
 	layout: [
 		[
@@ -298,17 +297,28 @@ export const levelConfig: Level[] = [LEVEL_ONE, LEVEL_TWO, LEVEL_THREE];
 export const withGeneratedTables = (levels: Level[]) =>
 	levels.map((level) => ({
 		...level,
-		tables: getTablesForLevel(flattenBricksArray(level.layout).length, level.ranges),
+		tables: getTablesForLevel(
+			flattenBricksArray(level.layout).length,
+			level.ranges
+		),
 	}));
 
-const getTablesForLevel = (amountOfTables: number, ranges: { multiplication: number[], tables: number[]}): TableResult[] => {
-	const list = []; 
+const getTablesForLevel = (
+	amountOfTables: number,
+	ranges: { multiplication: number[]; tables: number[] }
+): TableResult[] => {
+	const list = [];
 	for (let idx = 0; idx < amountOfTables; idx++) {
-		list.push(getRandomTable(makeTables(ranges.tables, ranges.multiplication), ranges.tables, ranges.multiplication))
+		list.push(
+			getRandomTable(
+				makeTables(ranges.tables, ranges.multiplication),
+				ranges.tables,
+				ranges.multiplication
+			)
+		);
 	}
-	console.log(list)
+	console.log(list);
 	return list;
 };
 
-export const levels = withGeneratedTables(levelConfig)
- 
+export const levels = withGeneratedTables(levelConfig);
