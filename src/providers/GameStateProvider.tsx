@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { GameState } from "../types/GameState";
-import { worlds } from "../data/worlds";
+import { worlds } from "../data/worldsConfig";
 
 // T represents a key of the gameState Type
 // gameState[Action] resolves to a type value.

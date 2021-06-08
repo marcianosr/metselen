@@ -1,6 +1,6 @@
 import { getRandomBrickColor } from "../components/BrickContainer";
 import { BrickType, RandomColorType } from "../types/Bricks";
-import { levels } from "../data/levelsConfig";
+import { levels } from "./levelsConfig";
 import { flattenBricksArray } from "../utils";
 
 export type World = {

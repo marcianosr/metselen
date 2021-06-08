@@ -8,7 +8,7 @@ import { BrickRow, BrickRowContainer } from "../BrickRowContainer";
 import { useGameState } from "../../providers/GameStateProvider";
 import { flattenBricksArray } from "../../utils";
 import LevelModal from "../LevelModal";
-import { WorldBrick } from "../../data/worlds";
+import { WorldBrick } from "../../data/worldsConfig";
 import { SaveGameState } from "../../data/saveGameState";
 
 import styles from "./styles.module.css";

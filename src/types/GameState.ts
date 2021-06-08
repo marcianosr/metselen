@@ -1,12 +1,12 @@
-import { World } from "../data/worlds";
+import { World } from "../data/worldsConfig";
 
 export type GameState = {
 	worlds: World[];
 	currentWorld: number;
 	currentLevel: number;
 	screen: {
-		current: string
-	}
+		current: string;
+	};
 };
 
 export type GameStateProps = {

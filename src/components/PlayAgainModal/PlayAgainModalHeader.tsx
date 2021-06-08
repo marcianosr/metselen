@@ -1,5 +1,5 @@
 import React from "react";
-import { WorldBrick, worlds } from "../../data/worlds";
+import { WorldBrick, worlds } from "../../data/worldsConfig";
 import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
 import { BrickType } from "../../types/Bricks";

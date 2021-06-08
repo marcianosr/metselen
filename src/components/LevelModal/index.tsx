@@ -3,7 +3,7 @@ import { useLocalStorage } from "react-use";
 import { levels } from "../../data/levelsConfig";
 
 import { useLevelState } from "../../providers/LevelStateProvider";
-import { WorldBrick } from "../../data/worlds";
+import { WorldBrick } from "../../data/worldsConfig";
 import { SaveGameState } from "../../data/saveGameState";
 import { useGameState } from "../../providers/GameStateProvider";
 import { flattenBricksArray } from "../../utils";
