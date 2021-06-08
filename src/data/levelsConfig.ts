@@ -201,7 +201,7 @@ const LEVEL_TWO: Level = {
 const LEVEL_THREE: Level = {
 	name: "",
 	level: 3,
-	time: 100,
+	time: 40,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [1, 2],

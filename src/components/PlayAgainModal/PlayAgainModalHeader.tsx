@@ -1,6 +1,9 @@
 import React from "react";
+import { WorldBrick, worlds } from "../../data/worlds";
 import { useGameState } from "../../providers/GameStateProvider";
 import { useLevelState } from "../../providers/LevelStateProvider";
+import { BrickType } from "../../types/Bricks";
+import { flattenBricksArray } from "../../utils";
 import styles from "./styles.module.css";
 
 type PlayAgainModalHeaderProps = {
@@ -16,8 +19,12 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 }) => {
 	const { levelState } = useLevelState();
 	const {
-		gameState: { currentLevel },
+		gameState: { currentLevel, currentWorld },
 	} = useGameState();
+	const worldLevelConfig = flattenBricksArray<WorldBrick>(
+		worlds[currentWorld - 1].levels
+	);
+	const maxBricksPerLevel = worldLevelConfig[currentLevel - 1].maxBricks;
 
 	return (
 		<header>
@@ -30,7 +37,7 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 				))}
 			{!timerFinished &&
 				allTablesCompleted &&
-				storedHighscore !== levelState.score && (
+				maxBricksPerLevel !== levelState.score && (
 					<>
 						<h1 className={styles.title}>Level afgelopen!</h1>
 						<span className={styles.text}>
@@ -41,7 +48,7 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 
 			{!timerFinished &&
 				allTablesCompleted &&
-				storedHighscore === levelState.score && (
+				maxBricksPerLevel === levelState.score && (
 					<h1 className={styles.title}>
 						Wow super metselaar! Level {currentLevel} is
 						uitgespeeld!
