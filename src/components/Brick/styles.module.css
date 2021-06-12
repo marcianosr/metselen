@@ -14,7 +14,7 @@
 	);
 }
 
-.brickContainer:last-child:not(.lastBrick) .brick {
+.brickContainer:last-child .brick {
 	border-left: var(--cementWidth) solid var(--defaultCementColor);
 }
 
@@ -86,7 +86,8 @@
 	/* border-left: 0; */
 	border-right: var(--cementWidth) dashed var(--defaultCementColor);
 	border-top: var(--cementWidth) dashed var(--defaultCementColor);
-	border-bottom: var(--cementWidth) dashed var(--defaultCementColor);
+	border-bottom: 0;
+	/* border-bottom: var(--cementWidth) dashed var(--defaultCementColor); */
 	/* border-left: var(--cementWidth) dashed var(--defaultCementColor); */
 }
 
