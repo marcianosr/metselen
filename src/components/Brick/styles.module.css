@@ -24,6 +24,10 @@
 	position: relative;
 }
 
+.brickIsClickable {
+	cursor: pointer;
+}
+
 .brickShadow {
 	position: absolute;
 	bottom: 0;

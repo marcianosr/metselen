@@ -68,6 +68,7 @@ const Brick: React.FC<BrickProps> = ({
 				[styles.currentBrick]: currentBrick?.id === id,
 				[styles.disabledBrickInner]: disabled,
 				[styles.lastBrickInner]: isLastBrick,
+				[styles.brickIsClickable]: onClick,
 			})}
 		>
 			{!disabled && !isLastBrick && (
