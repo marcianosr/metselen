@@ -28,7 +28,8 @@ console.log("NODE ENV:", process.env.NODE_ENV);
 
 function App() {
 	useEffect(() => {
-		init(configs.analytics[process.env.NODE_ENV]);
+		if (process.env.NODE_ENV === "production")
+			init(configs.analytics[process.env.NODE_ENV]);
 	}, []);
 
 	return (
