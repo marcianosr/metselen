@@ -1,0 +1,12 @@
+.ground {
+	height: 10px;
+	background-color: #54a415;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.grassContainer {
+	position: absolute;
+	top: -25px;
+}

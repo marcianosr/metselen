@@ -1,7 +1,6 @@
 .levelSelectContainer {
 	display: grid;
-	grid-template-rows: 1fr 1fr;
-	border-bottom: 10px solid crimson;
+	grid-template-rows: 1fr auto;
 	height: 100%;
 }
 

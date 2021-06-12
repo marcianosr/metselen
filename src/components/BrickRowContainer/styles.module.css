@@ -10,4 +10,5 @@
 	flex-wrap: wrap;
 	flex-direction: row-reverse;
 	flex: 1 1 100%;
+	justify-content: center;
 }
