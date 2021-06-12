@@ -20,7 +20,7 @@ type Level = {
 const LEVEL_ONE: Level = {
 	name: "",
 	level: 1,
-	time: 100,
+	time: 30,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [1],
@@ -107,7 +107,7 @@ const LEVEL_ONE: Level = {
 const LEVEL_TWO: Level = {
 	name: "",
 	level: 2,
-	time: 100,
+	time: 30,
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [2],
