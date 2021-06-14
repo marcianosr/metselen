@@ -38,7 +38,7 @@ export const worlds: World[] = [
 			[
 				{
 					id: 1,
-					size: "default",
+					size: "medium",
 					isUnlocked: true,
 					bricksNeeded: 0,
 					text: "1",
@@ -49,7 +49,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 2,
-					size: "default",
+					size: "medium",
 					isUnlocked: true,
 					bricksNeeded: 0,
 					text: "2",
@@ -60,7 +60,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 3,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 5,
 					text: "1 & 2",
@@ -71,7 +71,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 4,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 12,
 					text: "3",
@@ -80,7 +80,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 5,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 20,
 					text: "1 - 3",
@@ -91,7 +91,7 @@ export const worlds: World[] = [
 			[
 				{
 					id: 6,
-					size: "small",
+					size: "verySmall",
 					isUnlocked: false,
 					bricksNeeded: 32,
 					text: "4",
@@ -100,7 +100,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 7,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 43,
 					text: "2 - 4",
@@ -109,7 +109,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 8,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 57,
 					text: "5",
@@ -118,7 +118,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 9,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 70,
 					text: "1 - 5",
@@ -127,7 +127,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 10,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 72,
 					text: "6",
@@ -136,7 +136,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 11,
-					size: "small",
+					size: "verySmall",
 					isUnlocked: false,
 					bricksNeeded: 83,
 					text: "7",
@@ -147,7 +147,7 @@ export const worlds: World[] = [
 			[
 				{
 					id: 12,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 100,
 					text: "4-7",
@@ -156,7 +156,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 13,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 113,
 					text: "8",
@@ -165,7 +165,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 14,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 130,
 					text: "1 - 8",
@@ -174,7 +174,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 15,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 150,
 					text: "9",
@@ -183,7 +183,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 16,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 175,
 					text: "4 - 9",
@@ -194,7 +194,7 @@ export const worlds: World[] = [
 			[
 				{
 					id: 17,
-					size: "small",
+					size: "verySmall",
 					isUnlocked: true,
 					bricksNeeded: 0,
 					text: "",
@@ -204,7 +204,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 18,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 201,
 					text: "10",
@@ -213,7 +213,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 19,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 232,
 					text: "5 - 10",
@@ -222,7 +222,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 20,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 265,
 					text: "3 - 10",
@@ -231,7 +231,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 21,
-					size: "default",
+					size: "medium",
 					isUnlocked: false,
 					bricksNeeded: 285,
 					text: "2 - 9",
@@ -240,7 +240,7 @@ export const worlds: World[] = [
 				},
 				{
 					id: 22,
-					size: "small",
+					size: "verySmall",
 					isUnlocked: true,
 					bricksNeeded: 0,
 					text: "",
@@ -252,7 +252,7 @@ export const worlds: World[] = [
 			[
 				{
 					id: 23,
-					size: "large",
+					size: "veryLarge",
 					isUnlocked: true,
 					bricksNeeded: 300,
 					text: "1 - 10",

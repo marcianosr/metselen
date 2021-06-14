@@ -36,15 +36,31 @@
 	height: 8px;
 }
 
+
+
+.verySmallBrick {
+	composes: brickSize from "../../composition.css";
+	width: var(--brickVerySmall);
+}
+
 .smallBrick {
 	composes: brickSize from "../../composition.css";
+	width: var(--brickSmall);
+}
 
-	width: var(--brickSizeSmall);
+.mediumBrick {
+	composes: brickSize from "../../composition.css";
+	width: var(--brickMedium);
 }
 
 .largeBrick {
 	composes: brickSize from "../../composition.css";
-	width: calc(var(--brickSize) * 3);
+	width: var(--brickLarge);
+}
+
+.veryLargeBrick {
+	composes: brickSize from "../../composition.css";
+	width: var(--brickVeryLarge);
 }
 
 .lastBrick {

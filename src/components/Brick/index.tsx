@@ -42,7 +42,11 @@ const Brick: React.FC<BrickProps> = ({
 			styles.brickContainer,
 			{
 				[styles.dropBrick]: willDrop,
+				[styles.verySmallBrick]: size === "verySmall",
 				[styles.smallBrick]: size === "small",
+				[styles.mediumBrick]: size === "medium",
+				[styles.largeBrick]: size === "large",
+				[styles.veryLargeBrick]: size === "veryLarge",
 				[styles.hardShakeBrick]:
 					currentBrick?.hardShake?.length &&
 					currentBrick?.hardShake.includes(id),
@@ -50,7 +54,6 @@ const Brick: React.FC<BrickProps> = ({
 				// [styles.dropBrick]: !willDrop,
 
 				[styles.disabledBrick]: disabled,
-				[styles.largeBrick]: size === "large",
 				[styles.lastBrick]: isLastBrick,
 			}
 		)}

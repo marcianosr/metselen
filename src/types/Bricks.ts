@@ -1,6 +1,6 @@
 export type BrickType = {
 	id: number;
-	size: "default" | "small" | "large";
+	size: "verySmall" | "small" | "medium" | "large" | "veryLarge";
 	willDrop?: boolean;
 	hardShake?: number[];
 	color?: RandomColorType;

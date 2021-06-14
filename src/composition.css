@@ -3,6 +3,7 @@
   Default styles which can be overridden in component styles with CSS vars. 
 */
 
+
 .brickWallComposition {
 	--defaultContainerWidth: 700px;
 
@@ -15,7 +16,13 @@
 }
 
 .brickSize {
-	--brickWidth: 20%;
+	--brickVerySmall: 70px; 
+	--brickSmall: 105px; 
+	--brickMedium: 140px; 
+	--brickLarge: 210px; 
+	--brickVeryLarge: 350px; 
+
+	--brickWidth: var(--brickMedium);
 	--brickHeight: 50px;
 	--brickGap: 4px;
 	--brickSize: calc(var(--brickWidth) - var(--brickGap));

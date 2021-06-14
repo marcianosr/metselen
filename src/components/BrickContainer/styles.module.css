@@ -44,12 +44,12 @@
 .brickCementSide:last-child {
 	border-left: var(--cementWidth) solid var(--defaultCementColor);
 	/* Make sure the bricks in the end will fit (without cement) */
-	--brickSize: var(--brickWidth);
+	/* --brickSize: var(--brickWidth); */
 }
 
 .brickCementSide:last-child.smallBrick {
 	/* Make sure the bricks in the end will fit (without cement)  */
-	--brickSizeSmall: calc(var(--brickWidth) / 2);
+	/* --brickSizeSmall: calc(var(--brickWidth) / 2); */
 }
 
 @keyframes animateCement {
