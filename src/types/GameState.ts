@@ -7,6 +7,7 @@ export type GameState = {
 	screen: {
 		current: string;
 	};
+	mode: string;
 };
 
 export type GameStateProps = {

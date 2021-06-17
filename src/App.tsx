@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Children, useEffect } from "react";
 import { useLocalStorage } from "react-use";
 import { init, track, parameters } from "insights-js";
 import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
@@ -68,11 +68,44 @@ const ScreenManager = () => {
 
 	return (
 		<>
-			{gameState.screen.current === "enterName" && <UserDataScreen />}
-			{gameState.screen.current === "overworld" && (
-				<LevelSelectScreenContainer />
+			<ModeManager />
+			{gameState.mode === "game" && (
+				<>
+					{gameState.screen.current === "enterName" && (
+						<UserDataScreen />
+					)}
+					{gameState.screen.current === "overworld" && (
+						<LevelSelectScreenContainer />
+					)}
+					{gameState.screen.current === "level" && <LevelContainer />}
+				</>
 			)}
-			{gameState.screen.current === "level" && <LevelContainer />}
+
+			{gameState.mode === "editor" && (
+				<section>
+					<h1>{gameState.mode}</h1>
+				</section>
+			)}
+		</>
+	);
+};
+
+const ModeManager: React.FC = ({ children }) => {
+	const { gameState, updateGameState } = useGameState();
+
+	return (
+		<>
+			<button
+				onClick={() =>
+					gameState.mode === "game"
+						? updateGameState("mode", "editor")
+						: updateGameState("mode", "game")
+				}
+			>
+				Switch to {gameState.mode}
+			</button>
+
+			{children}
 		</>
 	);
 };
