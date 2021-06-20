@@ -20,8 +20,28 @@
 
 .brick {
 	composes: brickComposition;
-	composes: brickSize from "../../composition.css";
+	/* composes: brickSize from "../../composition.css"; */
 	position: relative;
+}
+
+.veryLarge {
+	grid-column: span 4;
+}
+
+.large {
+	grid-column: span 3;
+}
+
+.medium {
+	grid-column: span 2;
+}
+
+.small {
+	grid-column: span 1.5;
+}
+
+.verySmall {
+	grid-column: span 1;
 }
 
 .brickIsClickable {
@@ -34,33 +54,6 @@
 	background-color: var(--brickShadowColor);
 	width: 100%;
 	height: 8px;
-}
-
-
-
-.verySmallBrick {
-	composes: brickSize from "../../composition.css";
-	width: var(--brickVerySmall);
-}
-
-.smallBrick {
-	composes: brickSize from "../../composition.css";
-	width: var(--brickSmall);
-}
-
-.mediumBrick {
-	composes: brickSize from "../../composition.css";
-	width: var(--brickMedium);
-}
-
-.largeBrick {
-	composes: brickSize from "../../composition.css";
-	width: var(--brickLarge);
-}
-
-.veryLargeBrick {
-	composes: brickSize from "../../composition.css";
-	width: var(--brickVeryLarge);
 }
 
 .lastBrick {

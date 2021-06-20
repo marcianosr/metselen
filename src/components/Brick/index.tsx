@@ -2,7 +2,6 @@ import React, { CSSProperties } from "react";
 import classnames from "classnames";
 import { BrickType, RandomColorType } from "../../types/Bricks";
 import { LightCrack, DarkCrack } from "./Cracks";
-import brickContainerStyles from "../BrickContainer/styles.module.css";
 import styles from "./styles.module.css";
 
 type BrickProps = {
@@ -37,26 +36,17 @@ const Brick: React.FC<BrickProps> = ({
 	<div
 		key={id}
 		onClick={onClick}
-		className={classnames(
-			brickContainerStyles.brickCementSide,
-			styles.brickContainer,
-			{
-				[styles.dropBrick]: willDrop,
-				[styles.verySmallBrick]: size === "verySmall",
-				[styles.smallBrick]: size === "small",
-				[styles.mediumBrick]: size === "medium",
-				[styles.largeBrick]: size === "large",
-				[styles.veryLargeBrick]: size === "veryLarge",
-				[styles.hardShakeBrick]:
-					currentBrick?.hardShake?.length &&
-					currentBrick?.hardShake.includes(id),
+		className={classnames(styles.brickContainer, [styles[`${size}`]], {
+			[styles.dropBrick]: willDrop,
+			[styles.hardShakeBrick]:
+				currentBrick?.hardShake?.length &&
+				currentBrick?.hardShake.includes(id),
 
-				// [styles.dropBrick]: !willDrop,
+			// [styles.dropBrick]: !willDrop,
 
-				[styles.disabledBrick]: disabled,
-				[styles.lastBrick]: isLastBrick,
-			}
-		)}
+			[styles.disabledBrick]: disabled,
+			[styles.lastBrick]: isLastBrick,
+		})}
 	>
 		<div
 			style={

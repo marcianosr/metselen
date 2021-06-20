@@ -8,36 +8,3 @@
 	align-content: flex-end;
 	height: 100%;
 }
-
-.brickRow {
-	display: grid;
-	grid-template-columns: repeat(var(--columns), 70px);
-	direction: rtl;
-	gap: 2px;
-	order: var(--rowOrder);
-}
-
-.brick {
-	background: red;
-	height: 50px;
-}
-
-.veryLarge {
-	grid-column: span 4;
-}
-
-.large {
-	grid-column: span 3;
-}
-
-.medium {
-	grid-column: span 2;
-}
-
-.small {
-	grid-column: span 1.5;
-}
-
-.verySmall {
-	grid-column: span 1;
-}

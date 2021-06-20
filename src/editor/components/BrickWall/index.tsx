@@ -1,9 +1,9 @@
-import React, { useState, CSSProperties } from "react";
+import { CSSProperties } from "react";
 
 import Brick from "../../../components/Brick";
 import styles from "./styles.module.css";
-import classNames from "classnames";
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
+import { BrickRow } from "../../../components/BrickRowContainer";
 
 // Getting a test layoout for now.
 // This will be a file based on the edits of a user
@@ -12,7 +12,6 @@ import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
 
 export interface CSSVars extends CSSProperties {
 	"--columns": number;
-	"--rowOrder": number;
 }
 
 // Setup a basic grid of 5 default bricks = 10 small bricks
@@ -30,30 +29,25 @@ const BrickWall = () => {
 				style={columnSettingStyles}
 				className={styles.brickWallContainer}
 			>
-				{levelConfigState.layout.map((row: any) => {
-					const rowOrderStyles = {
-						"--rowOrder": row.order,
-					} as CSSVars;
-
+				{levelConfigState.layout.map((row: any, idx: number) => {
 					return (
 						<>
-							<div
-								style={rowOrderStyles}
-								className={styles.brickRow}
-							>
-								{row.bricks.map((brick: any) => {
+							<BrickRow idx={idx} row={row.order}>
+								{row.bricks.map((brick: any, idx: number) => {
 									return (
-										<div
-											className={classNames(
-												styles.brick,
-												[styles[`${brick.size}`]]
-											)}
-										>
-											{brick.id}
-										</div>
+										<Brick
+											key={idx}
+											id={idx}
+											size={brick.size}
+											text={brick.size}
+											color={{
+												key: "1",
+												values: ["#ff0000", "#ff00ff"],
+											}}
+										/>
 									);
 								})}
-							</div>
+							</BrickRow>
 						</>
 					);
 				})}
