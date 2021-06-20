@@ -27,7 +27,7 @@ const INITIAL_GAME_STATE = {
 	screen: {
 		current: "enterName",
 	},
-	mode: "game" 
+	mode: "editor",
 };
 
 export const GameStateContext = createContext<GameStateContextState>({
@@ -45,7 +45,7 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		screen: {
 			current: "enterName",
 		},
-		mode: "game"
+		mode: "editor",
 	});
 
 	const updateGameState: GameStateUpdater = (key, value) => {
