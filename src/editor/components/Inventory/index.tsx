@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import { BrickType, pinkSchemeColors } from "../../../types/Bricks";
 import Brick from "../../../components/Brick";
+import classNames from "classnames";
 
 const brickTypes: BrickType[] = [
 	{
@@ -45,9 +46,16 @@ const brickTypes: BrickType[] = [
 		},
 	},
 ];
-const Inventory = () => (
-	<aside className={styles.inventory}>
-		<h1>Brick types</h1>
+
+type InventoryProps = { direction?: string };
+
+const Inventory: React.FC<InventoryProps> = ({
+	direction = "vertical",
+	children,
+}) => (
+	<aside className={classNames(styles.inventory, [styles[direction]])}>
+		{children}
+		{/* <h1>Brick types</h1>
 		<ul className={styles.bricksContainer}>
 			{brickTypes.map((brick: BrickType) => (
 				<li>
@@ -60,7 +68,7 @@ const Inventory = () => (
 					<span>{brick.size}</span>
 				</li>
 			))}
-		</ul>
+		</ul> */}
 	</aside>
 );
 

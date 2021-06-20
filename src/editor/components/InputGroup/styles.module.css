@@ -1,0 +1,4 @@
+.inputContainer {
+	display: grid;
+	grid-template-rows: repeat(auto-fit, minmax(25px, 1fr));
+}

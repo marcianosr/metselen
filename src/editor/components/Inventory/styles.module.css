@@ -2,14 +2,23 @@
 	background: coral;
 	position: absolute;
 	left: 0;
-	width: 100%;
-	height: 100px;
 	padding: 1rem;
 }
 
-.bricksContainer {
+/* .bricksContainer {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
 	height: 100%;
+} */
+
+.vertical {
+	height: 300px;
+	top: 0;
+}
+
+.horizontal {
+	width: 100%;
+	height: 100px;
+	top: 0;
 }
