@@ -1,17 +1,17 @@
-import React from "react";
-import { useGameState } from "../../../providers/GameStateProvider";
-import BrickWall from "../BrickWall";
-import Inventory from "../Inventory";
+import { LevelConfigStateProvider } from "../../../providers/LevelConfigProvider";
+import Editor from "../Editor";
+
 import styles from "./styles.module.css";
 
 const EditorScreen = () => {
 	return (
-		<section className={styles.editorScreen}>
-			<section className={styles.editorContainer}>
-				<Inventory />
-				<BrickWall />
+		<LevelConfigStateProvider>
+			<section className={styles.editorScreen}>
+				<section className={styles.editorContainer}>
+					<Editor />
+				</section>
 			</section>
-		</section>
+		</LevelConfigStateProvider>
 	);
 };
 
