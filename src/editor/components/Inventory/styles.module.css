@@ -5,20 +5,20 @@
 	padding: 1rem;
 }
 
-/* .bricksContainer {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-	height: 100%;
-} */
-
 .vertical {
 	height: 300px;
-	top: 0;
+	top: calc(50% - 150px);
 }
 
 .horizontal {
 	width: 100%;
 	height: 100px;
 	top: 0;
+}
+
+.brickInventoryContainer {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	height: 100%;
 }

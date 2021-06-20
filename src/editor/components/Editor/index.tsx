@@ -3,13 +3,16 @@ import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import BrickWall from "../BrickWall";
 import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
+import BrickInventory from "../Inventory/BrickInventory";
 
 const Editor = () => {
 	const { levelConfigState, updateLeveConfigState } = useLevelConfigState();
 	return (
 		<>
 			<BrickWall />
-			<Inventory direction="horizontal">hi</Inventory>
+			<Inventory direction="horizontal">
+				<BrickInventory />
+			</Inventory>
 			<Inventory>
 				<InputGroup
 					label="Amount of columns"
