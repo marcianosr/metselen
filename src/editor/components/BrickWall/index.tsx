@@ -75,8 +75,12 @@ const BrickWall = () => {
 	const [levelSettings, setLevelSettings] =
 		useState<LevelConfig>(INITIAL_LEVEL);
 
+	const [gridInput, setGridInput] = useState({
+		columns: levelSettings.columns,
+	});
+
 	const columnSettingStyles = {
-		"--columns": levelSettings.columns,
+		"--columns": gridInput.columns,
 	} as CSSVars;
 
 	return (
@@ -85,25 +89,43 @@ const BrickWall = () => {
 				style={columnSettingStyles}
 				className={styles.brickWallContainer}
 			>
+				<input
+					type="number"
+					id="columns"
+					name="columns"
+					value={gridInput.columns}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						setGridInput({
+							...setGridInput,
+							columns: parseInt(e.target.value),
+						})
+					}
+				/>
 				{levelSettings.layout.map((row: any) => {
 					const rowOrderStyles = {
 						"--rowOrder": row.order,
 					} as CSSVars;
 
 					return (
-						<div style={rowOrderStyles} className={styles.brickRow}>
-							{row.bricks.map((brick: any) => {
-								return (
-									<div
-										className={classNames(styles.brick, [
-											styles[`${brick.size}`],
-										])}
-									>
-										{brick.id}
-									</div>
-								);
-							})}
-						</div>
+						<>
+							<div
+								style={rowOrderStyles}
+								className={styles.brickRow}
+							>
+								{row.bricks.map((brick: any) => {
+									return (
+										<div
+											className={classNames(
+												styles.brick,
+												[styles[`${brick.size}`]]
+											)}
+										>
+											{brick.id}
+										</div>
+									);
+								})}
+							</div>
+						</>
 					);
 				})}
 			</section>
