@@ -3,7 +3,7 @@ import { BrickType } from "../types/Bricks";
 import { flattenBricksArray } from "../utils";
 import { getRandomTable, makeTables, TableResult } from "./tables";
 
-type Level = {
+export type Level = {
 	name: string;
 	level: number;
 	layout: BrickType[][];

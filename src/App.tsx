@@ -8,6 +8,7 @@ import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer"
 import UserDataScreen from "./components/UserDataScreen";
 import { SaveGameState } from "./data/saveGameState";
 import "./App.css";
+import EditorScreen from "./editor/components/EditorScreen";
 
 type Config = {
 	analytics: {
@@ -68,7 +69,7 @@ const ScreenManager = () => {
 
 	return (
 		<>
-			<ModeManager />
+			{/* <ModeManager /> */}
 			{gameState.mode === "game" && (
 				<>
 					{gameState.screen.current === "enterName" && (
@@ -81,11 +82,7 @@ const ScreenManager = () => {
 				</>
 			)}
 
-			{gameState.mode === "editor" && (
-				<section>
-					<h1>{gameState.mode}</h1>
-				</section>
-			)}
+			{gameState.mode === "editor" && <EditorScreen />}
 		</>
 	);
 };
@@ -102,7 +99,7 @@ const ModeManager: React.FC = ({ children }) => {
 						: updateGameState("mode", "game")
 				}
 			>
-				Switch to {gameState.mode}
+				Switch to {gameState.mode === "game" ? "editor" : "game"}
 			</button>
 
 			{children}
