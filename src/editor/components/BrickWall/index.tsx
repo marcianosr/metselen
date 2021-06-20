@@ -1,9 +1,10 @@
 import { CSSProperties } from "react";
 
-import Brick from "../../../components/Brick";
 import styles from "./styles.module.css";
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import { BrickRow } from "../../../components/BrickRowContainer";
+import Brick from "../../../components/Brick";
+import { TransparentBrick } from "../Brick";
 
 // Getting a test layoout for now.
 // This will be a file based on the edits of a user
@@ -35,16 +36,21 @@ const BrickWall = () => {
 							<BrickRow idx={idx} row={row.order}>
 								{row.bricks.map((brick: any, idx: number) => {
 									return (
-										<Brick
-											key={idx}
-											id={idx}
-											size={brick.size}
-											text={brick.size}
-											color={{
-												key: "1",
-												values: ["#ff0000", "#ff00ff"],
-											}}
-										/>
+										<TransparentBrick>
+											<Brick
+												key={idx}
+												id={idx}
+												size={brick.size}
+												text={brick.size}
+												color={{
+													key: "1",
+													values: [
+														"#ff0000",
+														"#ff00ff",
+													],
+												}}
+											/>
+										</TransparentBrick>
 									);
 								})}
 							</BrickRow>

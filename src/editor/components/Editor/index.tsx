@@ -6,7 +6,7 @@ import Inventory from "../Inventory";
 import BrickInventory from "../Inventory/BrickInventory";
 
 const Editor = () => {
-	const { levelConfigState, updateLeveConfigState } = useLevelConfigState();
+	const { levelConfigState, updateLevelConfigState } = useLevelConfigState();
 	return (
 		<>
 			<BrickWall />
@@ -18,7 +18,7 @@ const Editor = () => {
 					label="Amount of columns"
 					value={levelConfigState.columns}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						updateLeveConfigState(
+						updateLevelConfigState(
 							"columns",
 							parseInt(e.target.value)
 						)
@@ -28,7 +28,7 @@ const Editor = () => {
 					label="Time"
 					value={levelConfigState.time}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						updateLeveConfigState("time", parseInt(e.target.value))
+						updateLevelConfigState("time", parseInt(e.target.value))
 					}
 				/>
 			</Inventory>
