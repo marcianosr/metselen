@@ -1,0 +1,8 @@
+.transparentBrick {
+	opacity: 0.5;
+}
+
+.inventoryBrick {
+	cursor: pointer;
+	user-select: none;
+}
