@@ -30,13 +30,13 @@ const BrickWall = () => {
 				style={columnSettingStyles}
 				className={styles.brickWallContainer}
 			>
-				{levelConfigState.layout.map((row: any, idx: number) => {
+				{levelConfigState.layout.map((row: any, rowIdx: number) => {
 					return (
 						<>
-							<BrickRow idx={idx} row={row.order}>
+							<BrickRow idx={rowIdx} row={row.order}>
 								{row.bricks.map((brick: any, idx: number) => {
 									return (
-										<TransparentBrick>
+										<>
 											<Brick
 												key={idx}
 												id={idx}
@@ -50,7 +50,7 @@ const BrickWall = () => {
 													],
 												}}
 											/>
-										</TransparentBrick>
+										</>
 									);
 								})}
 							</BrickRow>

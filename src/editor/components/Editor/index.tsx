@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
+import { BrickType } from "../../../types/Bricks";
 import BrickWall from "../BrickWall";
 import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
 import BrickInventory from "../Inventory/BrickInventory";
 
 const Editor = () => {
-	const { levelConfigState, updateLevelConfigState } = useLevelConfigState();
+	const {
+		levelConfigState,
+		updateLevelConfigState,
+		updateLevelConfigStateMultiple,
+	} = useLevelConfigState();
+
+	const addBrick = (brick: Pick<BrickType, "id" | "size">, row: number) => {
+		updateLevelConfigStateMultiple({
+			layout: [
+				{
+					order: 1,
+					bricks: [
+						...levelConfigState.layout[row].bricks,
+						{
+							id: brick.id,
+							size: brick.size,
+						},
+					],
+				},
+			],
+		});
+	};
+
 	return (
 		<>
 			<BrickWall />
 			<Inventory direction="horizontal">
-				<BrickInventory />
+				<BrickInventory addBrick={addBrick} />
 			</Inventory>
 			<Inventory>
 				<InputGroup
