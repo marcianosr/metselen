@@ -33,8 +33,8 @@ type LevelStateMultipleUpdater = (state: Partial<LevelConfigState>) => void;
 type LevelConfigStateContextState = {
 	levelConfigState: LevelConfigState;
 	setLevelConfigState: (levelState: LevelConfigState) => void;
-	updateLeveConfigState: LevelStateUpdater;
-	updateLeveConfigStateMultiple: LevelStateMultipleUpdater;
+	updateLevelConfigState: LevelStateUpdater;
+	updateLevelConfigStateMultiple: LevelStateMultipleUpdater;
 };
 
 type LevelConfigStateProps = {};
@@ -44,30 +44,31 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 	level: 0,
 	columns: 1,
 	layout: [
+		{ order: 0, bricks: [] },
 		{
 			order: 3,
 			bricks: [
 				{ id: 1, size: "medium", willDrop: true, cracked: false },
 				{ id: 2, size: "medium", willDrop: true, cracked: false },
 				{ id: 3, size: "medium", willDrop: true, cracked: false },
-				{ id: 4, size: "medium", willDrop: true, cracked: false },
-				{ id: 5, size: "small", willDrop: true, cracked: false },
+				// { id: 4, size: "medium", willDrop: true, cracked: false },
+				// { id: 5, size: "small", willDrop: true, cracked: false },
 			],
 		},
-		{
-			order: 2,
-			bricks: [
-				{ id: 1, size: "veryLarge", willDrop: true, cracked: false },
-				{ id: 2, size: "small", willDrop: true, cracked: false },
-			],
-		},
-		{
-			order: 1,
-			bricks: [
-				{ id: 1, size: "large", willDrop: true, cracked: false },
-				{ id: 2, size: "small", willDrop: true, cracked: false },
-			],
-		},
+		// {
+		// 	order: 2,
+		// 	bricks: [
+		// 		{ id: 1, size: "veryLarge", willDrop: true, cracked: false },
+		// 		{ id: 2, size: "small", willDrop: true, cracked: false },
+		// 	],
+		// },
+		// {
+		// 	order: 1,
+		// 	bricks: [
+		// 		{ id: 1, size: "large", willDrop: true, cracked: false },
+		// 		{ id: 2, size: "small", willDrop: true, cracked: false },
+		// 	],
+		// },
 	],
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -80,8 +81,8 @@ export const LevelConfigStateContext =
 	createContext<LevelConfigStateContextState>({
 		levelConfigState: INITIAL_LEVEL_STATE,
 		setLevelConfigState: () => {},
-		updateLeveConfigState: () => {},
-		updateLeveConfigStateMultiple: () => {},
+		updateLevelConfigState: () => {},
+		updateLevelConfigStateMultiple: () => {},
 	});
 
 export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
@@ -90,14 +91,14 @@ export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
 	const [levelConfigState, setLevelConfigState] =
 		useState<LevelConfigState>(INITIAL_LEVEL_STATE);
 
-	const updateLeveConfigState: LevelStateUpdater = (key, value) => {
+	const updateLevelConfigState: LevelStateUpdater = (key, value) => {
 		setLevelConfigState({
 			...levelConfigState,
 			[key]: value,
 		});
 	};
 
-	const updateLeveConfigStateMultiple: LevelStateMultipleUpdater = (
+	const updateLevelConfigStateMultiple: LevelStateMultipleUpdater = (
 		state
 	) => {
 		setLevelConfigState({
@@ -113,8 +114,8 @@ export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
 			value={{
 				levelConfigState,
 				setLevelConfigState,
-				updateLeveConfigState,
-				updateLeveConfigStateMultiple,
+				updateLevelConfigState,
+				updateLevelConfigStateMultiple,
 			}}
 		>
 			{children}
