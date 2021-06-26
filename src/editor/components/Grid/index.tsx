@@ -14,8 +14,13 @@ const GRID_SETTINGS = {
 }
 
 const Grid = () => {
-	const { levelConfigState } = useLevelConfigState();
+	const { levelConfigState, updateLevelConfigState } = useLevelConfigState();
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
+	const [bricks, setBricks] = useState([
+		...levelConfigState.layout
+	]);
+	console.log(bricks)
+
 
 	const selectCell = (e: React.MouseEvent) => {
 		const grid = e.currentTarget.getBoundingClientRect();
@@ -28,6 +33,16 @@ const Grid = () => {
 			x: Math.floor((position.x + GRID_SETTINGS.width) / GRID_SETTINGS.width),
 			y: Math.floor((position.y + GRID_SETTINGS.height) / GRID_SETTINGS.height),
 		})
+
+		setBricks([
+			...bricks,
+			{
+				id: Math.round(Math.random() * 1000), size: "verySmall", x: Math.floor(position.x / GRID_SETTINGS.width),
+				y: Math.floor(position.y / GRID_SETTINGS.height),
+			}
+		])
+
+
 	}
 
 	return (
@@ -36,7 +51,7 @@ const Grid = () => {
 		>
 			<div className={styles.grid} onClick={selectCell}>
 				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={styles.selectedCell}>cell</div>}
-				{levelConfigState.layout.map((brick: BrickPosition, idx) =>
+				{bricks.map((brick: BrickPosition, idx) =>
 					<Brick
 						key={idx}
 						id={idx}
