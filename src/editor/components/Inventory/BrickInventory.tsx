@@ -51,51 +51,17 @@ const brickTypes: BrickType[] = [
 ];
 
 type BrickInventoryProps = {
-	onClick?: () => void;
-	addBrick: (brick: BrickType, rowIdx: number) => void;
+
 };
 
-const BrickInventory: React.FC<BrickInventoryProps> = ({ onClick, addBrick }) => {
+const BrickInventory: React.FC<BrickInventoryProps> = () => {
 	const { levelConfigState, updateLevelConfigStateMultiple } =
 		useLevelConfigState();
 
-
-	const showPotentialPlacementOfBrick = (brick: BrickType) => {
-		// Add to the bricks array to display this in the wall 
-		// When selecting another brick remove the last added brick which is the preview brick
-		// When pressing 'add', add the selected brick and also add a new preview brick that is currently active
-
-		updateLevelConfigStateMultiple({
-			layout: [
-				{
-					order: 1,
-					bricks: [
-						...levelConfigState.layout[0]
-							.bricks,
-						{
-							id: 1,
-							size: brick.size,
-						},
-					],
-				},
-			],
-		});
-	}
-
-	const removeLastBrick = () => {
-		updateLevelConfigStateMultiple({
-			layout: [
-				{
-					order: 1,
-					bricks: levelConfigState.layout[0].bricks.slice(0, levelConfigState.layout[0].bricks.length - 1)
-				},
-			],
-		})
-	}
 	return (
 		<section>
 			<h1>Brick types</h1>
-			<ul className={styles.brickInventoryContainer}>
+			{/* <ul className={styles.brickInventoryContainer}>
 				{brickTypes.map((brick: BrickType) => (
 					<li>
 						<InventoryBrick
@@ -116,7 +82,7 @@ const BrickInventory: React.FC<BrickInventoryProps> = ({ onClick, addBrick }) =>
 						</InventoryBrick>
 					</li>
 				))}
-			</ul>
+			</ul> */}
 		</section>
 	);
 };

@@ -1,0 +1,30 @@
+.gridContainer {
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.grid {
+	background-image: repeating-linear-gradient(
+			#ccc 0 1px,
+			transparent 1px 100%
+		),
+		repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+	background-size: 70px 50px;
+	height: 100%;
+	max-width: 1191px;
+	max-height: 901px;
+	margin: 0 auto;
+	overflow: hidden;
+
+	display: grid;
+	/* justify-content: center;
+	align-content: flex-end; */
+	grid-template-columns: repeat(auto-fill, 70px);
+	grid-template-rows: repeat(auto-fill, 50px);
+}
+
+.selectedCell {
+	grid-row: var(--y);
+	grid-column: var(--x);
+}

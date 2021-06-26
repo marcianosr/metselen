@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import { BrickType } from "../../../types/Bricks";
-import BrickWall from "../BrickWall";
+import BrickWall from "../Grid";
 import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
 import BrickInventory from "../Inventory/BrickInventory";
@@ -13,40 +13,14 @@ const Editor = () => {
 		updateLevelConfigStateMultiple,
 	} = useLevelConfigState();
 
-	const addBrick = (brick: Pick<BrickType, "id" | "size">, row: number) => {
-		updateLevelConfigStateMultiple({
-			layout: [
-				{
-					order: 1,
-					bricks: [
-						...levelConfigState.layout[row].bricks,
-						{
-							id: brick.id,
-							size: brick.size,
-						},
-					],
-				},
-			],
-		});
-	};
 
 	return (
 		<>
 			<BrickWall />
-			<Inventory direction="horizontal">
-				<BrickInventory addBrick={addBrick} />
-			</Inventory>
-			<Inventory>
-				<InputGroup
-					label="Amount of columns"
-					value={levelConfigState.columns}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						updateLevelConfigState(
-							"columns",
-							parseInt(e.target.value)
-						)
-					}
-				/>
+			{/* <Inventory direction="horizontal">
+				<BrickInventory />
+			</Inventory> */}
+			{/* <Inventory>
 				<InputGroup
 					label="Time"
 					value={levelConfigState.time}
@@ -54,7 +28,7 @@ const Editor = () => {
 						updateLevelConfigState("time", parseInt(e.target.value))
 					}
 				/>
-			</Inventory>
+			</Inventory> */}
 		</>
 	);
 };

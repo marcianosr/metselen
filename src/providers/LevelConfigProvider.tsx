@@ -1,18 +1,12 @@
 import React, { createContext, useState } from "react";
 import { BrickType } from "../types/Bricks";
 
-// The new Level Type
-
-type Layout = {
-	order: number;
-	bricks: BrickType[];
-};
 
 type LevelConfigState = {
 	name: string;
 	level: number;
 	columns: number;
-	layout: Layout[];
+	layout: BrickType[],
 	ranges: {
 		multiplication: number[];
 		tables: number[];
@@ -44,31 +38,12 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 	level: 0,
 	columns: 1,
 	layout: [
-		{ order: 0, bricks: [] },
-		{
-			order: 3,
-			bricks: [
-				{ id: 1, size: "medium", willDrop: true, cracked: false },
-				{ id: 2, size: "medium", willDrop: true, cracked: false },
-				{ id: 3, size: "medium", willDrop: true, cracked: false },
-				// { id: 4, size: "medium", willDrop: true, cracked: false },
-				// { id: 5, size: "small", willDrop: true, cracked: false },
-			],
-		},
-		// {
-		// 	order: 2,
-		// 	bricks: [
-		// 		{ id: 1, size: "veryLarge", willDrop: true, cracked: false },
-		// 		{ id: 2, size: "small", willDrop: true, cracked: false },
-		// 	],
-		// },
-		// {
-		// 	order: 1,
-		// 	bricks: [
-		// 		{ id: 1, size: "large", willDrop: true, cracked: false },
-		// 		{ id: 2, size: "small", willDrop: true, cracked: false },
-		// 	],
-		// },
+		{ id: 1, size: "medium", willDrop: true, cracked: false },
+		{ id: 2, size: "medium", willDrop: true, cracked: false },
+		{ id: 3, size: "medium", willDrop: true, cracked: false },
+		{ id: 4, size: "medium", willDrop: true, cracked: false },
+		{ id: 5, size: "medium", willDrop: true, cracked: false },
+		{ id: 6, size: "medium", willDrop: true, cracked: false },
 	],
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -80,9 +55,9 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 export const LevelConfigStateContext =
 	createContext<LevelConfigStateContextState>({
 		levelConfigState: INITIAL_LEVEL_STATE,
-		setLevelConfigState: () => {},
-		updateLevelConfigState: () => {},
-		updateLevelConfigStateMultiple: () => {},
+		setLevelConfigState: () => { },
+		updateLevelConfigState: () => { },
+		updateLevelConfigStateMultiple: () => { },
 	});
 
 export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
