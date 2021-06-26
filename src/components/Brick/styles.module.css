@@ -1,11 +1,14 @@
 .brickComposition {
 	--brickShadowColor: #b75f70;
+	--defaultBrickHeight: 44px;
 
 	composes: cementComposition from "../BrickContainer/styles.module.css";
 
 	border-right: var(--cementWidth) solid var(--defaultCementColor);
 	border-top: var(--cementWidth) solid var(--defaultCementColor);
 	border-bottom: var(--cementWidth) solid var(--defaultCementColor);
+
+	height: var(--defaultBrickHeight);
 
 	background: linear-gradient(
 		90deg,
