@@ -25,8 +25,5 @@ const InventoryBrick: React.FC<InventoryBrickProps> = ({
 	</div>
 );
 
-export const TransparentBrick: React.FC = ({ children }) => (
-	<div className={styles.transparentBrick}>{children}</div>
-);
 
 export default InventoryBrick;

@@ -1,12 +1,15 @@
 import React, { createContext, useState } from "react";
 import { BrickType } from "../types/Bricks";
 
+export type BrickPosition = BrickType & {
+	x: number;
+	y: number
+}
 
 type LevelConfigState = {
 	name: string;
 	level: number;
-	columns: number;
-	layout: BrickType[],
+	layout: BrickPosition[],
 	ranges: {
 		multiplication: number[];
 		tables: number[];
@@ -36,14 +39,13 @@ type LevelConfigStateProps = {};
 const INITIAL_LEVEL_STATE: LevelConfigState = {
 	name: "Untitled",
 	level: 0,
-	columns: 1,
 	layout: [
-		{ id: 1, size: "medium", willDrop: true, cracked: false },
-		{ id: 2, size: "medium", willDrop: true, cracked: false },
-		{ id: 3, size: "medium", willDrop: true, cracked: false },
-		{ id: 4, size: "medium", willDrop: true, cracked: false },
-		{ id: 5, size: "medium", willDrop: true, cracked: false },
-		{ id: 6, size: "medium", willDrop: true, cracked: false },
+		{ id: 1, size: "large", willDrop: true, cracked: false, x: 1, y: 2 },
+		{ id: 2, size: "medium", willDrop: true, cracked: false, x: 1, y: 0 },
+		{ id: 3, size: "medium", willDrop: true, cracked: false, x: 2, y: 0 },
+		{ id: 4, size: "medium", willDrop: true, cracked: false, x: 3, y: 0 },
+		{ id: 5, size: "medium", willDrop: true, cracked: false, x: 4, y: 0 },
+		{ id: 6, size: "medium", willDrop: true, cracked: false, x: 5, y: 0 },
 	],
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

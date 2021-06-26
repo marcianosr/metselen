@@ -15,11 +15,10 @@ type BrickProps = {
 	disabled?: boolean;
 	isLastBrick?: boolean;
 	onClick?: () => void;
+	x?: number;
+	y?: number;
 };
 
-interface CSSProp extends CSSProperties {
-	"--defaultBrickColor": string;
-}
 
 const Brick: React.FC<BrickProps> = ({
 	id,
@@ -32,10 +31,17 @@ const Brick: React.FC<BrickProps> = ({
 	disabled,
 	isLastBrick,
 	onClick,
+	x, y
 }) => (
 	<div
 		key={id}
 		onClick={onClick}
+		style={
+			{
+				"--x": x,
+				"--y": y,
+			} as CSSProperties
+		}
 		className={classnames(styles.brickContainer, [styles[`${size}`]], {
 			[styles.dropBrick]: willDrop,
 			[styles.hardShakeBrick]:
@@ -53,7 +59,7 @@ const Brick: React.FC<BrickProps> = ({
 				{
 					"--defaultBrickColor": color?.values[0],
 					"--secondBrickColor": color?.values[1],
-				} as CSSProp
+				} as CSSProperties
 			}
 			className={classnames(styles.brick, {
 				// [styles.dropBrick]: willDrop,

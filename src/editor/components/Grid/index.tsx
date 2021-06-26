@@ -1,17 +1,16 @@
-import React, { CSSProperties } from "react";
-
-import styles from "./styles.module.css";
-import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
-import { BrickRow } from "../../../components/BrickRowContainer";
+import React, { useState, CSSProperties } from "react";
+import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
-import { TransparentBrick } from "../Brick";
-import { BrickType } from "../../../types/Bricks";
-import classNames from "classnames";
-import { useState } from "react";
+import styles from "./styles.module.css";
 
 type Position = {
 	x: number
 	y: number
+}
+
+const GRID_SETTINGS = {
+	width: 70,
+	height: 50,
 }
 
 const Grid = () => {
@@ -26,65 +25,36 @@ const Grid = () => {
 		}
 
 		setSelectedCell({
-			x: Math.floor((position.x + 70) / 70),
-			y: Math.floor((position.y + 50) / 50),
+			x: Math.floor((position.x + GRID_SETTINGS.width) / GRID_SETTINGS.width),
+			y: Math.floor((position.y + GRID_SETTINGS.height) / GRID_SETTINGS.height),
 		})
 	}
 
 	return (
-		<>
-			<section
-				className={styles.gridContainer}
-			>
-				<div className={styles.grid} onClick={selectCell}>
-					{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={styles.selectedCell}>cell</div>}
-					{levelConfigState.layout.map((brick: BrickType, idx) => {
-						return (
-							<Brick
-								key={idx}
-								id={idx}
-								size={brick.size}
-								text={brick.size}
-								color={{
-									key: "1",
-									values: [
-										"#ff0000",
-										"#ff00ff",
-									],
-								}}
-							/>
-						)
-					})}
-				</div>
-				{/* {levelConfigState.layout.map((row: any, rowIdx: number) => {
-					return (
-						<>
-							<BrickRow idx={rowIdx} row={row.order}>
-								{row.bricks.map((brick: any, idx: number) => {
-									return (
-										<>
-											<Brick
-												key={idx}
-												id={idx}
-												size={brick.size}
-												text={brick.size}
-												color={{
-													key: "1",
-													values: [
-														"#ff0000",
-														"#ff00ff",
-													],
-												}}
-											/>
-										</>
-									);
-								})}
-							</BrickRow>
-						</>
-					);
-				})} */}
-			</section>
-		</>
+		<section
+			className={styles.gridContainer}
+		>
+			<div className={styles.grid} onClick={selectCell}>
+				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={styles.selectedCell}>cell</div>}
+				{levelConfigState.layout.map((brick: BrickPosition, idx) =>
+					<Brick
+						key={idx}
+						id={idx}
+						size={brick.size}
+						text={brick.size}
+						color={{
+							key: "1",
+							values: [
+								"#ff0000",
+								"#ff00ff",
+							],
+						}}
+						x={brick.x}
+						y={brick.y}
+					/>
+				)}
+			</div>
+		</section>
 	);
 };
 

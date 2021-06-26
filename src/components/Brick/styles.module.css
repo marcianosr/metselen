@@ -1,5 +1,12 @@
 .brickComposition {
 	--brickShadowColor: #b75f70;
+
+	--verySmall: 70px;
+	--small: 105px;
+	--medium: 140px;
+	--large: 210px;
+	--veryLarge: 280px;
+
 	--defaultBrickHeight: 44px;
 
 	composes: cementComposition from "../BrickContainer/styles.module.css";
@@ -17,6 +24,12 @@
 	);
 }
 
+.brickContainer {
+	position: absolute;
+	left: calc(var(--x) * 70px);
+	top: calc(var(--y) * 50px);
+}
+
 .brickContainer:last-child .brick {
 	border-left: var(--cementWidth) solid var(--defaultCementColor);
 }
@@ -28,23 +41,23 @@
 }
 
 .veryLarge {
-	grid-column: span 4;
+	width: var(--veryLarge);
 }
 
 .large {
-	grid-column: span 3;
+	width: var(--large);
 }
 
 .medium {
-	grid-column: span 2;
+	width: var(--medium);
 }
 
 .small {
-	grid-column: span 1.5;
+	width: var(--small);
 }
 
 .verySmall {
-	grid-column: span 1;
+	width: var(--verySmall);
 }
 
 .brickIsClickable {
@@ -64,6 +77,7 @@
 	/* border-left: none; */
 }
 
+/* Refactor to .goldenBrick or something */
 .lastBrickInner {
 	background: linear-gradient(
 		140deg,

@@ -1,4 +1,7 @@
 .gridContainer {
+	--width: 70px;
+	--height: 50px;
+
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
@@ -18,13 +21,13 @@
 	overflow: hidden;
 
 	display: grid;
-	/* justify-content: center;
-	align-content: flex-end; */
-	grid-template-columns: repeat(auto-fill, 70px);
-	grid-template-rows: repeat(auto-fill, 50px);
+	grid-template-columns: repeat(auto-fill, var(--width));
+	grid-template-rows: repeat(auto-fill, var(--height));
+	position: relative;
 }
 
 .selectedCell {
 	grid-row: var(--y);
 	grid-column: var(--x);
+	background: cornflowerblue;
 }
