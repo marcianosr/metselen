@@ -11,7 +11,7 @@ type BrickProps = {
 	willDrop?: boolean;
 	color: RandomColorType | undefined;
 	cracked?: boolean;
-	text: string;
+	text?: string;
 	disabled?: boolean;
 	isLastBrick?: boolean;
 	onClick?: () => void;
