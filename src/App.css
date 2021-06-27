@@ -3,4 +3,9 @@
 	--secondBrickColor: #df597a;
 	--primaryBlue: #005170;
 	--secondaryBlue: #3683a7;
+	--verySmall: 70px;
+	--small: 105px;
+	--medium: 140px;
+	--large: 210px;
+	--veryLarge: 280px;
 }

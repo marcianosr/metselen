@@ -1,8 +1,6 @@
 .brickComposition {
 	--brickShadowColor: #b75f70;
 
-	
-
 	--defaultBrickHeight: 44px;
 
 	composes: cementComposition from "../BrickContainer/styles.module.css";
@@ -21,12 +19,6 @@
 }
 
 .brickContainer {
-	--verySmall: 70px;
-	--small: 105px;
-	--medium: 140px;
-	--large: 210px;
-	--veryLarge: 280px;
-	
 	position: absolute;
 	left: calc(var(--x) * 70px);
 	top: calc(var(--y) * 50px);

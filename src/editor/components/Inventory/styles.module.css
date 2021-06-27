@@ -1,6 +1,7 @@
 .inventory {
 	background: coral;
 	position: absolute;
+	top: 0;
 	left: 0;
 	padding: 1rem;
 }
@@ -16,9 +17,26 @@
 	top: 0;
 }
 
-.brickInventoryContainer {
+.brickInventoryContainer li > div {
+	position: static;
+}
+
+.listItem:hover {
+	cursor: pointer;
+	background: var(--defaultBrickColor);
+}
+
+.listItem {
+	margin-bottom: 0.5rem;
 	display: flex;
-	gap: 1rem;
 	align-items: center;
-	height: 100%;
+}
+
+.selected {
+	background-color: var(--defaultBrickColor);
+}
+
+.brickSizeText {
+	composes: defaultText from "../../../typography.module.css";
+	margin-left: 0.5rem;
 }

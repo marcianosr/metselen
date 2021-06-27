@@ -28,8 +28,32 @@
 }
 
 .selectedCell {
-	grid-row: var(--y);
-	grid-column: var(--x);
+	/* grid-row: var(--y);
+	grid-column: var(--x); */
 	background: rgba(1, 1, 1, 0.2);
 	z-index: 1;
+	position: absolute;
+	left: calc(var(--x) * 70px);
+	top: calc(var(--y) * 50px);
+	height: 50px;
+}
+
+.veryLarge {
+	width: var(--veryLarge);
+}
+
+.large {
+	width: var(--large);
+}
+
+.medium {
+	width: var(--medium);
+}
+
+.small {
+	width: var(--small);
+}
+
+.verySmall {
+	width: var(--verySmall);
 }

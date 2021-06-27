@@ -2,6 +2,9 @@ import React, { useState, CSSProperties } from "react";
 import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
 import styles from "./styles.module.css";
+import BrickInventory from "../Inventory/BrickInventory";
+import { BrickSizes } from "../../../types/Bricks";
+import classNames from "classnames";
 
 type Position = {
 	x: number
@@ -19,8 +22,8 @@ const Grid = () => {
 	const [bricks, setBricks] = useState([
 		...levelConfigState.layout
 	]);
-	console.log(bricks)
-
+	const [showInventory, setShowInventory] = useState(false);
+	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium")
 
 	const selectCell = (e: React.MouseEvent) => {
 		const grid = e.currentTarget.getBoundingClientRect();
@@ -30,27 +33,41 @@ const Grid = () => {
 		}
 
 		setSelectedCell({
-			x: Math.floor((position.x + GRID_SETTINGS.width) / GRID_SETTINGS.width),
-			y: Math.floor((position.y + GRID_SETTINGS.height) / GRID_SETTINGS.height),
-		})
+			x: Math.floor(position.x / GRID_SETTINGS.width),
+			y: Math.floor(position.y / GRID_SETTINGS.height),
+		});
+	}
+
+
+	const addBrick = (e: React.MouseEvent) => {
+		const grid = e.currentTarget.getBoundingClientRect();
+		const position = {
+			x: e.clientX - grid.left,
+			y: e.clientY - grid.top
+		}
 
 		setBricks([
 			...bricks,
 			{
-				id: Math.round(Math.random() * 1000), size: "verySmall", x: Math.floor(position.x / GRID_SETTINGS.width),
+				id: Math.round(Math.random() * 1000), size: selectedSize, x: Math.floor(position.x / GRID_SETTINGS.width),
 				y: Math.floor(position.y / GRID_SETTINGS.height),
 			}
-		])
-
-
+		]);
 	}
+
+	const openBrickInventory = (e: React.MouseEvent) => {
+		e.preventDefault();
+		setShowInventory(true);
+	}
+
+
 
 	return (
 		<section
 			className={styles.gridContainer}
 		>
-			<div className={styles.grid} onClick={selectCell}>
-				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={styles.selectedCell}>cell</div>}
+			<div className={styles.grid} onMouseMove={selectCell} onClick={addBrick} onContextMenu={openBrickInventory}>
+				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={classNames(styles.selectedCell, [styles[selectedSize]])}>cell</div>}
 				{bricks.map((brick: BrickPosition, idx) =>
 					<Brick
 						key={idx}
@@ -68,7 +85,9 @@ const Grid = () => {
 						y={brick.y}
 					/>
 				)}
+
 			</div>
+			{showInventory && <BrickInventory selectedSize={selectedSize} setSelectedSize={setSelectedSize} setShowInventory={setShowInventory} />}
 		</section>
 	);
 };

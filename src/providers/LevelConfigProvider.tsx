@@ -41,11 +41,6 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 	level: 0,
 	layout: [
 		{ id: 1, size: "large", willDrop: true, cracked: false, x: 1, y: 2 },
-		{ id: 2, size: "medium", willDrop: true, cracked: false, x: 1, y: 0 },
-		{ id: 3, size: "medium", willDrop: true, cracked: false, x: 2, y: 0 },
-		{ id: 4, size: "medium", willDrop: true, cracked: false, x: 3, y: 0 },
-		{ id: 5, size: "medium", willDrop: true, cracked: false, x: 4, y: 0 },
-		{ id: 6, size: "medium", willDrop: true, cracked: false, x: 5, y: 0 },
 	],
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

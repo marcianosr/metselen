@@ -1,11 +1,10 @@
-import React, { MouseEvent, useState } from "react";
-import { BrickType, pinkSchemeColors } from "../../../types/Bricks";
+import React from "react";
+import { BrickType, pinkSchemeColors, BrickSizes } from "../../../types/Bricks";
 import Brick from "../../../components/Brick";
-import InventoryBrick from "../Brick";
 
 import styles from "./styles.module.css";
-import { useLevelState } from "../../../providers/LevelStateProvider";
-import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
+import Modal from "../../../components/Modal";
+import classNames from "classnames";
 
 const brickTypes: BrickType[] = [
 	{
@@ -51,39 +50,36 @@ const brickTypes: BrickType[] = [
 ];
 
 type BrickInventoryProps = {
-
+	selectedSize: BrickSizes;
+	setSelectedSize: (size: BrickSizes) => void;
+	setShowInventory: (show: boolean) => void
 };
 
-const BrickInventory: React.FC<BrickInventoryProps> = () => {
-	const { levelConfigState, updateLevelConfigStateMultiple } =
-		useLevelConfigState();
+const BrickInventory: React.FC<BrickInventoryProps> = ({ selectedSize, setSelectedSize, setShowInventory }) => {
+	const hideInventory = () => setShowInventory(false);
 
 	return (
-		<section>
-			<h1>Brick types</h1>
-			{/* <ul className={styles.brickInventoryContainer}>
-				{brickTypes.map((brick: BrickType) => (
-					<li>
-						<InventoryBrick
-							onClick={() => {
-								addBrick(brick, 0);
-							}}
-							onMouseEnter={() => showPotentialPlacementOfBrick(brick)}
-							onMouseLeave={removeLastBrick}
-						>
+		<Modal onClickBackdrop={hideInventory}>
+			<section className={styles.modalContainer}>
+				<ul className={styles.brickInventoryContainer}>
+					{brickTypes.map((brick: BrickType) => (
+						<li onClick={() => setSelectedSize(brick.size)} className={classNames(styles.listItem, {
+							[styles.selected]:
+								brick.size === selectedSize
+						})}>
 							<Brick
 								id={brick.id}
 								color={brick?.color}
 								size={brick.size}
-								text={brick.size}
-								onClick={onClick}
 							/>
-							<span>{brick.size}</span>
-						</InventoryBrick>
-					</li>
-				))}
-			</ul> */}
-		</section>
+							<span className={styles.brickSizeText}>{brick.size}</span>
+						</li>
+					))}
+				</ul>
+			</section>
+
+		</Modal>
+
 	);
 };
 
