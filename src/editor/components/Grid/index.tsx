@@ -60,8 +60,6 @@ const Grid = () => {
 		setShowInventory(true);
 	}
 
-
-
 	return (
 		<section
 			className={styles.gridContainer}
