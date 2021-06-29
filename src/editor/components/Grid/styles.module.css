@@ -9,11 +9,11 @@
 
 .grid {
 	background-image: repeating-linear-gradient(
-			#ccc 0 1px,
+			black 0 1px,
 			transparent 1px 100%
 		),
-		repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
-	background-size: 70px 50px;
+		repeating-linear-gradient(90deg, black 0 1px, transparent 1px 100%);
+	background-size: var(--width) var(--height);
 	height: 100%;
 	max-width: 1191px;
 	max-height: 901px;
@@ -28,14 +28,12 @@
 }
 
 .selectedCell {
-	/* grid-row: var(--y);
-	grid-column: var(--x); */
 	background: rgba(1, 1, 1, 0.2);
 	z-index: 1;
 	position: absolute;
-	left: calc(var(--x) * 70px);
-	top: calc(var(--y) * 50px);
-	height: 50px;
+	left: calc(var(--x) * var(--width));
+	top: calc(var(--y) * var(--height));
+	height: var(--height);
 	pointer-events: none;
 }
 
