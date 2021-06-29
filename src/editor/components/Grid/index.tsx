@@ -3,7 +3,7 @@ import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConf
 import Brick from "../../../components/Brick";
 import styles from "./styles.module.css";
 import BrickInventory from "../Inventory/BrickInventory";
-import { BrickSizes } from "../../../types/Bricks";
+import { BrickSizes, BrickType } from "../../../types/Bricks";
 import classNames from "classnames";
 
 type Position = {
@@ -17,7 +17,7 @@ const GRID_SETTINGS = {
 }
 
 const Grid = () => {
-	const { levelConfigState, updateLevelConfigState } = useLevelConfigState();
+	const { levelConfigState } = useLevelConfigState();
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
 	const [bricks, setBricks] = useState([
 		...levelConfigState.layout
@@ -55,16 +55,29 @@ const Grid = () => {
 		]);
 	}
 
+	const removeBrick = (e: React.MouseEvent, brick: BrickType) => {
+		const newBricksState = bricks.filter(b => b.id !== brick.id);
+		setBricks(newBricksState);
+	}
+
 	const openBrickInventory = (e: React.MouseEvent) => {
 		e.preventDefault();
 		setShowInventory(true);
+	}
+
+	const handleRightClick = (e: React.MouseEvent, brick?: BrickType) => {
+		e.preventDefault();
+		if (e.currentTarget.id === "grid") openBrickInventory(e);
+		if (brick && e.currentTarget.id === "brick") removeBrick(e, brick);
 	}
 
 	return (
 		<section
 			className={styles.gridContainer}
 		>
-			<div className={styles.grid} onMouseMove={selectCell} onClick={addBrick} onContextMenu={openBrickInventory}>
+			<div id="grid" className={styles.grid} onMouseMove={selectCell} onClick={addBrick} onContextMenu={(e: React.MouseEvent) => {
+				handleRightClick(e)
+			}}>
 				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={classNames(styles.selectedCell, [styles[selectedSize]])}>cell</div>}
 				{bricks.map((brick: BrickPosition, idx) =>
 					<Brick
@@ -81,12 +94,16 @@ const Grid = () => {
 						}}
 						x={brick.x}
 						y={brick.y}
+						onRightClick={(e: React.MouseEvent) => {
+							e.stopPropagation(); // don't bubble up and fire the onClick of the grid
+							handleRightClick(e, brick);
+						}}
 					/>
 				)}
 
 			</div>
 			{showInventory && <BrickInventory selectedSize={selectedSize} setSelectedSize={setSelectedSize} setShowInventory={setShowInventory} />}
-		</section>
+		</section >
 	);
 };
 

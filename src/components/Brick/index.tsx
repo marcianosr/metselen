@@ -15,6 +15,7 @@ type BrickProps = {
 	disabled?: boolean;
 	isLastBrick?: boolean;
 	onClick?: () => void;
+	onRightClick?: (e: React.MouseEvent) => void;
 	x?: number;
 	y?: number;
 };
@@ -31,11 +32,14 @@ const Brick: React.FC<BrickProps> = ({
 	disabled,
 	isLastBrick,
 	onClick,
+	onRightClick,
 	x, y
 }) => (
 	<div
 		key={id}
+		id={"brick"}
 		onClick={onClick}
+		onContextMenu={onRightClick}
 		style={
 			{
 				"--x": x,
