@@ -12,7 +12,7 @@ type Position = {
 }
 
 const GRID_SETTINGS = {
-	width: 70,
+	width: 35,
 	height: 50,
 }
 
