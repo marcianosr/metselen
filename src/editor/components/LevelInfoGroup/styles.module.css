@@ -1,0 +1,16 @@
+.levelInfoGroup {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 2rem;
+}
+
+.title {
+	composes: defaultText from "../../../typography.module.css";
+	font-size: 3rem;
+}
+
+.smallTitle {
+	composes: title;
+	font-size: 2rem;
+}
