@@ -1,6 +1,6 @@
 .gridContainer {
-	--width: 35px;
-	--height: 50px;
+	--cellWidth: 35px;
+	--cellHeight: 50px;
 
 	height: 100%;
 	width: 100%;
@@ -9,11 +9,11 @@
 
 .grid {
 	background-image: repeating-linear-gradient(
-			black 0 1px,
+			#1bcaff 0 1px,
 			transparent 1px 100%
 		),
-		repeating-linear-gradient(90deg, black 0 1px, transparent 1px 100%);
-	background-size: var(--width) var(--height);
+		repeating-linear-gradient(90deg, #1bcaff 0 1px, transparent 1px 100%);
+	background-size: var(--cellWidth) var(--cellHeight);
 	height: 100%;
 	max-width: 1191px;
 	max-height: 901px;
@@ -21,8 +21,8 @@
 	overflow: hidden;
 
 	display: grid;
-	grid-template-columns: repeat(auto-fill, var(--width));
-	grid-template-rows: repeat(auto-fill, var(--height));
+	grid-template-columns: repeat(auto-fill, var(--cellWidth));
+	grid-template-rows: repeat(auto-fill, var(--cellHeight));
 	position: relative;
 	cursor: pointer;
 }
@@ -31,9 +31,9 @@
 	background: rgba(1, 1, 1, 0.2);
 	z-index: 1;
 	position: absolute;
-	left: calc(var(--x) * var(--width));
-	top: calc(var(--y) * var(--height));
-	height: var(--height);
+	left: calc(var(--x) * var(--cellWidth));
+	top: calc(var(--y) * var(--cellHeight));
+	height: var(--cellHeight);
 	pointer-events: none;
 }
 

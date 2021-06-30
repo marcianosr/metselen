@@ -20,9 +20,13 @@
 
 .brickContainer {
 	position: absolute;
-	left: calc(var(--x) * 70px);
-	top: calc(var(--y) * 50px);
+	left: calc(var(--x) * var(--cellWidth));
+	top: calc(var(--y) * var(--cellHeight));
 }
+
+/* .brickContainer + .brickContainer:not(:last-child) .brick {
+	border-right: 0;
+} */
 
 .brickContainer:last-child .brick {
 	border-left: var(--cementWidth) solid var(--defaultCementColor);
