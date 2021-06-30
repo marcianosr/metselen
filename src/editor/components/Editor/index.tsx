@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
-import { BrickType } from "../../../types/Bricks";
 import BrickWall from "../Grid";
 import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
-import BrickInventory from "../Inventory/BrickInventory";
 import LevelInfoGroup from "../LevelInfoGroup";
 
 const Editor = () => {
@@ -13,7 +11,6 @@ const Editor = () => {
 		updateLevelConfigState,
 	} = useLevelConfigState();
 
-	console.log(levelConfigState)
 	return (
 		<>
 			<LevelInfoGroup />

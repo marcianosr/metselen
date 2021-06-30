@@ -23,7 +23,7 @@ const Grid = () => {
 		...levelConfigState.layout
 	]);
 	const [showInventory, setShowInventory] = useState(false);
-	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium")
+	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium");
 
 	const selectCell = (e: React.MouseEvent) => {
 		const grid = e.currentTarget.getBoundingClientRect();
