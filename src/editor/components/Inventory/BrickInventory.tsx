@@ -63,7 +63,10 @@ const BrickInventory: React.FC<BrickInventoryProps> = ({ selectedSize, setSelect
 			<section className={styles.modalContainer}>
 				<ul className={styles.brickInventoryContainer}>
 					{brickTypes.map((brick: BrickType) => (
-						<li onClick={() => setSelectedSize(brick.size)} className={classNames(styles.listItem, {
+						<li onClick={() => {
+							setSelectedSize(brick.size);
+							hideInventory();
+						}} className={classNames(styles.listItem, {
 							[styles.selected]:
 								brick.size === selectedSize
 						})}>
