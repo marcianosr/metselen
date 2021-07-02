@@ -1,4 +1,3 @@
-import { WorldBrick } from "../data/worldsConfig";
 import { BrickType } from "../types/Bricks";
 
 export const toBrickIds = (mapping: BrickType[][]) =>

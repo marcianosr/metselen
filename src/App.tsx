@@ -1,4 +1,4 @@
-import { Children, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
 import { init, track, parameters } from "insights-js";
 import { GameStateProvider, useGameState } from "./providers/GameStateProvider";
@@ -69,7 +69,6 @@ const ScreenManager = () => {
 
 	return (
 		<>
-			{/* <ModeManager /> */}
 			{gameState.mode === "game" && (
 				<>
 					{gameState.screen.current === "enterName" && (
@@ -87,7 +86,7 @@ const ScreenManager = () => {
 	);
 };
 
-const ModeManager: React.FC = ({ children }) => {
+export const ModeManager: React.FC = ({ children }) => {
 	const { gameState, updateGameState } = useGameState();
 
 	return (

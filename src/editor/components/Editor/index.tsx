@@ -35,6 +35,8 @@ const Editor = () => {
 						updateLevelConfigState("time", parseInt(e.target.value))
 					}
 				/>
+				<button>Save level</button>
+
 			</Inventory>
 		</>
 	);
