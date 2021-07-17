@@ -15,11 +15,13 @@
 		"@types/react": "^17.0.13",
 		"@types/react-dom": "^17.0.8",
 		"@types/uuid": "^8.3.0",
+		"axios": "^0.21.1",
 		"classnames": "^2.3.1",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"gh-pages": "^3.2.0",
 		"insights-js": "^1.2.10",
+		"nodemon": "^2.0.9",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-scripts": "^4.0.3",
@@ -35,7 +37,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"server": "node server/index.js"
+		"server": "nodemon server/index.js"
 	},
 	"eslintConfig": {
 		"extends": [

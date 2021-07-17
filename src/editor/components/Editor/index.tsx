@@ -1,41 +1,64 @@
 import React from "react";
-import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
-import BrickWall from "../Grid";
+import axios from "axios";
+import { useLevelConfigState, LevelConfigState } from "../../../providers/LevelConfigProvider";
+import Grid from "../Grid";
 import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
 import LevelInfoGroup from "../LevelInfoGroup";
 
+type LevelDraftState = LevelConfigState;
+
 const Editor = () => {
 	const {
 		levelConfigState,
-		updateLevelConfigState,
+		updateLevelConfigStateMultiple
 	} = useLevelConfigState();
+
+	const [levelDraft, setLevelDraft] = React.useState<LevelDraftState>(
+		levelConfigState
+	);
+
+
+	const saveLevel = () => {
+		updateLevelConfigStateMultiple({
+			...levelConfigState,
+			...levelDraft
+		});
+
+		axios.post("/api", { level: levelDraft, }).then(response => console.log(response))
+	}
 
 	return (
 		<>
 			<LevelInfoGroup />
-			<BrickWall />
+			<Grid levelDraft={levelDraft} setLevelDraft={setLevelDraft} />
 			{/* <Inventory direction="horizontal">
 				<BrickInventory />
 			</Inventory> */}
 			<Inventory>
 				<InputGroup
 					label="Level name"
-					value={levelConfigState.name}
+					value={levelDraft.name}
 					type="text"
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						updateLevelConfigState("name", e.target.value)
+						setLevelDraft({
+							...levelDraft,
+							name: e.target.value
+						})
 					}
 				/>
 				<InputGroup
 					label="Time"
-					value={levelConfigState.time}
+					value={levelDraft.time}
 					type="number"
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						updateLevelConfigState("time", parseInt(e.target.value))
+						setLevelDraft({
+							...levelDraft,
+							time: parseInt(e.target.value)
+						})
 					}
 				/>
-				<button>Save level</button>
+				<button onClick={saveLevel}>Save level</button>
 
 			</Inventory>
 		</>

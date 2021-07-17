@@ -6,7 +6,7 @@ export type BrickPosition = BrickType & {
 	y: number
 }
 
-type LevelConfigState = {
+export type LevelConfigState = {
 	name: string;
 	level: number;
 	layout: BrickPosition[],

@@ -1,10 +1,10 @@
 import React, { useState, CSSProperties } from "react";
+import classNames from "classnames";
 import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
-import styles from "./styles.module.css";
 import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
-import classNames from "classnames";
+import styles from "./styles.module.css";
 
 type Position = {
 	x: number
@@ -16,11 +16,15 @@ const GRID_SETTINGS = {
 	height: 50,
 }
 
-const Grid = () => {
-	const { levelConfigState } = useLevelConfigState();
+type GridProps = {
+	levelDraft: any;
+	setLevelDraft: any;
+}
+
+const Grid: React.FC<GridProps> = ({ levelDraft, setLevelDraft }) => {
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
-	const [bricks, setBricks] = useState([
-		...levelConfigState.layout
+	const [brickLayout, setBrickLayout] = useState([
+		...levelDraft.layout
 	]);
 	const [showInventory, setShowInventory] = useState(false);
 	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium");
@@ -46,18 +50,24 @@ const Grid = () => {
 			y: e.clientY - grid.top
 		}
 
-		setBricks([
-			...bricks,
-			{
-				id: Math.round(Math.random() * 1000), size: selectedSize, x: Math.floor(position.x / GRID_SETTINGS.width),
-				y: Math.floor(position.y / GRID_SETTINGS.height),
-			}
-		]);
+		setLevelDraft({
+			...levelDraft,
+			layout: [
+				...levelDraft.layout,
+				{
+					id: Math.round(Math.random() * 1000), size: selectedSize, x: Math.floor(position.x / GRID_SETTINGS.width),
+					y: Math.floor(position.y / GRID_SETTINGS.height)
+				}
+			]
+		});
 	}
 
 	const removeBrick = (e: React.MouseEvent, brick: BrickType) => {
-		const newBricksState = bricks.filter(b => b.id !== brick.id);
-		setBricks(newBricksState);
+		const newBricksState = levelDraft.layout.filter((b: BrickType) => b.id !== brick.id);
+		setLevelDraft({
+			...levelDraft,
+			layout: newBricksState
+		});
 	}
 
 	const openBrickInventory = (e: React.MouseEvent) => {
@@ -79,7 +89,7 @@ const Grid = () => {
 				handleRightClick(e)
 			}}>
 				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={classNames(styles.selectedCell, [styles[selectedSize]])}>cell</div>}
-				{bricks.map((brick: BrickPosition, idx) =>
+				{levelDraft.layout.map((brick: BrickPosition, idx: number) =>
 					<Brick
 						key={idx}
 						id={idx}
