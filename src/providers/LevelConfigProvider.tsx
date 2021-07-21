@@ -37,7 +37,7 @@ type LevelConfigStateContextState = {
 type LevelConfigStateProps = {};
 
 const INITIAL_LEVEL_STATE: LevelConfigState = {
-	name: "Untitled",
+	name: "untitled",
 	level: 0,
 	layout: [
 		{ id: 1, size: "large", willDrop: true, cracked: false, x: 1, y: 2 },

@@ -1,35 +1,53 @@
 const express = require("express");
 const fs = require("fs");
-const path = require("path");
-const PORT = process.env.PORT || 3200;
+const PORT = 3200;
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 
-app.post("/api", (req, res) => {
-	console.log("post:", req.body);
-
+const saveFile = (req, res) => {
 	try {
 		if (!fs.existsSync(`src/data/levels`)) fs.mkdirSync("src/data/levels/");
+
 		fs.writeFile(
 			`src/data/levels/level-${req.body.level.name}.json`,
 			JSON.stringify(req.body),
 			(err) => {
-				if (err) console.log(err);
+				if (err) {
+					console.log("Error saving level:", err);
+					return err;
+				}
 
-				console.log("saved!");
+				console.log("Level saved!");
+
+				res.json(req.body.level);
 			}
 		);
 	} catch (err) {
-		console.log(err);
+		throw new Error(err);
 	}
+};
+
+app.post("/check", (req, res) => {
+	if (fs.existsSync(`src/data/levels/level-${req.body.level.name}.json`)) {
+		res.status(400).json({
+			message: `File "level-${req.body.level.name}.json" already exists`,
+		});
+	}
+
+	saveFile(req, res);
+
+	res.status(200).json({
+		message: `File "level-${req.body.level.name}.json" saved!`,
+	});
 });
 
-app.get("/api", (req, res) => {
-	console.log("get");
-	res.json({ message: "Editor api!" });
+app.post("/write", (req, res) => {
+	console.log("post:", req.body);
+
+	saveFile(req, res);
 });
 
 app.listen(PORT, () => {

@@ -80,7 +80,6 @@ const BrickInventory: React.FC<BrickInventoryProps> = ({ selectedSize, setSelect
 					))}
 				</ul>
 			</section>
-
 		</Modal>
 
 	);
