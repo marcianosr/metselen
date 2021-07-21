@@ -1,16 +1,15 @@
 import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import styles from "./styles.module.css";
 
-const LevelInfoGroup = () => {
-    const {
-        levelConfigState,
-    } = useLevelConfigState();
+type LevelInfoGroupProps = {
+    levelDraftState: any
+}
 
-
+const LevelInfoGroup: React.FC<LevelInfoGroupProps> = ({ levelDraftState }) => {
     return (
         <section className={styles.levelInfoGroup}>
             <h1 className={styles.title}>Level editor</h1>
-            <h2 className={styles.smallTitle}>Level {levelConfigState.level} - {levelConfigState.name}</h2>
+            <h2 className={styles.smallTitle}>World {levelDraftState.worldNumber} Level {levelDraftState.levelNumber} - {levelDraftState.name}</h2>
         </section>
     )
 }

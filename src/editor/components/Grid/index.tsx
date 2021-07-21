@@ -17,14 +17,14 @@ const GRID_SETTINGS = {
 }
 
 type GridProps = {
-	levelDraft: any;
-	setLevelDraft: any;
+	levelDraftState: any;
+	setLevelDraftState: any;
 }
 
-const Grid: React.FC<GridProps> = ({ levelDraft, setLevelDraft }) => {
+const Grid: React.FC<GridProps> = ({ levelDraftState, setLevelDraftState }) => {
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
 	const [brickLayout, setBrickLayout] = useState([
-		...levelDraft.layout
+		...levelDraftState.layout
 	]);
 	const [showInventory, setShowInventory] = useState(false);
 	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium");
@@ -50,10 +50,10 @@ const Grid: React.FC<GridProps> = ({ levelDraft, setLevelDraft }) => {
 			y: e.clientY - grid.top
 		}
 
-		setLevelDraft({
-			...levelDraft,
+		setLevelDraftState({
+			...levelDraftState,
 			layout: [
-				...levelDraft.layout,
+				...levelDraftState.layout,
 				{
 					id: Math.round(Math.random() * 1000), size: selectedSize, x: Math.floor(position.x / GRID_SETTINGS.width),
 					y: Math.floor(position.y / GRID_SETTINGS.height)
@@ -63,9 +63,9 @@ const Grid: React.FC<GridProps> = ({ levelDraft, setLevelDraft }) => {
 	}
 
 	const removeBrick = (e: React.MouseEvent, brick: BrickType) => {
-		const newBricksState = levelDraft.layout.filter((b: BrickType) => b.id !== brick.id);
-		setLevelDraft({
-			...levelDraft,
+		const newBricksState = levelDraftState.layout.filter((b: BrickType) => b.id !== brick.id);
+		setLevelDraftState({
+			...levelDraftState,
 			layout: newBricksState
 		});
 	}
@@ -89,7 +89,7 @@ const Grid: React.FC<GridProps> = ({ levelDraft, setLevelDraft }) => {
 				handleRightClick(e)
 			}}>
 				{selectedCell && <div style={{ "--x": selectedCell.x, "--y": selectedCell.y } as CSSProperties} className={classNames(styles.selectedCell, [styles[selectedSize]])}>cell</div>}
-				{levelDraft.layout.map((brick: BrickPosition, idx: number) =>
+				{levelDraftState.layout.map((brick: BrickPosition, idx: number) =>
 					<Brick
 						key={idx}
 						id={idx}

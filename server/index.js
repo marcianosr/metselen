@@ -10,9 +10,8 @@ app.use(express.json()); // To parse the incoming requests with JSON payloads
 const saveFile = (req, res) => {
 	try {
 		if (!fs.existsSync(`src/data/levels`)) fs.mkdirSync("src/data/levels/");
-
 		fs.writeFile(
-			`src/data/levels/level-${req.body.level.name}.json`,
+			`src/data/levels/level-${req.body.level.worldNumber}-${req.body.level.levelNumber}.json`,
 			JSON.stringify(req.body),
 			(err) => {
 				if (err) {
@@ -31,16 +30,20 @@ const saveFile = (req, res) => {
 };
 
 app.post("/check", (req, res) => {
-	if (fs.existsSync(`src/data/levels/level-${req.body.level.name}.json`)) {
+	if (
+		fs.existsSync(
+			`src/data/levels/level-${req.body.level.worldNumber}-${req.body.level.levelNumber}.json`
+		)
+	) {
 		res.status(400).json({
-			message: `File "level-${req.body.level.name}.json" already exists`,
+			message: `File "level-${req.body.level.worldNumber}-${req.body.level.levelNumber}.json" already exists`,
 		});
 	}
 
 	saveFile(req, res);
 
 	res.status(200).json({
-		message: `File "level-${req.body.level.name}.json" saved!`,
+		message: `File "level-${req.body.level.worldNumber}-${req.body.level.levelNumber}.json" saved!`,
 	});
 });
 

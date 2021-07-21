@@ -8,7 +8,8 @@ export type BrickPosition = BrickType & {
 
 export type LevelConfigState = {
 	name: string;
-	level: number;
+	worldNumber: number;
+	levelNumber: number;
 	layout: BrickPosition[],
 	ranges: {
 		multiplication: number[];
@@ -38,7 +39,8 @@ type LevelConfigStateProps = {};
 
 const INITIAL_LEVEL_STATE: LevelConfigState = {
 	name: "untitled",
-	level: 0,
+	worldNumber: 1,
+	levelNumber: 0,
 	layout: [
 		{ id: 1, size: "large", willDrop: true, cracked: false, x: 1, y: 2 },
 	],
