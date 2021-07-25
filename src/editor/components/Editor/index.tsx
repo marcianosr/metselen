@@ -21,8 +21,14 @@ const Editor = () => {
 	const [levelDraftState, setLevelDraftState] = useState<LevelDraftState>(
 		levelConfigState
 	);
+
 	const [toggleInventories, setToggleInventories] = useState(false);
 	const inventoriesAreShown = toggleInventories === true;
+
+	// Load levels!
+	useEffect(() => {
+		setLevelDraftState(levelConfigState);
+	}, [levelConfigState])
 
 	const confirmSave = async () => {
 		axios.post("/check", { level: levelDraftState, }).then(response => {

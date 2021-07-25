@@ -29,6 +29,32 @@ const saveFile = (req, res) => {
 	}
 };
 
+app.get("/files", (req, res) => {
+	fs.readdir("./src/data/levels", (error, files) => {
+		if (error) console.log("Error reading files", error);
+
+		return res.json({
+			files,
+		});
+	});
+});
+
+app.post("/file", (req, res) => {
+	console.log(req.body.file);
+	return fs.readFile(
+		`src/data/levels/${req.body.file}`,
+		"utf-8",
+		(error, level) => {
+			if (error) {
+				console.log("Error reading file", error);
+				return;
+			}
+
+			return res.json({ level });
+		}
+	);
+});
+
 app.post("/check", (req, res) => {
 	if (
 		fs.existsSync(

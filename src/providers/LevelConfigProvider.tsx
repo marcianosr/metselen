@@ -66,6 +66,7 @@ export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
 		useState<LevelConfigState>(INITIAL_LEVEL_STATE);
 
 	const updateLevelConfigState: LevelStateUpdater = (key, value) => {
+		console.log("key", key)
 		setLevelConfigState({
 			...levelConfigState,
 			[key]: value,
