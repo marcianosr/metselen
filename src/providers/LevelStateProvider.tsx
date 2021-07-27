@@ -41,11 +41,11 @@ const INITIAL_LEVEL_STATE: LevelState = {
 
 export const LevelStateContext = createContext<LevelStateContextState>({
 	levelState: INITIAL_LEVEL_STATE,
-	setLevelState: () => {},
-	onResetLevel: () => {},
-	onPlayLevel: (levelId: number) => {},
-	updateLevelState: () => {},
-	updateLevelStateMultiple: () => {},
+	setLevelState: () => { },
+	onResetLevel: () => { },
+	onPlayLevel: (levelId: number) => { },
+	updateLevelState: () => { },
+	updateLevelStateMultiple: () => { },
 });
 
 export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
@@ -84,7 +84,7 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 		updateGameStateMultiple({
 			currentLevel: levelId,
 			screen: {
-				current: "level",
+				game: "level",
 			},
 		});
 	};

@@ -50,7 +50,7 @@ const ScreenManager = () => {
 
 	useEffect(() => {
 		if (user?.username) {
-			updateGameState("screen", { current: "overworld" });
+			updateGameState("screen", { game: "overworld" });
 			track({
 				id: "User registered",
 				parameters: {
@@ -71,13 +71,13 @@ const ScreenManager = () => {
 		<>
 			{gameState.mode === "game" && (
 				<>
-					{gameState.screen.current === "enterName" && (
+					{gameState.screen.game === "enterName" && (
 						<UserDataScreen />
 					)}
-					{gameState.screen.current === "overworld" && (
+					{gameState.screen.game === "overworld" && (
 						<LevelSelectScreenContainer />
 					)}
-					{gameState.screen.current === "level" && <LevelContainer />}
+					{gameState.screen.game === "level" && <LevelContainer />}
 				</>
 			)}
 

@@ -19,22 +19,23 @@ type GameStateContextState = {
 	updateGameStateMultiple: GameStateMultipleUpdater;
 };
 
-const INITIAL_GAME_STATE = {
+const INITIAL_GAME_STATE: GameState = {
 	worlds,
 	currentWorld: 1,
 	currentLevel: 1,
-	// Refactor screen changes  to it's own provider
+	// Refactor screen changes to it's own provider
 	screen: {
-		current: "enterName",
+		game: "enterName",
+		editor: "files"
 	},
 	mode: "editor",
 };
 
 export const GameStateContext = createContext<GameStateContextState>({
 	gameState: INITIAL_GAME_STATE,
-	setGameState: () => {},
-	updateGameState: () => {},
-	updateGameStateMultiple: () => {},
+	setGameState: () => { },
+	updateGameState: () => { },
+	updateGameStateMultiple: () => { },
 });
 
 export const GameStateProvider: React.FC = ({ children }) => {
@@ -43,7 +44,8 @@ export const GameStateProvider: React.FC = ({ children }) => {
 		currentWorld: INITIAL_GAME_STATE.currentWorld,
 		currentLevel: INITIAL_GAME_STATE.currentLevel,
 		screen: {
-			current: "enterName",
+			game: "enterName",
+			editor: "files"
 		},
 		mode: "editor",
 	});

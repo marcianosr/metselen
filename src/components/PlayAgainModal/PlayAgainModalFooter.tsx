@@ -16,7 +16,7 @@ const PlayAgainModalFooter: React.FC<PlayAgainModalFooterProps> = ({
 	const { onResetLevel } = useLevelState();
 
 	const returnToOverworld = () =>
-		updateGameState("screen", { current: "overworld" });
+		updateGameState("screen", { game: "overworld" });
 
 	return (
 		<footer className={classNames(styles.buttonContainer)}>
