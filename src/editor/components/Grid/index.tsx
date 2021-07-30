@@ -1,6 +1,6 @@
 import React, { useState, CSSProperties, Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
-import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConfigProvider";
+import { BrickPosition } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
 import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
@@ -24,9 +24,6 @@ type GridProps = {
 
 const Grid: React.FC<GridProps> = ({ levelDraftState, setLevelDraftState }) => {
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
-	const [brickLayout, setBrickLayout] = useState([
-		...levelDraftState.layout
-	]);
 	const [showInventory, setShowInventory] = useState(false);
 	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium");
 
