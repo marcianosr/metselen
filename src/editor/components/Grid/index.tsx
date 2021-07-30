@@ -1,9 +1,10 @@
-import React, { useState, CSSProperties } from "react";
+import React, { useState, CSSProperties, Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
 import { BrickPosition, useLevelConfigState } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
 import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
+import { LevelDraftState } from "../Editor";
 import styles from "./styles.module.css";
 
 type Position = {
@@ -17,8 +18,8 @@ const GRID_SETTINGS = {
 }
 
 type GridProps = {
-	levelDraftState: any;
-	setLevelDraftState: any;
+	levelDraftState: LevelDraftState;
+	setLevelDraftState: Dispatch<SetStateAction<LevelDraftState>>
 }
 
 const Grid: React.FC<GridProps> = ({ levelDraftState, setLevelDraftState }) => {

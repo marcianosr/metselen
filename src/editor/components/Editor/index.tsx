@@ -9,7 +9,7 @@ import ConfirmSaveModal from "../ConfirmSaveModal";
 import Button from "../../../components/Button";
 import styles from "./styles.module.css";
 
-type LevelDraftState = LevelConfigState;
+export type LevelDraftState = LevelConfigState;
 
 const Editor = () => {
 	const {
