@@ -5,6 +5,7 @@ type AppModes = "editor" | "game";
 type GameScreens = "enterName" | "overworld" | "level";
 type EditorScreens = "files" | "editor";
 
+// TODO: Require atleast one
 type AppScreens = {
 	game?: GameScreens;
 	editor?: EditorScreens;
