@@ -5,11 +5,16 @@ import styles from "./styles.module.css";
 type InputGroupProps = {
 	label: string;
 	value: number | string;
-	type: "text" | "number";
+	type: "text" | "number" | "checkbox";
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputGroup: React.FC<InputGroupProps> = ({ label, value, type, onChange }) => {
+const InputGroup: React.FC<InputGroupProps> = ({
+	label,
+	value,
+	type,
+	onChange,
+}) => {
 	return (
 		<fieldset className={styles.inputContainer}>
 			<label htmlFor={label}>{label}</label>

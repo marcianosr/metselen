@@ -3,19 +3,22 @@ import { BrickType } from "../types/Bricks";
 
 export type BrickPosition = BrickType & {
 	x: number;
-	y: number
-}
+	y: number;
+};
 
 export type LevelConfigState = {
 	name: string;
 	worldNumber: number;
 	levelNumber: number;
-	layout: BrickPosition[],
+	layout: BrickPosition[];
 	ranges: {
 		multiplication: number[];
 		tables: number[];
 	};
 	time: number;
+	isUnlocked: boolean;
+	maxBricks: number;
+	bricksNeeded: number;
 };
 
 // T represents a key of the LevelState Type
@@ -49,14 +52,17 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 		tables: [1],
 	},
 	time: 10,
+	isUnlocked: false,
+	maxBricks: 0,
+	bricksNeeded: 0,
 };
 
 export const LevelConfigStateContext =
 	createContext<LevelConfigStateContextState>({
 		levelConfigState: INITIAL_LEVEL_STATE,
-		setLevelConfigState: () => { },
-		updateLevelConfigState: () => { },
-		updateLevelConfigStateMultiple: () => { },
+		setLevelConfigState: () => {},
+		updateLevelConfigState: () => {},
+		updateLevelConfigStateMultiple: () => {},
 	});
 
 export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
@@ -66,7 +72,7 @@ export const LevelConfigStateProvider: React.FC<LevelConfigStateProps> = ({
 		useState<LevelConfigState>(INITIAL_LEVEL_STATE);
 
 	const updateLevelConfigState: LevelStateUpdater = (key, value) => {
-		console.log("key", key)
+		console.log("key", key);
 		setLevelConfigState({
 			...levelConfigState,
 			[key]: value,

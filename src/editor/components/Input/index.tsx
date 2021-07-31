@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 
 type InputProps = {
-	type: "number" | "text";
+	type: "number" | "text" | "checkbox";
 	id: string;
 	name: string;
 	value: number | string;
