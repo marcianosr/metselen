@@ -81,7 +81,12 @@ const ScreenManager = () => {
 				</>
 			)}
 
-			{gameState.mode === "editor" && <FileSelectionScreenContainer />}
+			{gameState.mode === "editor" &&
+				<>
+					<ModeManager />
+					<FileSelectionScreenContainer />
+				</>
+			}
 		</>
 	);
 };

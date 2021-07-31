@@ -27,6 +27,7 @@ const LevelSelectScreenContainer: React.FC = () => {
 	const totalLevels = flattenBricksArray<WorldBrick>(
 		worlds[currentWorld - 1].levels
 	).length;
+
 	const [modalId, setModalId] = useState<SetStateAction<number | null>>(null);
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const worldsScore = savedGameState?.worlds?.score;

@@ -26,28 +26,21 @@ const INITIAL_GAME_STATE: GameState = {
 	// Refactor screen changes to it's own provider
 	screen: {
 		game: "enterName",
-		editor: "files"
+		editor: "files",
 	},
 	mode: "editor",
 };
 
 export const GameStateContext = createContext<GameStateContextState>({
 	gameState: INITIAL_GAME_STATE,
-	setGameState: () => { },
-	updateGameState: () => { },
-	updateGameStateMultiple: () => { },
+	setGameState: () => {},
+	updateGameState: () => {},
+	updateGameStateMultiple: () => {},
 });
 
 export const GameStateProvider: React.FC = ({ children }) => {
 	const [gameState, setGameState] = React.useState<GameState>({
-		worlds,
-		currentWorld: INITIAL_GAME_STATE.currentWorld,
-		currentLevel: INITIAL_GAME_STATE.currentLevel,
-		screen: {
-			game: "enterName",
-			editor: "files"
-		},
-		mode: "editor",
+		...INITIAL_GAME_STATE,
 	});
 
 	const updateGameState: GameStateUpdater = (key, value) => {
