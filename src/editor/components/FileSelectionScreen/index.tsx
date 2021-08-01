@@ -35,7 +35,7 @@ const FileSelectionScreen: React.FC = () => {
 		axios
 			.post("/file", { file })
 			.then((response) => {
-				setLevelData(JSON.parse(response.data.level).level);
+				setLevelData(JSON.parse(response.data.level).data);
 			})
 			.catch((error) => console.log(error));
 	};

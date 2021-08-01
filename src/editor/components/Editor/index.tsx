@@ -34,7 +34,7 @@ const Editor = () => {
 
 	const confirmSave = async () => {
 		axios
-			.post("/check", { level: levelDraftState })
+			.post("/check", { data: levelDraftState })
 			.then((response) => {
 				console.info(
 					"%c%s",
@@ -62,7 +62,7 @@ const Editor = () => {
 
 	const saveLevel = () => {
 		axios
-			.post("/write", { level: levelDraftState })
+			.post("/write", { data: levelDraftState })
 			.then((response) => {
 				console.info(
 					"%c%s",
