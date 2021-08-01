@@ -1,14 +1,22 @@
 .inventory {
-	background: coral;
+	background: rgba(215, 108, 128, 0.85);
+	border: 5px solid var(--defaultBrickColor);
+	border-radius: 5px;
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 1rem;
+	padding: 0.2rem;
+}
+
+.vertical > * {
+	margin-bottom: 0.5rem;
 }
 
 .vertical {
-	height: 300px;
-	top: calc(50% - 150px);
+	min-height: 300px;
+	top: calc(50%);
+	transform: translateY(-50%);
+	position: fixed;
 }
 
 .horizontal {

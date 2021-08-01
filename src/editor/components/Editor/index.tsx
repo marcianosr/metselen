@@ -94,6 +94,7 @@ const Editor = () => {
 			/>
 			{inventoriesAreShown && (
 				<Inventory>
+					<h1 className={styles.title}>Create level</h1>
 					<InputGroup
 						label="Level name"
 						value={levelDraftState.name}
