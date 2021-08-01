@@ -5,13 +5,13 @@ import {
 	LevelConfigState,
 } from "../../../providers/LevelConfigProvider";
 import Grid from "../Grid";
-import InputGroup from "../InputGroup";
 import Inventory from "../Inventory";
 import LevelInfoGroup from "../LevelInfoGroup";
 import ConfirmSaveModal from "../ConfirmSaveModal";
 import Button from "../../../components/Button";
 import styles from "./styles.module.css";
 import LevelInventory from "../Inventory/LevelInventory";
+import WorldInventory from "../Inventory/WorldInventory";
 
 export type LevelDraftState = LevelConfigState;
 
@@ -25,6 +25,7 @@ const Editor = () => {
 
 	const [toggleInventories, setToggleInventories] = useState(false);
 	const inventoriesAreShown = toggleInventories === true;
+	const isLevelOrWorld = levelDraftState.type !== "level" ? "level" : "world";
 
 	// Load levels!
 	useEffect(() => {
@@ -52,6 +53,12 @@ const Editor = () => {
 				return error.response.data;
 			});
 	};
+
+	const switchTo = () =>
+		setLevelDraftState({
+			...levelDraftState,
+			type: isLevelOrWorld,
+		});
 
 	const saveLevel = () => {
 		axios
@@ -98,10 +105,22 @@ const Editor = () => {
 					<h1 className={styles.title}>
 						Create {levelDraftState.type}
 					</h1>
-					<LevelInventory
-						levelDraftState={levelDraftState}
-						setLevelDraftState={setLevelDraftState}
-					/>
+					<button type="button" onClick={switchTo}>
+						Switch to {isLevelOrWorld}
+					</button>
+					{levelDraftState.type === "level" && (
+						<LevelInventory
+							levelDraftState={levelDraftState}
+							setLevelDraftState={setLevelDraftState}
+						/>
+					)}
+
+					{levelDraftState.type === "world" && (
+						<WorldInventory
+							levelDraftState={levelDraftState}
+							setLevelDraftState={setLevelDraftState}
+						/>
+					)}
 					<Button variant="brick" onClick={() => confirmSave()}>
 						Save level
 					</Button>
