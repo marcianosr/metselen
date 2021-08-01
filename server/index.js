@@ -64,6 +64,8 @@ app.post("/check", (req, res) => {
 		res.status(400).json({
 			message: `File "level-${req.body.level.worldNumber}-${req.body.level.levelNumber}.json" already exists`,
 		});
+
+		return;
 	}
 
 	saveFile(req, res);
