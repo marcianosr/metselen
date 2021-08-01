@@ -11,6 +11,7 @@ import LevelInfoGroup from "../LevelInfoGroup";
 import ConfirmSaveModal from "../ConfirmSaveModal";
 import Button from "../../../components/Button";
 import styles from "./styles.module.css";
+import LevelInventory from "../Inventory/LevelInventory";
 
 export type LevelDraftState = LevelConfigState;
 
@@ -94,80 +95,13 @@ const Editor = () => {
 			/>
 			{inventoriesAreShown && (
 				<Inventory>
-					<h1 className={styles.title}>Create level</h1>
-					<InputGroup
-						label="Level name"
-						value={levelDraftState.name}
-						type="text"
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setLevelDraftState({
-								...levelDraftState,
-								name: e.target.value,
-							})
-						}
+					<h1 className={styles.title}>
+						Create {levelDraftState.type}
+					</h1>
+					<LevelInventory
+						levelDraftState={levelDraftState}
+						setLevelDraftState={setLevelDraftState}
 					/>
-					<InputGroup
-						label="Time"
-						value={levelDraftState.time}
-						type="number"
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setLevelDraftState({
-								...levelDraftState,
-								time: parseInt(e.target.value),
-							})
-						}
-					/>
-					<InputGroup
-						label="Is level unlocked"
-						value={"isUnlocked"}
-						type="checkbox"
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setLevelDraftState({
-								...levelDraftState,
-								isUnlocked: false,
-							})
-						}
-					/>
-					<InputGroup
-						label="Bricks needed to unlock"
-						value={levelDraftState.bricksNeeded}
-						type="number"
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setLevelDraftState({
-								...levelDraftState,
-								bricksNeeded: parseInt(e.target.value),
-							})
-						}
-					/>
-
-					<div className={styles.inputGroup}>
-						<InputGroup
-							label="World"
-							value={levelDraftState.worldNumber}
-							type="number"
-							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>
-							) =>
-								setLevelDraftState({
-									...levelDraftState,
-									worldNumber: parseInt(e.target.value),
-								})
-							}
-						/>
-						<InputGroup
-							label="Level"
-							value={levelDraftState.levelNumber}
-							type="number"
-							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>
-							) =>
-								setLevelDraftState({
-									...levelDraftState,
-									levelNumber: parseInt(e.target.value),
-								})
-							}
-						/>
-					</div>
 					<Button variant="brick" onClick={() => confirmSave()}>
 						Save level
 					</Button>

@@ -1,17 +1,11 @@
-import React, {
-	useState,
-	CSSProperties,
-	Dispatch,
-	SetStateAction,
-	useEffect,
-} from "react";
+import React, { useState, CSSProperties, useEffect } from "react";
 import classNames from "classnames";
 import { BrickPosition } from "../../../providers/LevelConfigProvider";
 import Brick from "../../../components/Brick";
 import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
-import { LevelDraftState } from "../Editor";
 import styles from "./styles.module.css";
+import { LevelDraftStateProps } from "../../../types/LevelState";
 
 type Position = {
 	x: number;
@@ -23,12 +17,10 @@ const GRID_SETTINGS = {
 	height: 50,
 };
 
-type GridProps = {
-	levelDraftState: LevelDraftState;
-	setLevelDraftState: Dispatch<SetStateAction<LevelDraftState>>;
-};
-
-const Grid: React.FC<GridProps> = ({ levelDraftState, setLevelDraftState }) => {
+const Grid: React.FC<LevelDraftStateProps> = ({
+	levelDraftState,
+	setLevelDraftState,
+}) => {
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
 	const [showInventory, setShowInventory] = useState(false);
 	const [selectedSize, setSelectedSize] = useState<BrickSizes>("medium");

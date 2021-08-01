@@ -1,7 +1,3 @@
-.inputGroup {
-	display: flex;
-}
-
 .title {
 	composes: defaultText from "../../../typography.module.css";
 	font-size: 2rem;

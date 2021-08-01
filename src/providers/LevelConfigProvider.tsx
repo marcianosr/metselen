@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
-import { BrickType } from "../types/Bricks";
+import { getRandomBrickColor } from "../components/BrickContainer";
+import { BrickType, RandomColorType } from "../types/Bricks";
 
 export type BrickPosition = BrickType & {
 	x: number;
@@ -19,6 +20,8 @@ export type LevelConfigState = {
 	isUnlocked: boolean;
 	maxBricks: number;
 	bricksNeeded: number;
+	color: RandomColorType;
+	type: "level" | "world";
 };
 
 // T represents a key of the LevelState Type
@@ -55,6 +58,8 @@ const INITIAL_LEVEL_STATE: LevelConfigState = {
 	isUnlocked: false,
 	maxBricks: 0,
 	bricksNeeded: 0,
+	color: getRandomBrickColor(),
+	type: "level",
 };
 
 export const LevelConfigStateContext =
