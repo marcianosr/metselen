@@ -1,6 +1,6 @@
 import { useState } from "react";
 import EditorScreen from "../components/EditorScreen";
-import NavigationBar from "../components/FileSelectionDisplay/NavigationBar";
+import NavigationBar from "../components/NavigationBar/NavigationBar";
 import {
 	EditorState,
 	EditorStateProvider,

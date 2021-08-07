@@ -1,0 +1,4 @@
+.navigationList {
+	display: flex;
+	border: 3px grey dashed;
+}
