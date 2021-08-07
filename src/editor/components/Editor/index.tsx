@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
-	useLevelConfigState,
-	LevelConfigState,
-} from "../../../providers/LevelConfigProvider";
+	useEditorState,
+	EditorState,
+} from "../../../providers/EditorStateProvider";
 import Grid from "../Grid";
 import Inventory from "../Inventory";
 import LevelInfoGroup from "../LevelInfoGroup";
@@ -13,28 +13,28 @@ import styles from "./styles.module.css";
 import LevelInventory from "../Inventory/LevelInventory";
 import WorldInventory from "../Inventory/WorldInventory";
 
-export type LevelDraftState = LevelConfigState;
+export type EditorDraftState = EditorState;
 
 const Editor = () => {
-	const { levelConfigState, updateLevelConfigStateMultiple } =
-		useLevelConfigState();
+	const { editorState, updateEditorStateMultiple } = useEditorState();
 	const [warningMessage, setWarningMessage] = useState("");
 	const [showErrorModal, setShowErrorModal] = useState(false);
-	const [levelDraftState, setLevelDraftState] =
-		useState<LevelDraftState>(levelConfigState);
+	const [editorDraftState, setEditorDraftState] =
+		useState<EditorDraftState>(editorState);
 
 	const [toggleInventories, setToggleInventories] = useState(false);
 	const inventoriesAreShown = toggleInventories === true;
-	const isLevelOrWorld = levelDraftState.type !== "level" ? "level" : "world";
+	const isLevelOrWorld =
+		editorDraftState.type !== "level" ? "level" : "world";
 
 	// Load levels!
 	useEffect(() => {
-		setLevelDraftState(levelConfigState);
-	}, [levelConfigState]);
+		setEditorDraftState(editorState);
+	}, [editorState]);
 
 	const confirmSave = async () => {
 		axios
-			.post("/check", { data: levelDraftState })
+			.post("/check", { data: editorDraftState })
 			.then((response) => {
 				console.info(
 					"%c%s",
@@ -55,14 +55,14 @@ const Editor = () => {
 	};
 
 	const switchTo = () =>
-		setLevelDraftState({
-			...levelDraftState,
+		setEditorDraftState({
+			...editorDraftState,
 			type: isLevelOrWorld,
 		});
 
 	const saveLevel = () => {
 		axios
-			.post("/write", { data: levelDraftState })
+			.post("/write", { data: editorDraftState })
 			.then((response) => {
 				console.info(
 					"%c%s",
@@ -78,9 +78,9 @@ const Editor = () => {
 				return error.response.data;
 			});
 
-		updateLevelConfigStateMultiple({
-			...levelConfigState,
-			...levelDraftState,
+		updateEditorStateMultiple({
+			...editorState,
+			...editorDraftState,
 		});
 	};
 
@@ -95,30 +95,30 @@ const Editor = () => {
 
 	return (
 		<>
-			<LevelInfoGroup levelDraftState={levelDraftState} />
+			<LevelInfoGroup editorDraftState={editorDraftState} />
 			<Grid
-				levelDraftState={levelDraftState}
-				setLevelDraftState={setLevelDraftState}
+				editorDraftState={editorDraftState}
+				setEditorDraftState={setEditorDraftState}
 			/>
 			{inventoriesAreShown && (
 				<Inventory>
 					<h1 className={styles.title}>
-						Create {levelDraftState.type}
+						Create {editorDraftState.type}
 					</h1>
 					<button type="button" onClick={switchTo}>
 						Switch to {isLevelOrWorld}
 					</button>
-					{levelDraftState.type === "level" && (
+					{editorDraftState.type === "level" && (
 						<LevelInventory
-							levelDraftState={levelDraftState}
-							setLevelDraftState={setLevelDraftState}
+							editorDraftState={editorDraftState}
+							setEditorDraftState={setEditorDraftState}
 						/>
 					)}
 
-					{levelDraftState.type === "world" && (
+					{editorDraftState.type === "world" && (
 						<WorldInventory
-							levelDraftState={levelDraftState}
-							setLevelDraftState={setLevelDraftState}
+							editorDraftState={editorDraftState}
+							setEditorDraftState={setEditorDraftState}
 						/>
 					)}
 					<Button variant="brick" onClick={() => confirmSave()}>

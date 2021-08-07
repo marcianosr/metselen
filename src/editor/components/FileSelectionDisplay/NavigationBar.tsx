@@ -1,12 +1,24 @@
+import { Dispatch, SetStateAction } from "react";
 import FileSelectionContainer from "../FileSelectionContainer";
 import { ModeManager } from "../../../App";
-import { LevelConfigStateProvider } from "../../../providers/LevelConfigProvider";
+import { EditorState } from "../../../providers/EditorStateProvider";
 
-const NavigationBar = () => (
-	<LevelConfigStateProvider>
+type NavigationBarProps = {
+	editorFileData: EditorState[];
+	setEditorFileData: Dispatch<SetStateAction<EditorState[]>>;
+};
+
+const NavigationBar: React.FC<NavigationBarProps> = ({
+	editorFileData,
+	setEditorFileData,
+}) => (
+	<>
 		<ModeManager />
-		<FileSelectionContainer />
-	</LevelConfigStateProvider>
+		<FileSelectionContainer
+			editorFileData={editorFileData}
+			setEditorFileData={setEditorFileData}
+		/>
+	</>
 );
 
 export default NavigationBar;

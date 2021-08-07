@@ -2,12 +2,18 @@ import Editor from "../Editor";
 
 import styles from "./styles.module.css";
 
-const EditorScreen = () => (
-	<section className={styles.editorScreen}>
-		<section className={styles.editorContainer}>
-			<Editor />
+type EditorScreenProps = {
+	isLoaded: boolean;
+};
+
+const EditorScreen: React.FC<EditorScreenProps> = ({ isLoaded }) => {
+	return (
+		<section className={styles.editorScreen}>
+			<section className={styles.editorContainer}>
+				{isLoaded && <Editor />}
+			</section>
 		</section>
-	</section>
-);
+	);
+};
 
 export default EditorScreen;

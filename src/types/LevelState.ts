@@ -1,6 +1,6 @@
 import { Tables } from "./Tables";
 import { BrickType } from "./Bricks";
-import { LevelDraftState } from "../editor/components/Editor";
+import { EditorDraftState } from "../editor/components/Editor";
 import { Dispatch, SetStateAction } from "react";
 
 export type LevelState = {
@@ -21,7 +21,7 @@ export type LevelStateProps = {
 	setLevelState: (levelState: LevelState) => void;
 };
 
-export type LevelDraftStateProps = {
-	levelDraftState: LevelDraftState;
-	setLevelDraftState: Dispatch<SetStateAction<LevelDraftState>>;
+export type EditorDraftStateProps = {
+	editorDraftState: EditorDraftState;
+	setEditorDraftState: Dispatch<SetStateAction<EditorDraftState>>;
 };

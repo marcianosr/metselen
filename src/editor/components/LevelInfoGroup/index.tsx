@@ -1,16 +1,19 @@
-import { LevelDraftState } from "../Editor";
+import { EditorDraftState } from "../Editor";
 import styles from "./styles.module.css";
 
 type LevelInfoGroupProps = {
-	levelDraftState: LevelDraftState;
+	editorDraftState: EditorDraftState;
 };
 
-const LevelInfoGroup: React.FC<LevelInfoGroupProps> = ({ levelDraftState }) => (
+const LevelInfoGroup: React.FC<LevelInfoGroupProps> = ({
+	editorDraftState,
+}) => (
 	<section className={styles.levelInfoGroup}>
-		<h1 className={styles.title}>{levelDraftState.type} editor</h1>
+		{console.log("Ed", editorDraftState)}
+		<h1 className={styles.title}>{editorDraftState.type} editor</h1>
 		<h2 className={styles.smallTitle}>
-			World {levelDraftState.worldNumber} Level{" "}
-			{levelDraftState.levelNumber} - {levelDraftState.name}
+			World {editorDraftState.worldNumber} Level{" "}
+			{editorDraftState.levelNumber} - {editorDraftState.name}
 		</h2>
 	</section>
 );

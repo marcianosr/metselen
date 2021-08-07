@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useLevelConfigState } from "../../../providers/LevelConfigProvider";
-import EditorScreen from "../EditorScreen";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+	EditorState,
+	useEditorState,
+} from "../../../providers/EditorStateProvider";
 import FileSelectionDisplay from "../FileSelectionDisplay";
 import styles from "./styles.module.css";
 
@@ -14,15 +16,20 @@ type FilesResponse = {
 	files: string[];
 };
 
-const FileSelectionContainer: React.FC = () => {
-	const { levelConfigState, updateLevelConfigStateMultiple } =
-		useLevelConfigState();
+type FileSelectionContainerProps = {
+	editorFileData: EditorState[];
+	setEditorFileData: Dispatch<SetStateAction<EditorState[]>>;
+};
+
+const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
+	editorFileData,
+	setEditorFileData,
+}) => {
+	const { editorState, updateEditorStateMultiple } = useEditorState();
 	const [files, setFiles] = useState<FilesStateType>({
 		worlds: [],
 		levels: [],
 	});
-	const [levelData, setLevelData] = useState({});
-	console.log(levelData);
 
 	const getLevels = () => axios.get<FilesResponse>("/files/levels");
 	const getWorlds = () => axios.get<FilesResponse>("/files/worlds");
@@ -38,17 +45,17 @@ const FileSelectionContainer: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		updateLevelConfigStateMultiple({
-			...levelConfigState,
-			...levelData,
+		updateEditorStateMultiple({
+			...editorState,
+			...editorFileData,
 		});
-	}, [levelData]);
+	}, [editorFileData]);
 
 	const loadFile = (file: string) => {
 		axios
 			.post("/file", { file })
 			.then((response) => {
-				setLevelData(JSON.parse(response.data.level).data);
+				setEditorFileData(JSON.parse(response.data.level).data);
 			})
 			.catch((error) => console.log(error));
 	};
@@ -56,7 +63,6 @@ const FileSelectionContainer: React.FC = () => {
 	return (
 		<section className={styles.fileSelection}>
 			<FileSelectionDisplay files={files} loadFile={loadFile} />
-			{Object.keys(levelData).length > 0 && <EditorScreen />}
 		</section>
 	);
 };

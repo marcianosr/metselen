@@ -1,11 +1,11 @@
 import React, { useState, CSSProperties, useEffect } from "react";
 import classNames from "classnames";
-import { BrickPosition } from "../../../providers/LevelConfigProvider";
+import { BrickPosition } from "../../../providers/EditorStateProvider";
 import Brick from "../../../components/Brick";
 import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
 import styles from "./styles.module.css";
-import { LevelDraftStateProps } from "../../../types/LevelState";
+import { EditorDraftStateProps } from "../../../types/LevelState";
 
 type Position = {
 	x: number;
@@ -17,9 +17,9 @@ const GRID_SETTINGS = {
 	height: 50,
 };
 
-const Grid: React.FC<LevelDraftStateProps> = ({
-	levelDraftState,
-	setLevelDraftState,
+const Grid: React.FC<EditorDraftStateProps> = ({
+	editorDraftState,
+	setEditorDraftState,
 }) => {
 	const [selectedCell, setSelectedCell] = useState<Position>({ x: 1, y: 1 });
 	const [showInventory, setShowInventory] = useState(false);
@@ -39,11 +39,11 @@ const Grid: React.FC<LevelDraftStateProps> = ({
 	};
 
 	useEffect(() => {
-		setLevelDraftState({
-			...levelDraftState,
-			maxBricks: levelDraftState.layout.length,
+		setEditorDraftState({
+			...editorDraftState,
+			maxBricks: editorDraftState.layout.length,
 		});
-	}, [levelDraftState.layout]);
+	}, [editorDraftState.layout]);
 
 	const addBrick = (e: React.MouseEvent) => {
 		const grid = e.currentTarget.getBoundingClientRect();
@@ -52,10 +52,10 @@ const Grid: React.FC<LevelDraftStateProps> = ({
 			y: e.clientY - grid.top,
 		};
 
-		setLevelDraftState({
-			...levelDraftState,
+		setEditorDraftState({
+			...editorDraftState,
 			layout: [
-				...levelDraftState.layout,
+				...editorDraftState.layout,
 				{
 					id: Math.round(Math.random() * 1000),
 					size: selectedSize,
@@ -67,11 +67,11 @@ const Grid: React.FC<LevelDraftStateProps> = ({
 	};
 
 	const removeBrick = (e: React.MouseEvent, brick: BrickType) => {
-		const newBricksState = levelDraftState.layout.filter(
+		const newBricksState = editorDraftState.layout.filter(
 			(b: BrickType) => b.id !== brick.id
 		);
-		setLevelDraftState({
-			...levelDraftState,
+		setEditorDraftState({
+			...editorDraftState,
 			layout: newBricksState,
 		});
 	};
@@ -113,7 +113,7 @@ const Grid: React.FC<LevelDraftStateProps> = ({
 						cell
 					</div>
 				)}
-				{levelDraftState.layout.map(
+				{editorDraftState.layout.map(
 					(brick: BrickPosition, idx: number) => (
 						<Brick
 							key={idx}

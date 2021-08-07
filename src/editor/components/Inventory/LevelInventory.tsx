@@ -1,31 +1,31 @@
 import React from "react";
-import { LevelDraftStateProps } from "../../../types/LevelState";
+import { EditorDraftStateProps } from "../../../types/LevelState";
 import InputGroup from "../InputGroup";
 import styles from "./styles.module.css";
 
-const LevelInventory: React.FC<LevelDraftStateProps> = ({
-	levelDraftState,
-	setLevelDraftState,
+const LevelInventory: React.FC<EditorDraftStateProps> = ({
+	editorDraftState,
+	setEditorDraftState,
 }) => (
 	<section>
 		<InputGroup
 			label="Level name"
-			value={levelDraftState.name}
+			value={editorDraftState.name}
 			type="text"
 			onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-				setLevelDraftState({
-					...levelDraftState,
+				setEditorDraftState({
+					...editorDraftState,
 					name: e.target.value,
 				})
 			}
 		/>
 		<InputGroup
 			label="Time"
-			value={levelDraftState.time}
+			value={editorDraftState.time}
 			type="number"
 			onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-				setLevelDraftState({
-					...levelDraftState,
+				setEditorDraftState({
+					...editorDraftState,
 					time: parseInt(e.target.value),
 				})
 			}
@@ -35,19 +35,19 @@ const LevelInventory: React.FC<LevelDraftStateProps> = ({
 			value={"isUnlocked"}
 			type="checkbox"
 			onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-				setLevelDraftState({
-					...levelDraftState,
+				setEditorDraftState({
+					...editorDraftState,
 					isUnlocked: false,
 				})
 			}
 		/>
 		<InputGroup
 			label="Bricks needed to unlock"
-			value={levelDraftState.bricksNeeded}
+			value={editorDraftState.bricksNeeded}
 			type="number"
 			onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-				setLevelDraftState({
-					...levelDraftState,
+				setEditorDraftState({
+					...editorDraftState,
 					bricksNeeded: parseInt(e.target.value),
 				})
 			}
@@ -56,22 +56,22 @@ const LevelInventory: React.FC<LevelDraftStateProps> = ({
 		<div className={styles.inputGroup}>
 			<InputGroup
 				label="World"
-				value={levelDraftState.worldNumber}
+				value={editorDraftState.worldNumber}
 				type="number"
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					setLevelDraftState({
-						...levelDraftState,
+					setEditorDraftState({
+						...editorDraftState,
 						worldNumber: parseInt(e.target.value),
 					})
 				}
 			/>
 			<InputGroup
 				label="Level"
-				value={levelDraftState.levelNumber}
+				value={editorDraftState.levelNumber}
 				type="number"
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					setLevelDraftState({
-						...levelDraftState,
+					setEditorDraftState({
+						...editorDraftState,
 						levelNumber: parseInt(e.target.value),
 					})
 				}
