@@ -69,10 +69,13 @@ const saveFile = (req, res) => {
 	}
 };
 
-app.get("/files", (req, res) => {
-	fs.readdir(`./src/data/levels`, (error, files) => {
-		if (error) console.log("Error reading files", error);
+app.get("/files/:dir", (req, res) => {
+	console.log(req.params, "req.params");
+	fs.readdir(`./src/data/${req.params.dir}`, (error, files) => {
+		if (error)
+			console.log(`Error reading paths and files in ${path}`, error);
 
+		console.log(files);
 		return res.json({
 			files,
 		});

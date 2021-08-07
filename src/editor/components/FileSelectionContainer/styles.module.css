@@ -1,0 +1,26 @@
+.fileSelection {
+	padding: 1rem;
+	display: flex;
+}
+
+.fileSelection > h1 {
+	margin-bottom: 1rem;
+}
+
+.fileSelection ul {
+	margin-bottom: 2rem;
+	margin-left: 2rem;
+	list-style-type: circle;
+}
+
+.fileSelection ul > * {
+	margin-bottom: 1rem;
+}
+
+.fileSelection li {
+	cursor: pointer;
+}
+
+.fileSelection li:hover {
+	color: orange;
+}

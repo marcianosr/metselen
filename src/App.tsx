@@ -8,7 +8,7 @@ import LevelSelectScreenContainer from "./components/LevelSelectScreenContainer"
 import UserDataScreen from "./components/UserDataScreen";
 import { SaveGameState } from "./data/saveGameState";
 import "./App.css";
-import FileSelectionScreenContainer from "./editor/components/FileSelectionScreen/FileSelectionScreenContainer";
+import NavigationBar from "./editor/components/FileSelectionDisplay/NavigationBar";
 
 type Config = {
 	analytics: {
@@ -81,12 +81,7 @@ const ScreenManager = () => {
 				</>
 			)}
 
-			{gameState.mode === "editor" &&
-				<>
-					<ModeManager />
-					<FileSelectionScreenContainer />
-				</>
-			}
+			{gameState.mode === "editor" && <NavigationBar />}
 		</>
 	);
 };
