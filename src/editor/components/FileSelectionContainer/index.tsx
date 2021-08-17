@@ -55,14 +55,33 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 		axios
 			.post("/file", { file })
 			.then((response) => {
-				setEditorFileData(JSON.parse(response.data.level).data);
+				setEditorFileData(JSON.parse(response.data.file).data);
+			})
+			.catch((error) => console.log(error));
+	};
+
+	const removeFile = (_: React.MouseEvent, file: string) => {
+		axios
+			.post("/remove", { fileToBeDeleted: file })
+			.then((response) => {
+				const type = `${file.split("-")[0]}s`;
+				// TODO: https://stackoverflow.com/questions/32968332/how-do-i-prevent-the-error-index-signature-of-object-type-implicitly-has-an-an
+				const updateFilelist = (files as any)[type].filter(
+					(f: string) => f !== file
+				);
+
+				setFiles({ ...files, [type]: updateFilelist });
 			})
 			.catch((error) => console.log(error));
 	};
 
 	return (
 		<section className={styles.fileSelection}>
-			<FileSelectionDisplay files={files} loadFile={loadFile} />
+			<FileSelectionDisplay
+				files={files}
+				loadFile={loadFile}
+				removeFile={removeFile}
+			/>
 		</section>
 	);
 };

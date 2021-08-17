@@ -70,7 +70,6 @@ const saveFile = (req, res) => {
 };
 
 app.get("/files/:dir", (req, res) => {
-	console.log(req.params, "req.params");
 	fs.readdir(`./src/data/${req.params.dir}`, (error, files) => {
 		if (error)
 			console.log(`Error reading paths and files in ${path}`, error);
@@ -83,18 +82,33 @@ app.get("/files/:dir", (req, res) => {
 });
 
 app.post("/file", (req, res) => {
-	const fileName = req.body.file.split(`-`)[0];
+	const fileNamePath = req.body.file.split(`-`)[0];
 
 	return fs.readFile(
-		`src/data/${fileName}s/${req.body.file}`,
+		`src/data/${fileNamePath}s/${req.body.file}`,
 		"utf-8",
-		(error, level) => {
+		(error, file) => {
 			if (error) {
 				console.log("Error reading file", error);
 				return;
 			}
+			return res.json({ file });
+		}
+	);
+});
 
-			return res.json({ level });
+app.post("/remove", (req, res) => {
+	const fileNamePath = req.body.fileToBeDeleted.split(`-`)[0];
+
+	return fs.unlink(
+		`src/data/${fileNamePath}s/${req.body.fileToBeDeleted}`,
+		(error) => {
+			if (error) {
+				console.log("Error deleting file", error);
+				return;
+			}
+			console.log("Succesfully deleted file!");
+			return res.json({ message: "Succesfully deleted file!" });
 		}
 	);
 });

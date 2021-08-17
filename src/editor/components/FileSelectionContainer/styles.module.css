@@ -17,10 +17,10 @@
 	margin-bottom: 1rem;
 }
 
-.fileSelection li {
+.fileSelection span {
 	cursor: pointer;
 }
 
-.fileSelection li:hover {
+.fileSelection span:hover {
 	color: orange;
 }
