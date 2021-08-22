@@ -18,7 +18,7 @@ export type EditorDraftState = EditorState;
 const Editor = () => {
 	const { editorState, updateEditorStateMultiple } = useEditorState();
 	const [warningMessage, setWarningMessage] = useState("");
-	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [showConfirmModal, setShowConfirmModal] = useState(false);
 	const [editorDraftState, setEditorDraftState] =
 		useState<EditorDraftState>(editorState);
 
@@ -46,7 +46,7 @@ const Editor = () => {
 			})
 			.catch((error) => {
 				console.error("Error /check endpoint: ", error.response);
-				if (error.response.status === 400) setShowErrorModal(true);
+				if (error.response.status === 400) setShowConfirmModal(true);
 				setWarningMessage(
 					`${error.response.data.message}. Do you want to overwrite this level data?`
 				);
@@ -70,7 +70,7 @@ const Editor = () => {
 					"✅ Succes /write endpoint: ",
 					response
 				);
-				setShowErrorModal(false);
+				setShowConfirmModal(false);
 				return response;
 			})
 			.catch((error) => {
@@ -126,10 +126,10 @@ const Editor = () => {
 					</Button>
 				</Inventory>
 			)}
-			{showErrorModal && (
+			{showConfirmModal && (
 				<ConfirmSaveModal
-					hideModal={() => setShowErrorModal(false)}
-					saveLevel={saveLevel}
+					hideModal={() => setShowConfirmModal(false)}
+					confirm={saveLevel}
 					warningMessage={warningMessage}
 				/>
 			)}

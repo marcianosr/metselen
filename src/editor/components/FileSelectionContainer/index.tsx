@@ -1,9 +1,11 @@
 import axios from "axios";
+import { resolve } from "path";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
 	EditorState,
 	useEditorState,
 } from "../../../providers/EditorStateProvider";
+import ConfirmSaveModal from "../ConfirmSaveModal";
 import FileSelectionDisplay from "../FileSelectionDisplay";
 import styles from "./styles.module.css";
 
@@ -30,13 +32,14 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 		worlds: [],
 		levels: [],
 	});
+	const [showWarningModal, setShowWarningModal] = useState(false);
+	const [fileToRemove, setFileToRemove] = useState("");
 
 	const getLevels = () => axios.get<FilesResponse>("/files/levels");
 	const getWorlds = () => axios.get<FilesResponse>("/files/worlds");
 
 	useEffect(() => {
 		Promise.all([getLevels(), getWorlds()]).then((response) => {
-			console.log(response);
 			setFiles({
 				levels: response.map((res) => res.data.files)[0],
 				worlds: response.map((res) => res.data.files)[1],
@@ -57,19 +60,25 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 			.then((response) => {
 				setEditorFileData(JSON.parse(response.data.file).data);
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => console.log("Error loading file...", error));
 	};
 
-	const removeFile = (_: React.MouseEvent, file: string) => {
+	const onClickRemoveFile = (_: React.MouseEvent, file: string) => {
+		setFileToRemove(file);
+		setShowWarningModal(true);
+	};
+
+	const confirmRemoveFile = () => {
 		axios
-			.post("/remove", { fileToBeDeleted: file })
+			.post("/remove", { fileToRemove })
 			.then((response) => {
-				const type = `${file.split("-")[0]}s`;
+				const type = `${fileToRemove.split("-")[0]}s`;
+
 				// TODO: https://stackoverflow.com/questions/32968332/how-do-i-prevent-the-error-index-signature-of-object-type-implicitly-has-an-an
 				const updateFilelist = (files as any)[type].filter(
-					(f: string) => f !== file
+					(f: string) => f !== fileToRemove
 				);
-
+				setShowWarningModal(false);
 				setFiles({ ...files, [type]: updateFilelist });
 			})
 			.catch((error) => console.log(error));
@@ -80,8 +89,17 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 			<FileSelectionDisplay
 				files={files}
 				loadFile={loadFile}
-				removeFile={removeFile}
+				onClickRemoveFile={onClickRemoveFile}
 			/>
+			{showWarningModal && (
+				<ConfirmSaveModal
+					hideModal={() => setShowWarningModal(false)}
+					confirm={confirmRemoveFile}
+					warningMessage={
+						"Are you sure you want to delete this file?"
+					}
+				/>
+			)}
 		</section>
 	);
 };

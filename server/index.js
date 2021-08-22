@@ -98,10 +98,10 @@ app.post("/file", (req, res) => {
 });
 
 app.post("/remove", (req, res) => {
-	const fileNamePath = req.body.fileToBeDeleted.split(`-`)[0];
+	const fileNamePath = req.body.fileToRemove.split(`-`)[0];
 
 	return fs.unlink(
-		`src/data/${fileNamePath}s/${req.body.fileToBeDeleted}`,
+		`src/data/${fileNamePath}s/${req.body.fileToRemove}`,
 		(error) => {
 			if (error) {
 				console.log("Error deleting file", error);

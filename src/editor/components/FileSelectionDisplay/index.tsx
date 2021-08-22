@@ -1,15 +1,16 @@
 import { FilesStateType } from "../FileSelectionContainer";
+import styles from "./styles.module.css";
 
 type FileSelectionDisplayProps = {
 	files: FilesStateType;
 	loadFile: (file: string) => void;
-	removeFile: (e: React.MouseEvent, file: string) => void;
+	onClickRemoveFile: (e: React.MouseEvent, file: string) => void;
 };
 
 const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 	files,
 	loadFile,
-	removeFile,
+	onClickRemoveFile,
 }) => (
 	<section>
 		<h1>Files</h1>
@@ -17,15 +18,22 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 			<h3>Levels</h3>
 			{files.levels.map((file, idx) => (
 				<>
-					<li key={idx} onClick={() => loadFile(file)}>
-						<span>{file}</span>
+					<li key={idx}>
+						<span
+							className={styles.filename}
+							onClick={() => loadFile(file)}
+						>
+							{file}
+						</span>
+						<button
+							type="button"
+							onClick={(e: React.MouseEvent) => {
+								onClickRemoveFile(e, file);
+							}}
+						>
+							Remove
+						</button>
 					</li>
-					<button
-						type="button"
-						onClick={(e: React.MouseEvent) => removeFile(e, file)}
-					>
-						Remove
-					</button>
 				</>
 			))}
 		</ul>
@@ -33,15 +41,22 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 			<h3>Worlds</h3>
 			{files.worlds.map((file, idx) => (
 				<>
-					<li key={idx} onClick={() => loadFile(file)}>
-						<span>{file}</span>
+					<li key={idx}>
+						<span
+							className={styles.filename}
+							onClick={() => loadFile(file)}
+						>
+							{file}
+						</span>
+						<button
+							type="button"
+							onClick={(e: React.MouseEvent) =>
+								onClickRemoveFile(e, file)
+							}
+						>
+							Remove
+						</button>
 					</li>
-					<button
-						type="button"
-						onClick={(e: React.MouseEvent) => removeFile(e, file)}
-					>
-						Remove
-					</button>
 				</>
 			))}
 		</ul>

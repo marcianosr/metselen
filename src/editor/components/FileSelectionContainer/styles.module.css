@@ -10,11 +10,15 @@
 .fileSelection ul {
 	margin-bottom: 2rem;
 	margin-left: 2rem;
-	list-style-type: circle;
+	list-style-type: square;
 }
 
 .fileSelection ul > * {
 	margin-bottom: 1rem;
+}
+
+.fileSelection li {
+	font-size: 1.5rem;
 }
 
 .fileSelection span {
