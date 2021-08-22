@@ -1,18 +1,13 @@
 import axios from "axios";
-import { resolve } from "path";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
 	EditorState,
 	useEditorState,
 } from "../../../providers/EditorStateProvider";
+import { useFilesState } from "../../../providers/FilesStateProvider";
 import ConfirmSaveModal from "../ConfirmSaveModal";
 import FileSelectionDisplay from "../FileSelectionDisplay";
 import styles from "./styles.module.css";
-
-export type FilesStateType = {
-	worlds: string[];
-	levels: string[];
-};
 
 type FilesResponse = {
 	files: string[];
@@ -28,10 +23,8 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 	setEditorFileData,
 }) => {
 	const { editorState, updateEditorStateMultiple } = useEditorState();
-	const [files, setFiles] = useState<FilesStateType>({
-		worlds: [],
-		levels: [],
-	});
+	const { filesState, updateFilesStateMultiple } = useFilesState();
+
 	const [showWarningModal, setShowWarningModal] = useState(false);
 	const [fileToRemove, setFileToRemove] = useState("");
 
@@ -40,7 +33,7 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 
 	useEffect(() => {
 		Promise.all([getLevels(), getWorlds()]).then((response) => {
-			setFiles({
+			updateFilesStateMultiple({
 				levels: response.map((res) => res.data.files)[0],
 				worlds: response.map((res) => res.data.files)[1],
 			});
@@ -75,11 +68,14 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 				const type = `${fileToRemove.split("-")[0]}s`;
 
 				// TODO: https://stackoverflow.com/questions/32968332/how-do-i-prevent-the-error-index-signature-of-object-type-implicitly-has-an-an
-				const updateFilelist = (files as any)[type].filter(
+				const updateFilelist = (filesState as any)[type].filter(
 					(f: string) => f !== fileToRemove
 				);
 				setShowWarningModal(false);
-				setFiles({ ...files, [type]: updateFilelist });
+				updateFilesStateMultiple({
+					...filesState,
+					[type]: updateFilelist,
+				});
 			})
 			.catch((error) => console.log(error));
 	};
@@ -87,7 +83,7 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 	return (
 		<section className={styles.fileSelection}>
 			<FileSelectionDisplay
-				files={files}
+				files={filesState}
 				loadFile={loadFile}
 				onClickRemoveFile={onClickRemoveFile}
 			/>

@@ -1,8 +1,9 @@
-import { FilesStateType } from "../FileSelectionContainer";
+import { Fragment } from "react";
+import { FilesState } from "../../../providers/FilesStateProvider";
 import styles from "./styles.module.css";
 
 type FileSelectionDisplayProps = {
-	files: FilesStateType;
+	files: FilesState;
 	loadFile: (file: string) => void;
 	onClickRemoveFile: (e: React.MouseEvent, file: string) => void;
 };
@@ -17,8 +18,8 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 		<ul>
 			<h3>Levels</h3>
 			{files.levels.map((file, idx) => (
-				<>
-					<li key={idx}>
+				<Fragment key={idx}>
+					<li>
 						<span
 							className={styles.filename}
 							onClick={() => loadFile(file)}
@@ -34,13 +35,13 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 							Remove
 						</button>
 					</li>
-				</>
+				</Fragment>
 			))}
 		</ul>
 		<ul>
 			<h3>Worlds</h3>
 			{files.worlds.map((file, idx) => (
-				<>
+				<Fragment key={idx}>
 					<li key={idx}>
 						<span
 							className={styles.filename}
@@ -57,7 +58,7 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 							Remove
 						</button>
 					</li>
-				</>
+				</Fragment>
 			))}
 		</ul>
 	</section>

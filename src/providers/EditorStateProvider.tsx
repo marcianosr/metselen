@@ -90,8 +90,6 @@ export const EditorStateProvider: React.FC<EditorStateProps> = ({
 		});
 	};
 
-	console.log("EditorProvider", editorState);
-
 	return (
 		<EditorStateContext.Provider
 			value={{
