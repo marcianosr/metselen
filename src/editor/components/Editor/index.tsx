@@ -12,6 +12,10 @@ import Button from "../../../components/Button";
 import styles from "./styles.module.css";
 import LevelInventory from "../Inventory/LevelInventory";
 import WorldInventory from "../Inventory/WorldInventory";
+import {
+	useFilesState,
+	FilesState,
+} from "../../../providers/FilesStateProvider";
 
 export type EditorDraftState = EditorState;
 
@@ -21,6 +25,7 @@ const Editor = () => {
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 	const [editorDraftState, setEditorDraftState] =
 		useState<EditorDraftState>(editorState);
+	const { filesState, updateFilesStateMultiple } = useFilesState();
 
 	const [toggleInventories, setToggleInventories] = useState(false);
 	const inventoriesAreShown = toggleInventories === true;
@@ -42,6 +47,15 @@ const Editor = () => {
 					"✅ Succces /check endpoint: ",
 					response
 				);
+
+				const type = `${
+					response.data.filename.split("-")[0]
+				}s` as keyof FilesState;
+
+				updateFilesStateMultiple({
+					...filesState,
+					[type]: [...filesState[type], response.data.filename],
+				});
 				return response;
 			})
 			.catch((error) => {

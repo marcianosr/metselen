@@ -7,8 +7,6 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 
-const handleWriteFile = (type) => {};
-
 const saveFile = (req, res) => {
 	try {
 		if (!fs.existsSync(`src/data/${req.body.data.type}s`))
@@ -143,6 +141,7 @@ app.post("/check", (req, res) => {
 
 	res.status(200).json({
 		message: `File "${req.body.data.type}-${req.body.data.worldNumber}-${req.body.data.levelNumber}.json" saved!`,
+		filename: `${req.body.data.type}-${req.body.data.worldNumber}-${req.body.data.levelNumber}.json`,
 	});
 });
 
