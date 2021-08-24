@@ -6,6 +6,7 @@ import {
 	EditorStateProvider,
 } from "../../providers/EditorStateProvider";
 import { FilesStateProvider } from "../../providers/FilesStateProvider";
+import styles from "./styles.module.css";
 
 const EditorPage = () => {
 	const [editorFileData, setEditorFileData] = useState<EditorState[]>([]); // current opened file
@@ -19,6 +20,11 @@ const EditorPage = () => {
 					setEditorFileData={setEditorFileData}
 					setShowEditor={setShowEditor}
 				/>
+				{!showEditor && (
+					<h1 className={styles.title}>
+						Create a new file or load saved files
+					</h1>
+				)}
 				{showEditor && <EditorScreen />}
 			</EditorStateProvider>
 		</FilesStateProvider>
