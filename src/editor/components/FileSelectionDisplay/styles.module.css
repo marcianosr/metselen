@@ -5,10 +5,11 @@
 .fileSelectionDisplay {
 	max-height: 200px;
 	overflow: scroll;
-	position: relative;
+	position: absolute;
 	border: 3px var(--primaryBlue) dashed;
 	background-color: var(--defaultBrickColor);
 	padding: 1rem;
+	z-index: 5;
 }
 
 .fileSelectionDisplay .close {

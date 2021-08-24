@@ -5,6 +5,8 @@
 }
 
 .navigation {
-	position: fixed;
-	z-index: 1;
+	border-bottom: 3px solid gray;
+	background-color: lightgray;
+	width: 100%;
+	padding: 1rem;
 }
