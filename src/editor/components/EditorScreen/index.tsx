@@ -2,15 +2,13 @@ import Editor from "../Editor";
 
 import styles from "./styles.module.css";
 
-type EditorScreenProps = {
-	isLoaded: boolean;
-};
+type EditorScreenProps = {};
 
-const EditorScreen: React.FC<EditorScreenProps> = ({ isLoaded }) => {
+const EditorScreen: React.FC<EditorScreenProps> = () => {
 	return (
 		<section className={styles.editorScreen}>
 			<section className={styles.editorContainer}>
-				{isLoaded && <Editor />}
+				<Editor />
 			</section>
 		</section>
 	);

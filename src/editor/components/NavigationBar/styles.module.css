@@ -1,4 +1,5 @@
 .navigationList {
+	/* border: 3px grey dashed; */
 	display: flex;
-	border: 3px grey dashed;
+	gap: 1rem;
 }

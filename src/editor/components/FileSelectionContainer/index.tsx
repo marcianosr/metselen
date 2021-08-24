@@ -16,11 +16,13 @@ type FilesResponse = {
 type FileSelectionContainerProps = {
 	editorFileData: EditorState[];
 	setEditorFileData: Dispatch<SetStateAction<EditorState[]>>;
+	setShowEditor: Dispatch<SetStateAction<boolean>>;
 };
 
 const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 	editorFileData,
 	setEditorFileData,
+	setShowEditor,
 }) => {
 	const { editorState, updateEditorStateMultiple } = useEditorState();
 	const { filesState, updateFilesStateMultiple } = useFilesState();
@@ -52,6 +54,7 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 			.post("/file", { file })
 			.then((response) => {
 				setEditorFileData(JSON.parse(response.data.file).data);
+				setShowEditor(true);
 			})
 			.catch((error) => console.log("Error loading file...", error));
 	};
@@ -86,6 +89,7 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 				files={filesState}
 				loadFile={loadFile}
 				onClickRemoveFile={onClickRemoveFile}
+				setShowEditor={setShowEditor}
 			/>
 			{showWarningModal && (
 				<ConfirmSaveModal

@@ -9,7 +9,7 @@ import { FilesStateProvider } from "../../providers/FilesStateProvider";
 
 const EditorPage = () => {
 	const [editorFileData, setEditorFileData] = useState<EditorState[]>([]); // current opened file
-	const isLoaded = Object.keys(editorFileData).length > 0;
+	const [showEditor, setShowEditor] = useState(false);
 
 	return (
 		<FilesStateProvider>
@@ -17,8 +17,9 @@ const EditorPage = () => {
 				<NavigationBar
 					editorFileData={editorFileData}
 					setEditorFileData={setEditorFileData}
+					setShowEditor={setShowEditor}
 				/>
-				<EditorScreen isLoaded={isLoaded} />
+				{showEditor && <EditorScreen />}
 			</EditorStateProvider>
 		</FilesStateProvider>
 	);

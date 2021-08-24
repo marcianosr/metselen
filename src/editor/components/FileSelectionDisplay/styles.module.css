@@ -1,3 +1,19 @@
 .filename {
 	margin-right: 1rem;
 }
+
+.fileSelectionDisplay {
+	max-height: 200px;
+	overflow: scroll;
+	position: relative;
+	border: 3px grey dashed;
+}
+
+.fileSelectionDisplay .close {
+	position: absolute;
+	right: 0;
+}
+
+.fileSelectionDisplayContainer {
+	display: flex;
+}
