@@ -3,3 +3,8 @@
 	display: flex;
 	gap: 1rem;
 }
+
+.navigation {
+	position: fixed;
+	z-index: 1;
+}

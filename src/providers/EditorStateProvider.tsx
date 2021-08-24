@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { getRandomBrickColor } from "../components/BrickContainer";
-import { BrickType, RandomColorType } from "../types/Bricks";
+import { BrickType } from "../types/Bricks";
 
 export type BrickPosition = BrickType & {
 	x: number;
@@ -20,7 +20,6 @@ export type EditorState = {
 	isUnlocked: boolean;
 	maxBricks: number;
 	bricksNeeded: number;
-	color: RandomColorType;
 	type: "level" | "world";
 };
 
@@ -39,6 +38,7 @@ type EditorStateContextState = {
 	setEditorState: (levelState: EditorState) => void;
 	updateEditorState: EditorStateUpdater;
 	updateEditorStateMultiple: EditorStateMultipleUpdater;
+	cleanEditorState: () => void;
 };
 
 type EditorStateProps = {};
@@ -48,7 +48,15 @@ const INITIAL_LEVEL_STATE: EditorState = {
 	worldNumber: 1,
 	levelNumber: 0,
 	layout: [
-		{ id: 1, size: "large", willDrop: true, cracked: false, x: 1, y: 2 },
+		{
+			id: 1,
+			size: "large",
+			willDrop: true,
+			cracked: false,
+			x: 1,
+			y: 2,
+			color: getRandomBrickColor(),
+		},
 	],
 	ranges: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -58,7 +66,6 @@ const INITIAL_LEVEL_STATE: EditorState = {
 	isUnlocked: false,
 	maxBricks: 0,
 	bricksNeeded: 0,
-	color: getRandomBrickColor(),
 	type: "level",
 };
 
@@ -67,6 +74,7 @@ export const EditorStateContext = createContext<EditorStateContextState>({
 	setEditorState: () => {},
 	updateEditorState: () => {},
 	updateEditorStateMultiple: () => {},
+	cleanEditorState: () => {},
 });
 
 export const EditorStateProvider: React.FC<EditorStateProps> = ({
@@ -90,6 +98,10 @@ export const EditorStateProvider: React.FC<EditorStateProps> = ({
 		});
 	};
 
+	const cleanEditorState = () => {
+		setEditorState(INITIAL_LEVEL_STATE);
+	};
+
 	return (
 		<EditorStateContext.Provider
 			value={{
@@ -97,6 +109,7 @@ export const EditorStateProvider: React.FC<EditorStateProps> = ({
 				setEditorState,
 				updateEditorState,
 				updateEditorStateMultiple,
+				cleanEditorState,
 			}}
 		>
 			{children}

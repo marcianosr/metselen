@@ -1,4 +1,5 @@
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { useEditorState } from "../../../providers/EditorStateProvider";
 import { FilesState } from "../../../providers/FilesStateProvider";
 import styles from "./styles.module.css";
 
@@ -16,8 +17,12 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 	setShowEditor,
 }) => {
 	const [showFileList, setShowFileList] = useState(false);
+	const { cleanEditorState } = useEditorState();
 	const toggleFileDisplay = () => setShowFileList(!showFileList);
-	const setupEmptyEditor = () => setShowEditor(true);
+	const setupEmptyEditor = () => {
+		setShowEditor(true);
+		cleanEditorState();
+	};
 
 	return (
 		<section>
@@ -39,7 +44,10 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 									<li>
 										<span
 											className={styles.filename}
-											onClick={() => loadFile(file)}
+											onClick={() => {
+												loadFile(file);
+												setShowFileList(false);
+											}}
 										>
 											{file}
 										</span>
@@ -62,7 +70,10 @@ const FileSelectionDisplay: React.FC<FileSelectionDisplayProps> = ({
 									<li key={idx}>
 										<span
 											className={styles.filename}
-											onClick={() => loadFile(file)}
+											onClick={() => {
+												loadFile(file);
+												setShowFileList(false);
+											}}
 										>
 											{file}
 										</span>
