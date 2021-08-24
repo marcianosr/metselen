@@ -6,6 +6,7 @@ import BrickInventory from "../Inventory/BrickInventory";
 import { BrickSizes, BrickType } from "../../../types/Bricks";
 import styles from "./styles.module.css";
 import { EditorDraftStateProps } from "../../../types/LevelState";
+import { getRandomBrickColor } from "../../../components/BrickContainer";
 
 type Position = {
 	x: number;
@@ -51,14 +52,20 @@ const Grid: React.FC<EditorDraftStateProps> = ({
 			x: e.clientX - grid.left,
 			y: e.clientY - grid.top,
 		};
+		const defaultBrickProps = {
+			id: Math.round(Math.random() * 1000),
+			size: selectedSize,
+			color: getRandomBrickColor(),
+			willDrop: true,
+			cracked: false,
+		};
 
 		setEditorDraftState({
 			...editorDraftState,
 			layout: [
 				...editorDraftState.layout,
 				{
-					id: Math.round(Math.random() * 1000),
-					size: selectedSize,
+					...defaultBrickProps,
 					x: Math.floor(position.x / GRID_SETTINGS.width),
 					y: Math.floor(position.y / GRID_SETTINGS.height),
 				},
@@ -120,10 +127,7 @@ const Grid: React.FC<EditorDraftStateProps> = ({
 							id={idx}
 							size={brick.size}
 							text={brick.size}
-							color={{
-								key: "1",
-								values: ["#ff0000", "#ff00ff"],
-							}}
+							color={brick.color}
 							x={brick.x}
 							y={brick.y}
 							onRightClick={(e: React.MouseEvent) => {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import axios from "axios";
 import {
 	useEditorState,
@@ -140,13 +141,16 @@ const Editor = () => {
 					</Button>
 				</Inventory>
 			)}
-			{showConfirmModal && (
-				<ConfirmSaveModal
-					hideModal={() => setShowConfirmModal(false)}
-					confirm={saveLevel}
-					warningMessage={warningMessage}
-				/>
-			)}
+
+			{showConfirmModal &&
+				createPortal(
+					<ConfirmSaveModal
+						hideModal={() => setShowConfirmModal(false)}
+						confirm={saveLevel}
+						warningMessage={warningMessage}
+					/>,
+					document.body
+				)}
 		</>
 	);
 };

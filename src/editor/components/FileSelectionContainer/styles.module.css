@@ -6,6 +6,11 @@
 	margin-bottom: 1rem;
 }
 
+.fileSelection ul > h3 {
+	font-size: 2rem;
+	margin-top: 0;
+}
+
 .fileSelection ul {
 	margin-bottom: 2rem;
 	margin-left: 2rem;
@@ -18,6 +23,7 @@
 
 .fileSelection li {
 	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 .fileSelection span {
@@ -25,5 +31,5 @@
 }
 
 .fileSelection span:hover {
-	color: orange;
+	text-decoration: underline;
 }

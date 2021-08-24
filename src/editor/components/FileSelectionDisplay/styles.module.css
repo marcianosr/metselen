@@ -6,12 +6,14 @@
 	max-height: 200px;
 	overflow: scroll;
 	position: relative;
-	border: 3px grey dashed;
+	border: 3px var(--primaryBlue) dashed;
+	background-color: var(--defaultBrickColor);
+	padding: 1rem;
 }
 
 .fileSelectionDisplay .close {
 	position: absolute;
-	right: 0;
+	right: 1rem;
 }
 
 .fileSelectionDisplayContainer {
