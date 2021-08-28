@@ -12,7 +12,7 @@ export type EditorState = {
 	worldNumber: number;
 	levelNumber: number;
 	layout: BrickPosition[];
-	ranges: {
+	assignments: {
 		multiplication: number[];
 		tables: number[];
 	};
@@ -58,7 +58,7 @@ const INITIAL_LEVEL_STATE: EditorState = {
 			color: getRandomBrickColor(),
 		},
 	],
-	ranges: {
+	assignments: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [1],
 	},

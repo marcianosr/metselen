@@ -8,7 +8,7 @@ export type Level = {
 	level: number;
 	layout: BrickType[][];
 	time: number;
-	ranges: {
+	assignments: {
 		multiplication: number[];
 		tables: number[];
 	};
@@ -21,7 +21,7 @@ const LEVEL_ONE: Level = {
 	name: "",
 	level: 1,
 	time: 30,
-	ranges: {
+	assignments: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [1],
 	},
@@ -108,7 +108,7 @@ const LEVEL_TWO: Level = {
 	name: "",
 	level: 2,
 	time: 30,
-	ranges: {
+	assignments: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [2],
 	},
@@ -202,7 +202,7 @@ const LEVEL_THREE: Level = {
 	name: "",
 	level: 3,
 	time: 40,
-	ranges: {
+	assignments: {
 		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		tables: [1, 2],
 	},
@@ -299,21 +299,21 @@ export const withGeneratedTables = (levels: Level[]) =>
 		...level,
 		tables: getTablesForLevel(
 			flattenBricksArray(level.layout).length,
-			level.ranges
+			level.assignments
 		),
 	}));
 
 const getTablesForLevel = (
 	amountOfTables: number,
-	ranges: { multiplication: number[]; tables: number[] }
+	assignments: { multiplication: number[]; tables: number[] }
 ): TableResult[] => {
 	const list = [];
 	for (let idx = 0; idx < amountOfTables; idx++) {
 		list.push(
 			getRandomTable(
-				makeTables(ranges.tables, ranges.multiplication),
-				ranges.tables,
-				ranges.multiplication
+				makeTables(assignments.tables, assignments.multiplication),
+				assignments.tables,
+				assignments.multiplication
 			)
 		);
 	}
