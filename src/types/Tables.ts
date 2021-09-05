@@ -1,5 +1,5 @@
-import { TableResult } from "../data/tables";
+import { AssignmentFormat } from "../data/tables";
 
-export type Tables = TableResult & {
+export type Tables = AssignmentFormat & {
 	id: number;
 };

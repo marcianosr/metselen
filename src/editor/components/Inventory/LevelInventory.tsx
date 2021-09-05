@@ -1,14 +1,20 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { EditorDraftStateProps } from "../../../types/LevelState";
-import InputGroup from "../InputGroup";
+import Input from "../Input";
+import {
+	mathAssignmentConfig,
+	MathAssignment,
+} from "../../../types/Assignment";
+
 import styles from "./styles.module.css";
+import AssignmentRadioButtonGroup from "../AssignmentRadioButtonGroup";
 
 const LevelInventory: React.FC<EditorDraftStateProps> = ({
 	editorDraftState,
 	setEditorDraftState,
 }) => (
 	<section>
-		<InputGroup
+		<Input
 			label="Level name"
 			value={editorDraftState.name}
 			type="text"
@@ -19,7 +25,7 @@ const LevelInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="Time"
 			value={editorDraftState.time}
 			type="number"
@@ -30,7 +36,7 @@ const LevelInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="Is level unlocked"
 			value={"isUnlocked"}
 			type="checkbox"
@@ -41,7 +47,7 @@ const LevelInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="Bricks needed to unlock"
 			value={editorDraftState.bricksNeeded}
 			type="number"
@@ -53,8 +59,13 @@ const LevelInventory: React.FC<EditorDraftStateProps> = ({
 			}
 		/>
 
+		<AssignmentRadioButtonGroup
+			editorDraftState={editorDraftState}
+			setEditorDraftState={setEditorDraftState}
+		/>
+
 		<div className={styles.inputGroup}>
-			<InputGroup
+			<Input
 				label="World"
 				value={editorDraftState.worldNumber}
 				type="number"
@@ -65,7 +76,7 @@ const LevelInventory: React.FC<EditorDraftStateProps> = ({
 					})
 				}
 			/>
-			<InputGroup
+			<Input
 				label="Level"
 				value={editorDraftState.levelNumber}
 				type="number"

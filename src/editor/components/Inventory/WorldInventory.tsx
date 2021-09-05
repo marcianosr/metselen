@@ -1,13 +1,13 @@
 import React from "react";
 import { EditorDraftStateProps } from "../../../types/LevelState";
-import InputGroup from "../InputGroup";
+import Input from "../Input";
 
 const WorldInventory: React.FC<EditorDraftStateProps> = ({
 	editorDraftState,
 	setEditorDraftState,
 }) => (
 	<section>
-		<InputGroup
+		<Input
 			label="World name"
 			value={editorDraftState.name}
 			type="text"
@@ -18,7 +18,7 @@ const WorldInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="Is world unlocked"
 			value={"isUnlocked"}
 			type="checkbox"
@@ -29,7 +29,7 @@ const WorldInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="Bricks needed to unlock"
 			value={editorDraftState.bricksNeeded}
 			type="number"
@@ -40,7 +40,7 @@ const WorldInventory: React.FC<EditorDraftStateProps> = ({
 				})
 			}
 		/>
-		<InputGroup
+		<Input
 			label="World"
 			value={editorDraftState.worldNumber}
 			type="number"
