@@ -162,7 +162,7 @@ const BrickContainer: React.FC = () => {
 											cracked={brick.cracked}
 											text={
 												levelState.answers[brick.id - 1]
-													.table
+													.sum
 											}
 										/>
 									)

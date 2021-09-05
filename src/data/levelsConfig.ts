@@ -1,29 +1,31 @@
+import { MathAssignment, Assignment } from "../types/Assignment";
 import { BrickType } from "../types/Bricks";
-// import { Tables } from "../types/Tables";
 import { flattenBricksArray } from "../utils";
-import { getRandomTable, makeTables, TableResult } from "./tables";
+import { getRandomTable, makeTables, AssignmentFormat } from "./tables";
 
 export type Level = {
 	name: string;
 	level: number;
 	layout: BrickType[][];
 	time: number;
-	assignments: {
-		multiplication: number[];
-		tables: number[];
-	};
-	// tables: Tables[]
+	assignments: Assignment;
 };
 
-// Refactor later: Merge these properties of levels with the levels arr in worlds object
+// keyof returns a union string, so: We want a key in Assignment and Maths type which returns "maths" and .MULTIPLICATIONs | additions | subtractions | divisions"
+// type MathsConfig = {
+// 	[key in keyof Assignment]: {};
+// };
 
+// Refactor later: Merge these properties of levels with the levels arr in worlds object
 const LEVEL_ONE: Level = {
 	name: "",
 	level: 1,
 	time: 30,
 	assignments: {
-		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [1],
+		[MathAssignment.MULTIPLICATION]: {
+			base: [1],
+			modifier: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		},
 	},
 	layout: [
 		[
@@ -109,8 +111,10 @@ const LEVEL_TWO: Level = {
 	level: 2,
 	time: 30,
 	assignments: {
-		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [2],
+		[MathAssignment.MULTIPLICATION]: {
+			base: [2],
+			modifier: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		},
 	},
 	layout: [
 		[
@@ -203,8 +207,10 @@ const LEVEL_THREE: Level = {
 	level: 3,
 	time: 40,
 	assignments: {
-		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [1, 2],
+		[MathAssignment.MULTIPLICATION]: {
+			base: [1, 2],
+			modifier: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		},
 	},
 	layout: [
 		[
@@ -294,30 +300,37 @@ const LEVEL_THREE: Level = {
 
 export const levelConfig: Level[] = [LEVEL_ONE, LEVEL_TWO, LEVEL_THREE];
 
-export const withGeneratedTables = (levels: Level[]) =>
-	levels.map((level) => ({
+// Make more dynamic: Based on the input of assignments
+export const withGeneratedSums = (levels: Level[]) =>
+	levels.map((level: Level) => ({
 		...level,
-		tables: getTablesForLevel(
+		// Change "tables" here in Level type when changing this
+		tables: createSumsForLevel(
 			flattenBricksArray(level.layout).length,
 			level.assignments
 		),
 	}));
 
-const getTablesForLevel = (
-	amountOfTables: number,
-	assignments: { multiplication: number[]; tables: number[] }
-): TableResult[] => {
-	const list = [];
-	for (let idx = 0; idx < amountOfTables; idx++) {
-		list.push(
+const createSumsForLevel = (
+	amountOfSums: number, // based on the the length of the level
+	assignments: Assignment
+) => {
+	const assignmentFormatList: AssignmentFormat[] = [];
+	for (let idx = 0; idx < amountOfSums; idx++) {
+		assignmentFormatList.push(
 			getRandomTable(
-				makeTables(assignments.tables, assignments.multiplication),
-				assignments.tables,
-				assignments.multiplication
+				makeTables(
+					assignments.multiplication.base,
+					assignments.multiplication?.modifier
+				),
+				assignments.multiplication?.base,
+				assignments.multiplication?.modifier
 			)
 		);
 	}
-	return list;
+	return assignmentFormatList;
 };
 
-export const levels = withGeneratedTables(levelConfig);
+export const levels = withGeneratedSums(levelConfig);
+
+console.log(levels);

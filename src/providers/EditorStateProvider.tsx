@@ -1,6 +1,11 @@
 import React, { createContext, useState } from "react";
 import { getRandomBrickColor } from "../components/BrickContainer";
 import { BrickType } from "../types/Bricks";
+import {
+	Assignment,
+	MathAssignment,
+	mathAssignmentConfig,
+} from "../types/Assignment";
 
 export type BrickPosition = BrickType & {
 	x: number;
@@ -12,10 +17,7 @@ export type EditorState = {
 	worldNumber: number;
 	levelNumber: number;
 	layout: BrickPosition[];
-	assignments: {
-		multiplication: number[];
-		tables: number[];
-	};
+	assignments: Assignment;
 	time: number;
 	isUnlocked: boolean;
 	maxBricks: number;
@@ -59,8 +61,10 @@ const INITIAL_LEVEL_STATE: EditorState = {
 		},
 	],
 	assignments: {
-		multiplication: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		tables: [1],
+		[MathAssignment.MULTIPLICATION]: {
+			base: [1],
+			modifier: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		},
 	},
 	time: 10,
 	isUnlocked: false,
@@ -83,8 +87,8 @@ export const EditorStateProvider: React.FC<EditorStateProps> = ({
 	const [editorState, setEditorState] =
 		useState<EditorState>(INITIAL_LEVEL_STATE);
 
+	console.log("editorState", editorState);
 	const updateEditorState: EditorStateUpdater = (key, value) => {
-		console.log("key", key);
 		setEditorState({
 			...editorState,
 			[key]: value,
