@@ -48,3 +48,7 @@
 	composes: defaultText from "../../../typography.module.css";
 	margin-left: 0.5rem;
 }
+
+.inputContainer {
+	display: flex;
+}

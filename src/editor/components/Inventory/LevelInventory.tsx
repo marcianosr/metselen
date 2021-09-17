@@ -1,10 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { EditorDraftStateProps } from "../../../types/LevelState";
 import Input from "../Input";
-import {
-	mathAssignmentConfig,
-	MathAssignment,
-} from "../../../types/Assignment";
 
 import styles from "./styles.module.css";
 import AssignmentRadioButtonGroup from "../AssignmentRadioButtonGroup";

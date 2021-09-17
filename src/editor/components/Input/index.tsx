@@ -7,6 +7,7 @@ type InputProps = {
 	id?: string;
 	name?: string;
 	value: number | string;
+	checked?: boolean;
 	onChange: (value: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
 	id,
 	name,
 	value,
+	checked,
 	onChange,
 }) => (
 	<div className={styles.inputContainer}>
@@ -25,6 +27,7 @@ const Input: React.FC<InputProps> = ({
 			id={id}
 			name={name}
 			value={value}
+			checked={checked}
 			onChange={onChange}
 		/>
 	</div>
