@@ -19,6 +19,8 @@ type FileSelectionContainerProps = {
 	setShowEditor: Dispatch<SetStateAction<boolean>>;
 };
 
+
+
 const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 	editorFileData,
 	setEditorFileData,
@@ -40,13 +42,15 @@ const FileSelectionContainer: React.FC<FileSelectionContainerProps> = ({
 				worlds: response.map((res) => res.data.files)[1],
 			});
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
+	
 	useEffect(() => {
 		updateEditorStateMultiple({
 			...editorState,
 			...editorFileData,
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [editorFileData]);
 
 	const loadFile = (file: string) => {

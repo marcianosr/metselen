@@ -44,6 +44,7 @@ const Grid: React.FC<EditorDraftStateProps> = ({
 			...editorDraftState,
 			maxBricks: editorDraftState.layout.length,
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [editorDraftState.layout]);
 
 	const addBrick = (e: React.MouseEvent) => {

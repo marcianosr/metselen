@@ -4,7 +4,6 @@ import { BrickType } from "../types/Bricks";
 import {
 	Assignment,
 	MathAssignment,
-	mathAssignmentConfig,
 } from "../types/Assignment";
 
 export type BrickPosition = BrickType & {
