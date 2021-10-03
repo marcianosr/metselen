@@ -1,10 +1,7 @@
 import React, { createContext, useState } from "react";
 import { getRandomBrickColor } from "../components/BrickContainer";
 import { BrickType } from "../types/Bricks";
-import {
-	Assignment,
-	MathAssignment,
-} from "../types/Assignment";
+import { Assignment, MathAssignment } from "../types/Assignment";
 
 export type BrickPosition = BrickType & {
 	x: number;

@@ -2,7 +2,7 @@ export type OperatorDisplay = "+" | "-" | "x" | ":";
 export type Operator = "+" | "-" | "*" | "/";
 
 export type Assignment = {
-	[key: string]: Sum;
+	[key in MathAssignment]?: Sum;
 };
 
 export enum MathAssignment {
@@ -27,6 +27,14 @@ export const mathAssignmentConfig: MathAssignmentConfig = {
 	[MathAssignment.ADDITION]: {
 		operator: "+",
 		operatorDisplay: "+",
+	},
+	[MathAssignment.SUBTRACTION]: {
+		operator: "-",
+		operatorDisplay: "-",
+	},
+	[MathAssignment.DIVISION]: {
+		operator: "/",
+		operatorDisplay: ":",
 	},
 };
 

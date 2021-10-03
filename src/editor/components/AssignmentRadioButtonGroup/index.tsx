@@ -4,8 +4,7 @@ import { MathAssignment } from "../../../types/Assignment";
 import { EditorDraftStateProps } from "../../../types/LevelState";
 import styles from "./styles.module.css";
 
-
-const isChecked = (selected: string, key: string):boolean => selected === key; 
+const isChecked = (selected: string, key: string): boolean => selected === key;
 
 const AssignmentRadioButtonGroup: FC<EditorDraftStateProps> = ({
 	editorDraftState,
@@ -16,27 +15,32 @@ const AssignmentRadioButtonGroup: FC<EditorDraftStateProps> = ({
 		<div className={styles.assignmentGroup}>
 			{Object.values(MathAssignment).map((key) => (
 				<Fragment key={key}>
-
 					<Input
 						label={key}
 						value={key}
 						id={key}
 						name="assignment"
 						type="radio"
-						checked={isChecked(Object.keys(editorDraftState.assignments)[0], key)}
+						checked={isChecked(
+							Object.keys(editorDraftState.assignments)[0],
+							key
+						)}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+							const selectedValue = e.target
+								.value as MathAssignment; // “trust me, I know what I’m doing”
+
 							setEditorDraftState({
 								...editorDraftState,
 								assignments: {
 									[e.target.value]: {
 										base: [
 											...(editorDraftState.assignments[
-												e.target.value
+												selectedValue
 											]?.base || [1]),
 										],
 										modifier: [
 											...(editorDraftState.assignments[
-												e.target.value
+												selectedValue
 											]?.modifier || [
 												1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 											]),

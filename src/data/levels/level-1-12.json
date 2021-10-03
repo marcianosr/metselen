@@ -2,7 +2,7 @@
 	"data": {
 		"name": "untitled",
 		"worldNumber": 1,
-		"levelNumber": 1,
+		"levelNumber": 12,
 		"layout": [
 			{
 				"id": 1,
@@ -22,7 +22,7 @@
 		},
 		"time": 10,
 		"isUnlocked": false,
-		"maxBricks": 1,
+		"maxBricks": 0,
 		"bricksNeeded": 0,
 		"type": "level"
 	}

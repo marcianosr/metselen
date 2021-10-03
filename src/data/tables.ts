@@ -1,4 +1,8 @@
-import { Sum } from "../types/Assignment";
+import {
+	MathAssignment,
+	mathAssignmentConfig,
+	OperatorDisplay,
+} from "../types/Assignment";
 
 export type AssignmentFormat = {
 	sum: string;
@@ -6,28 +10,53 @@ export type AssignmentFormat = {
 	correct: "yes" | "no" | "untouched";
 };
 
-export const buildSumAssignmentsToDisplay = (sum: Sum): AssignmentFormat[][] =>
-	sum.base.map((base: number) =>
-		sum.modifier.map((modifier: number) => ({
-			sum: `${base} x ${modifier}`,
-			result: base * modifier,
-			correct: "untouched",
-		}))
-	);
-
-export const makeTables = (
+export const createSumMapping = (
 	tableRange: number[],
-	multiplierRange: number[]
+	multiplierRange: number[],
+	assignmentType: MathAssignment
 ): AssignmentFormat[][] => {
 	return tableRange.map((range, idx) =>
 		multiplierRange.map((multiplier) => ({
-			sum: `${range} x ${multiplier}`,
-			result: multiplier * range,
+			sum: displaySum({
+				range,
+				multiplier,
+				operator: mathAssignmentConfig[assignmentType].operatorDisplay,
+			}),
+			result: calculate({ range, multiplier })[
+				mathAssignmentConfig[assignmentType].operatorDisplay
+			],
 			correct: "untouched",
 		}))
 	);
 };
-export const getRandomTable = (
+
+const displaySum = ({
+	range,
+	multiplier,
+	operator,
+}: {
+	range: number;
+	multiplier: number;
+	operator: OperatorDisplay;
+}) =>
+	operator === "+" || operator === "x"
+		? `${range} ${operator} ${multiplier}`
+		: `${multiplier} ${operator} ${range}`;
+
+const calculate = ({
+	range,
+	multiplier,
+}: {
+	range: number;
+	multiplier: number;
+}) => ({
+	"+": range + multiplier,
+	"-": multiplier - range,
+	x: range * multiplier,
+	":": multiplier / range,
+});
+
+export const getRandomSum = (
 	assignmentFormat: AssignmentFormat[][],
 	tableRange: number[],
 	multiplierRange: number[]
