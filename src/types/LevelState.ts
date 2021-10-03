@@ -1,7 +1,7 @@
-import { Tables } from "./Tables";
+import { Dispatch, SetStateAction } from "react";
+import { AssignmentFormatWithId } from "./AssignmentFormatWithId";
 import { BrickType } from "./Bricks";
 import { EditorDraftState } from "../editor/components/Editor";
-import { Dispatch, SetStateAction } from "react";
 
 export type LevelState = {
 	timer: number;
@@ -9,8 +9,8 @@ export type LevelState = {
 	score: number;
 	bricks: BrickType[];
 	mapping: BrickType[][];
-	tables: any;
-	answers: Tables[];
+	assignments: any;
+	answers: AssignmentFormatWithId[];
 	isGameFinished: boolean;
 	amountOfBricksOnField: number;
 	currentAnswer: string | null;

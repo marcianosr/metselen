@@ -1,7 +1,11 @@
 import { AssignmentSettings, MathAssignment } from "../types/Assignment";
 import { BrickType } from "../types/Bricks";
 import { flattenBricksArray } from "../utils";
-import { getRandomSum, createSumMapping, AssignmentFormat } from "./tables";
+import {
+	getRandomSum,
+	createSumMapping,
+	AssignmentFormat,
+} from "./assignmentGeneration";
 
 const levelFiles = require.context("./levels/", false, /\.(json)$/);
 
@@ -32,20 +36,20 @@ export const withGeneratedSums = (levels: Level[]) =>
 	levels.map((level: Level) => ({
 		...level,
 		// Change "tables" here in Level type when changing this
-		tables: createSumsForLevel(
+		assignments: createSumsForLevel(
 			flattenBricksArray(level.layout).length,
 			level.assignmentSettings
 		),
 	}));
 
 const createSumsForLevel = (
-	amountOfSums: number, // based on the the length of the level
+	amount: number, // based on the the length of the level
 	assignmentSettings: AssignmentSettings
 ) => {
 	const assignmentFormatList: AssignmentFormat[] = [];
 	const key = Object.keys(assignmentSettings)[0] as MathAssignment;
 
-	for (let idx = 0; idx < amountOfSums; idx++) {
+	for (let idx = 0; idx < amount; idx++) {
 		assignmentFormatList.push(
 			getRandomSum(
 				createSumMapping(

@@ -25,7 +25,7 @@ const LevelContainer = () => {
 	const [savedGameState, setSavedGameState] =
 		useLocalStorage<SaveGameState>("saveGameState");
 
-	const allTablesCompleted = levelState.tables.length === 0;
+	const allAssignmentsCompleted = levelState.assignments.length === 0;
 	const user = savedGameState?.username || "";
 
 	const saveLevelDataToStorage = () => {
@@ -76,13 +76,13 @@ const LevelContainer = () => {
 		levels.reduce((totalScore, level) => totalScore + level.score, 0);
 
 	useEffect(() => {
-		if (allTablesCompleted || timerFinished) {
+		if (allAssignmentsCompleted || timerFinished) {
 			updateLevelState("isGameFinished", true);
 			stopTimer();
 			saveLevelDataToStorage();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allTablesCompleted, timerFinished]);
+	}, [allAssignmentsCompleted, timerFinished]);
 
 	useEffect(() => {
 		const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
@@ -127,7 +127,7 @@ const LevelContainer = () => {
 							<span>rijen</span>
 						</li>
 					</ul>
-					{!allTablesCompleted && <TableAnswerDisplay />}
+					{!allAssignmentsCompleted && <TableAnswerDisplay />}
 					<section className={styles.timerAndLevel}>
 						<span className={styles.levelText}>
 							Level{" "}

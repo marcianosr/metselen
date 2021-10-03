@@ -7,8 +7,8 @@ import classNames from "classnames";
 const increaseScore = (amount: number, score: number) => amount + score;
 const increaseBricksOnField = (amount: number, score: number) => amount + score;
 
-// const getNewTable = (tables: Tables[]) => {
-// 	const allTables = [...tables];
+// const getNewTable = (assignments: Tables[]) => {
+// 	const allTables = [...assignments];
 // 	const firstElem = allTables[0];
 // 	firstElem.correct = "no";
 // 	const shuffle = [...allTables.slice(1), firstElem]; // maybe just remove the sum or come up with a new one after getting it wrong
@@ -20,14 +20,14 @@ const allowBrickOnField = (amountOfBricksOnField: number) =>
 	increaseBricksOnField(1, amountOfBricksOnField);
 
 const markAnswerCorrect = (levelState: LevelState) => {
-	const currentTable = levelState.tables[0];
+	const currentTable = levelState.assignments[0];
 
 	currentTable.correct = "yes";
 	return [currentTable];
 };
 
 const markAnswerWrong = (levelState: LevelState) => {
-	const currentTable = levelState.tables[0];
+	const currentTable = levelState.assignments[0];
 
 	currentTable.correct = "no";
 	return [currentTable];
@@ -40,10 +40,11 @@ const AnswerDisplay: React.FC = () => {
 	// research the need of 'useCallBack'.
 	const validateAnswer = useCallback(
 		(answer: string) => {
-			const isCorrectAnswer = levelState.tables[0].result === +answer;
+			const isCorrectAnswer =
+				levelState.assignments[0].result === +answer;
 
 			updateLevelStateMultiple({
-				tables: levelState.tables.slice(1),
+				assignments: levelState.assignments.slice(1),
 				score: isCorrectAnswer
 					? increaseScore(1, levelState.score)
 					: levelState.score,

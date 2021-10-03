@@ -26,7 +26,7 @@ const PlayAgainModal: React.FC<PlayAgainModalProps> = ({
 	} = useGameState();
 	const [savedGameState] = useLocalStorage<SaveGameState>("saveGameState");
 	const levelsFromStorage = [...(savedGameState?.worlds?.levels || [])];
-	const allTablesCompleted = levelState.tables.length === 0;
+	const allAssignmentsCompleted = levelState.assignments.length === 0;
 	const percentageCompleted = Math.round(
 		(levelState.score / levelState.bricks.length) * 100
 	);
@@ -37,18 +37,18 @@ const PlayAgainModal: React.FC<PlayAgainModalProps> = ({
 	);
 
 	useEffect(() => {
-		if (allTablesCompleted || timerFinished) {
+		if (allAssignmentsCompleted || timerFinished) {
 			stopTimer();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allTablesCompleted, timerFinished]);
+	}, [allAssignmentsCompleted, timerFinished]);
 
 	return (
 		<Modal>
 			<section className={styles.modalContainer}>
 				<PlayAgainModalHeader
 					timerFinished={timerFinished}
-					allTablesCompleted={allTablesCompleted}
+					allAssignmentsCompleted={allAssignmentsCompleted}
 				/>
 				<TextCollectionWrapper>
 					<h2 className={styles.subTitle}>Jouw resultaten</h2>

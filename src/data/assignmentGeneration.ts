@@ -11,18 +11,18 @@ export type AssignmentFormat = {
 };
 
 export const createSumMapping = (
-	tableRange: number[],
-	multiplierRange: number[],
+	baseRange: number[],
+	modifierRange: number[],
 	assignmentType: MathAssignment
 ): AssignmentFormat[][] => {
-	return tableRange.map((range, idx) =>
-		multiplierRange.map((multiplier) => ({
+	return baseRange.map((base) =>
+		modifierRange.map((modifier) => ({
 			sum: displaySum({
-				range,
-				multiplier,
+				base,
+				modifier,
 				operator: mathAssignmentConfig[assignmentType].operatorDisplay,
 			}),
-			result: calculate({ range, multiplier })[
+			result: calculate({ base, modifier })[
 				mathAssignmentConfig[assignmentType].operatorDisplay
 			],
 			correct: "untouched",
@@ -31,41 +31,35 @@ export const createSumMapping = (
 };
 
 const displaySum = ({
-	range,
-	multiplier,
+	base,
+	modifier,
 	operator,
 }: {
-	range: number;
-	multiplier: number;
+	base: number;
+	modifier: number;
 	operator: OperatorDisplay;
 }) =>
 	operator === "+" || operator === "x"
-		? `${range} ${operator} ${multiplier}`
-		: `${multiplier} ${operator} ${range}`;
+		? `${base} ${operator} ${modifier}`
+		: `${modifier} ${operator} ${base}`;
 
-const calculate = ({
-	range,
-	multiplier,
-}: {
-	range: number;
-	multiplier: number;
-}) => ({
-	"+": range + multiplier,
-	"-": multiplier - range,
-	x: range * multiplier,
-	":": multiplier / range,
+const calculate = ({ base, modifier }: { base: number; modifier: number }) => ({
+	"+": base + modifier,
+	"-": modifier - base,
+	x: base * modifier,
+	":": modifier / base,
 });
 
 export const getRandomSum = (
 	assignmentFormat: AssignmentFormat[][],
-	tableRange: number[],
-	multiplierRange: number[]
+	baseRange: number[],
+	modifierRange: number[]
 ): AssignmentFormat => {
 	const randomNumberForRow: number = Math.floor(
-		Math.random() * tableRange.length
+		Math.random() * baseRange.length
 	);
 	const randomNumberForCell: number = Math.floor(
-		Math.random() * multiplierRange.length
+		Math.random() * modifierRange.length
 	);
 
 	return assignmentFormat[randomNumberForRow][randomNumberForCell];

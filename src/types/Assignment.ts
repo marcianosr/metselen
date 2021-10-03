@@ -2,7 +2,7 @@ export type OperatorDisplay = "+" | "-" | "x" | ":";
 export type Operator = "+" | "-" | "*" | "/";
 
 export type AssignmentSettings = {
-	[key in MathAssignment]?: Sum;
+	[key in MathAssignment]?: SumStructure;
 };
 
 export enum MathAssignment {
@@ -38,7 +38,7 @@ export const mathAssignmentConfig: MathAssignmentConfig = {
 	},
 };
 
-export type Sum = {
+export type SumStructure = {
 	base: number[];
 	modifier: number[];
 	modifier2?: number[];

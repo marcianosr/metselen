@@ -7,11 +7,11 @@ import styles from "./styles.module.css";
 
 type PlayAgainModalHeaderProps = {
 	timerFinished: boolean;
-	allTablesCompleted: boolean;
+	allAssignmentsCompleted: boolean;
 };
 
 const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
-	allTablesCompleted,
+	allAssignmentsCompleted,
 	timerFinished,
 }) => {
 	const { levelState } = useLevelState();
@@ -25,15 +25,15 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 
 	return (
 		<header>
-			{(timerFinished && !allTablesCompleted) ||
-				(timerFinished && allTablesCompleted && (
+			{(timerFinished && !allAssignmentsCompleted) ||
+				(timerFinished && allAssignmentsCompleted && (
 					<>
 						<h1 className={styles.title}>Game over!</h1>
 						<span className={styles.text}>De tijd is om!</span>
 					</>
 				))}
 			{!timerFinished &&
-				allTablesCompleted &&
+				allAssignmentsCompleted &&
 				maxBricksPerLevel !== levelState.score && (
 					<>
 						<h1 className={styles.title}>Level afgelopen!</h1>
@@ -44,7 +44,7 @@ const PlayAgainModalHeader: React.FC<PlayAgainModalHeaderProps> = ({
 				)}
 
 			{!timerFinished &&
-				allTablesCompleted &&
+				allAssignmentsCompleted &&
 				maxBricksPerLevel === levelState.score && (
 					<h1 className={styles.title}>
 						Wow super metselaar! Level {currentLevel} is

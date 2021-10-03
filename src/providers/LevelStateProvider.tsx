@@ -27,13 +27,13 @@ type LevelStateContextState = {
 type LevelStateProviderProps = {};
 
 const INITIAL_LEVEL_STATE: LevelState = {
-	timer: levels[0].time,
+	timer: levels[0]?.time || 0,
 	score: 0,
 	rows: 0,
-	tables: levels[0].tables,
+	assignments: levels[0]?.assignments || [],
 	answers: [],
-	bricks: flattenBricksArray<BrickType>(levels[0].layout),
-	mapping: levels[0].layout,
+	bricks: flattenBricksArray<BrickType>(levels[0]?.layout || []),
+	mapping: levels[0]?.layout || [],
 	isGameFinished: false,
 	amountOfBricksOnField: 0,
 	currentAnswer: null,
@@ -72,13 +72,12 @@ export const LevelStateProvider: React.FC<LevelStateProviderProps> = ({
 
 	console.log("levelState", levelState);
 
-	const reset = () => {
-		return setLevelState(INITIAL_LEVEL_STATE);
-	};
+	const reset = () => setLevelState(INITIAL_LEVEL_STATE);
+
 	const setupConfigForLevel = (levelId: number) => {
 		updateLevelStateMultiple({
 			mapping: levels[levelId - 1].layout,
-			tables: levels[levelId - 1].tables,
+			assignments: levels[levelId - 1].assignments,
 			timer: levels[levelId - 1].time,
 		});
 		updateGameStateMultiple({

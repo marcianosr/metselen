@@ -43,8 +43,9 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "1",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray<BrickType>(levels[0].layout)
-						.length,
+					maxBricks: flattenBricksArray<BrickType>(
+						levels[0]?.layout || []
+					).length,
 					...levels[0],
 				},
 				{
@@ -54,8 +55,9 @@ export const worlds: World[] = [
 					bricksNeeded: 0,
 					text: "2",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray<BrickType>(levels[1].layout)
-						.length,
+					maxBricks: flattenBricksArray<BrickType>(
+						levels[1]?.layout || []
+					).length,
 					...levels[1],
 				},
 				{
@@ -65,8 +67,9 @@ export const worlds: World[] = [
 					bricksNeeded: 5,
 					text: "1 & 2",
 					color: getRandomBrickColor(),
-					maxBricks: flattenBricksArray<BrickType>(levels[2].layout)
-						.length,
+					maxBricks: flattenBricksArray<BrickType>(
+						levels[2]?.layout || []
+					).length,
 					...levels[2],
 				},
 				{
