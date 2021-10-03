@@ -1,7 +1,7 @@
 export type OperatorDisplay = "+" | "-" | "x" | ":";
 export type Operator = "+" | "-" | "*" | "/";
 
-export type Assignment = {
+export type AssignmentSettings = {
 	[key in MathAssignment]?: Sum;
 };
 

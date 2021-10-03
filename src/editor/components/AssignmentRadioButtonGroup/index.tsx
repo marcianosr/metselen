@@ -22,7 +22,7 @@ const AssignmentRadioButtonGroup: FC<EditorDraftStateProps> = ({
 						name="assignment"
 						type="radio"
 						checked={isChecked(
-							Object.keys(editorDraftState.assignments)[0],
+							Object.keys(editorDraftState.assignmentSettings)[0],
 							key
 						)}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +31,17 @@ const AssignmentRadioButtonGroup: FC<EditorDraftStateProps> = ({
 
 							setEditorDraftState({
 								...editorDraftState,
-								assignments: {
+								assignmentSettings: {
 									[e.target.value]: {
 										base: [
-											...(editorDraftState.assignments[
+											...(editorDraftState
+												.assignmentSettings[
 												selectedValue
 											]?.base || [1]),
 										],
 										modifier: [
-											...(editorDraftState.assignments[
+											...(editorDraftState
+												.assignmentSettings[
 												selectedValue
 											]?.modifier || [
 												1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

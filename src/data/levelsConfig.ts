@@ -1,4 +1,4 @@
-import { Assignment, MathAssignment } from "../types/Assignment";
+import { AssignmentSettings, MathAssignment } from "../types/Assignment";
 import { BrickType } from "../types/Bricks";
 import { flattenBricksArray } from "../utils";
 import { getRandomSum, createSumMapping, AssignmentFormat } from "./tables";
@@ -17,7 +17,7 @@ export type Level = {
 	level: number;
 	layout: BrickType[][];
 	time: number;
-	assignments: Assignment;
+	assignmentSettings: AssignmentSettings;
 };
 
 // keyof returns a union string, so: We want a key in Assignment and Maths type which returns "maths" and .MULTIPLICATIONs | additions | subtractions | divisions"
@@ -34,27 +34,27 @@ export const withGeneratedSums = (levels: Level[]) =>
 		// Change "tables" here in Level type when changing this
 		tables: createSumsForLevel(
 			flattenBricksArray(level.layout).length,
-			level.assignments
+			level.assignmentSettings
 		),
 	}));
 
 const createSumsForLevel = (
 	amountOfSums: number, // based on the the length of the level
-	assignments: Assignment
+	assignmentSettings: AssignmentSettings
 ) => {
 	const assignmentFormatList: AssignmentFormat[] = [];
-	const key = Object.keys(assignments)[0] as MathAssignment;
+	const key = Object.keys(assignmentSettings)[0] as MathAssignment;
 
 	for (let idx = 0; idx < amountOfSums; idx++) {
 		assignmentFormatList.push(
 			getRandomSum(
 				createSumMapping(
-					assignments[key]?.base || [],
-					assignments[key]?.modifier || [],
+					assignmentSettings[key]?.base || [],
+					assignmentSettings[key]?.modifier || [],
 					key
 				),
-				assignments[key]?.base || [],
-				assignments[key]?.modifier || []
+				assignmentSettings[key]?.base || [],
+				assignmentSettings[key]?.modifier || []
 			)
 		);
 	}
